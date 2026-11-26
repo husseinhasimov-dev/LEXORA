@@ -1,0 +1,12 @@
+# Local Android APK signing configuration (do NOT commit signing.properties or keystore files).
+# Copy this file to signing.properties (ignored by git) and point KEYSTORE_FILE to the original
+# keystore that signed the LEXORA APK installed on your phone (typically your original debug.keystore).
+#
+# Windows example (use forward slashes / or escaped backslashes \\):
+# KEYSTORE_FILE=C:/Users/YOUR_USERNAME/.android/debug.keystore
+#
+# Defaults for Android's standard debug.keystore are android / androiddebugkey / android.
+KEYSTORE_FILE=
+KEYSTORE_PASSWORD=android
+KEY_ALIAS=androiddebugkey
+KEY_PASSWORD=android

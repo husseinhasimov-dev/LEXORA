@@ -6,8 +6,13 @@ import android.os.Build
 import android.content.pm.PackageManager
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
 import androidx.compose.foundation.*
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.selection.toggleable
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.Role
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -23,50 +28,68 @@ import com.google.firebase.auth.*
 import java.util.Locale
 
 @Composable fun SwitchRow(label:String,on:Boolean,change:(Boolean)->Unit){
-    Row(Modifier.fillMaxWidth().toggleable(value=on,role=Role.Switch,onValueChange=change),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){
+    val interaction=remember{MutableInteractionSource()}
+    Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(10.dp)).toggleable(
+        value=on,
+        interactionSource=interaction,
+        indication=ripple(color=blue),
+        role=Role.Switch,
+        onValueChange=change
+    ).padding(vertical=4.dp,horizontal=2.dp),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){
         Text(label,Modifier.weight(1f));Switch(on,null)
     }
 }
 @Composable fun Profile(state:ScreenState,vm:StudyModel,placement:()->Unit){
     val p=state.prefs;val ctx=LocalContext.current
+    val reducedMotion=LocalReducedMotion.current
     var operation by rememberSaveable{mutableStateOf("")}
     var reset by rememberSaveable{mutableStateOf("")}
     var credit by rememberSaveable{mutableStateOf(false)}
     var notifications by rememberSaveable{mutableStateOf(false)}
-    if(notifications){NotificationScreen(state,vm){notifications=false};return}
     val save=rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/octet-stream")){it?.let { vm.transfer(it,operation) }}
     val open=rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()){it?.let { vm.transfer(it,operation) }}
-    Page {
-        Label("Preferences");Heading("Your profile")
-        Secondary("Manage notifications"){notifications=true}
-        Sheet {
-            Text("Learning goals",style=MaterialTheme.typography.titleLarge)
-            Pick("Starting level",p.getValue("level"),levels){vm.preference("level",it)}
-            Pick("New words daily",p.getValue("goal"),listOf("1","3","5","10","15","20","30","50")){vm.preference("goal",it)}
-            Pick("Reviews daily",p.getValue("reviewLimit"),listOf("5","10","25","50","100","200","500")){vm.preference("reviewLimit",it)}
-            Pick("Session size",p.getValue("size"),listOf("1","3","5","8","10","15","20","30")){vm.preference("size",it)}
-            Pick("Desired retention (%)",p.getValue("retention"),listOf("75","80","85","90","92","95","97")){vm.preference("retention",it)}
-            TextButton({vm.run{fitInitialMemory()}},enabled=!state.busy){Text("Fit initial stability from history")}
-            SwitchRow("Written recall",p["writing"]=="true"){vm.preference("writing",it.toString())}
-            SwitchRow("Context practice",p["context"]=="true"){vm.preference("context",it.toString())}
-            SwitchRow("Explain minor typos",p["hints"]=="true"){vm.preference("hints",it.toString())}
-            Pick("Speech speed",p.getValue("speed"),listOf("0.65","0.8","1.0","1.2")){vm.preference("speed",it)}
-            Secondary("Take placement assessment",state.session==null,placement)
-        }
-        Account(vm)
-        Sheet {
-            Text("Local data",style=MaterialTheme.typography.titleLarge)
-            Hint("Backups merge learning history, personal words, favorites and decks. CSV transfers personal vocabulary.")
-            for(name in listOf("Backup","Restore","CSV export","CSV import","Anki export","Anki import"))Secondary(name,!state.busy){
-                operation=name
-                if(name=="Backup" || name.endsWith("export"))save.launch(when(name){"Backup"->"lexora-backup.json";"Anki export"->"lexora-words.txt";else->"lexora-words.csv"})
-                else open.launch(arrayOf("*/*"))
+    AnimatedContent(
+        targetState=notifications,
+        modifier=Modifier.fillMaxSize(),
+        transitionSpec={drillTransition(targetState,reducedMotion)},
+        label="profileNotifications"
+    ){showingNotifications->
+        if(showingNotifications){
+            NotificationScreen(state,vm){notifications=false}
+        }else{
+            Page {
+                Label("Preferences");Heading("Your profile")
+                Secondary("Manage notifications"){notifications=true}
+                Sheet {
+                    Text("Learning goals",style=MaterialTheme.typography.titleLarge)
+                    Pick("Starting level",p.getValue("level"),levels){vm.preference("level",it)}
+                    Pick("New words daily",p.getValue("goal"),listOf("1","3","5","10","15","20","30","50")){vm.preference("goal",it)}
+                    Pick("Reviews daily",p.getValue("reviewLimit"),listOf("5","10","25","50","100","200","500")){vm.preference("reviewLimit",it)}
+                    Pick("Session size",p.getValue("size"),listOf("1","3","5","8","10","15","20","30")){vm.preference("size",it)}
+                    Pick("Desired retention (%)",p.getValue("retention"),listOf("75","80","85","90","92","95","97")){vm.preference("retention",it)}
+                    TextButton({vm.run{fitInitialMemory()}},enabled=!state.busy){Text("Fit initial stability from history")}
+                    SwitchRow("Written recall",p["writing"]=="true"){vm.preference("writing",it.toString())}
+                    SwitchRow("Context practice",p["context"]=="true"){vm.preference("context",it.toString())}
+                    SwitchRow("Explain minor typos",p["hints"]=="true"){vm.preference("hints",it.toString())}
+                    Pick("Speech speed",p.getValue("speed"),listOf("0.65","0.8","1.0","1.2")){vm.preference("speed",it)}
+                    Secondary("Take placement assessment",state.session==null,placement)
+                }
+                Account(vm)
+                Sheet {
+                    Text("Local data",style=MaterialTheme.typography.titleLarge)
+                    Hint("Backups merge learning history, personal words, favorites and decks. CSV transfers personal vocabulary.")
+                    for(name in listOf("Backup","Restore","CSV export","CSV import","Anki export","Anki import"))Secondary(name,!state.busy){
+                        operation=name
+                        if(name=="Backup" || name.endsWith("export"))save.launch(when(name){"Backup"->"lexora-backup.json";"Anki export"->"lexora-words.txt";else->"lexora-words.csv"})
+                        else open.launch(arrayOf("*/*"))
+                    }
+                    if(Cloud.uid()==null){
+                        TextButton({reset="progress"}){Text("Reset learning progress",color=amber)}
+                        TextButton({reset="personal"}){Text("Delete personal vocabulary",color=amber)}
+                    }
+                    TextButton({credit=true}){Text("Sources and privacy")}
+                }
             }
-            if(Cloud.uid()==null){
-                TextButton({reset="progress"}){Text("Reset learning progress",color=amber)}
-                TextButton({reset="personal"}){Text("Delete personal vocabulary",color=amber)}
-            }
-            TextButton({credit=true}){Text("Sources and privacy")}
         }
     }
     if(reset.isNotEmpty()){
@@ -115,6 +138,7 @@ import java.util.Locale
             runCatching{val token=GoogleSignIn.getSignedInAccountFromIntent(r.data).getResult(com.google.android.gms.common.api.ApiException::class.java).idToken
                 result(auth.signInWithCredential(GoogleAuthProvider.getCredential(requireNotNull(token),null)))}.onFailure{message=it.localizedMessage?:"Google sign-in failed."}
         }
+        if(busy)LinearProgressIndicator(Modifier.fillMaxWidth().height(3.dp),color=mint,trackColor=Color.Transparent)
         if(user==null){
             Hint("Signing in opens a separate account profile. Your offline profile stays on this device. Use a local backup to merge its history.")
             OutlinedTextField(email,{email=it},label={Text("Email")},singleLine=true)

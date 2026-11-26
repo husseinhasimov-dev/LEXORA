@@ -16,22 +16,29 @@ import java.time.LocalDate
 @Composable fun AcademicScreen(state:ScreenState,vm:StudyModel,voice:Voice,back:()->Unit){
     var q by rememberSaveable{mutableStateOf("")}
     var cat by rememberSaveable{mutableStateOf("All")}
-    val result=state.academic.filter{(cat=="All" || state.categories[it.id]==cat) &&
-        (it.german.contains(q.trim(),true) || it.meaning.contains(q.trim(),true))}
+    val trimmed=remember(q){q.trim()}
+    val categoryOptions=remember(state.categories){listOf("All")+state.categories.values.distinct().sorted()}
+    val result=remember(state.academic,state.categories,cat,trimmed){
+        state.academic.filter{(cat=="All" || state.categories[it.id]==cat) &&
+            (it.german.contains(trimmed,true) || it.meaning.contains(trimmed,true))}
+    }
+    val selectedIds=remember(state.selected){state.selected.mapTo(HashSet()){it.id}}
+    val speechSpeed=remember(state.prefs){state.prefs.getValue("speed").toFloat()}
+    val say:(String)->Unit=remember(voice,speechSpeed){{voice.play(it,speechSpeed)}}
     val list=rememberLazyListState()
     LaunchedEffect(q,cat){list.scrollToItem(0)}
     LazyColumn(state=list,modifier=Modifier.fillMaxSize(),contentPadding=PaddingValues(18.dp),verticalArrangement=Arrangement.spacedBy(12.dp)){
-        item{TextButton(back){Text("Back to library")};Heading("TestDaF Academic Dictionary")
+        item(contentType="header"){TextButton(back){Text("Back to library")};Heading("TestDaF Academic Dictionary")
             Hint("${state.academic.size} selected entries for university study and exam preparation.")}
-        item{OutlinedTextField(q,{q=it},Modifier.fillMaxWidth(),label={Text("Search academic German or English")},singleLine=true)}
-        item{Pick("Category",cat,listOf("All")+state.categories.values.distinct().sorted()){cat=it};Hint("${result.size} entries")}
-        items(result,key={it.id}){w->Sheet{
+        item(contentType="search"){OutlinedTextField(q,{q=it},Modifier.fillMaxWidth(),label={Text("Search academic German or English")},singleLine=true)}
+        item(contentType="filter"){Pick("Category",cat,categoryOptions){cat=it};Hint("${result.size} entries")}
+        items(result,key={it.id},contentType={"academic_word"}){w->Sheet{
             Label(state.categories[w.id].orEmpty());Text(w.german,style=MaterialTheme.typography.headlineSmall);Text(w.meaning)
             Text((classes[w.pos]?:w.pos)+" · "+w.level)
-            WordInfo(w,{voice.play(it,state.prefs.getValue("speed").toFloat())},false)
+            WordInfo(w,say,false)
             UsageIndicator(w)
-            TextButton({voice.play(w.german,state.prefs.getValue("speed").toFloat())}){Text("Listen to word")}
-            val queued=state.selected.any{it.id==w.id}
+            TextButton({say(w.german)}){Text("Listen to word")}
+            val queued=w.id in selectedIds
             Secondary(if(queued)"In my learning list" else "Add to my learning list",!state.busy && !queued){vm.run{addAcademic(w.id)}}
             TextButton({vm.detail(w.id)}){Text("Word details and progress")}
         }}

@@ -38,20 +38,26 @@ import androidx.compose.ui.unit.dp
         Pick("Focus",focus,listOf("Frequent","Recent","Article","Spelling","Capitalization","Umlaut or ß","Translation confusion","Verb form","Difficult reviews")){focus=it}
         Secondary("Open Mistake Lab",available){begin(Mode.Lab,Filters(status=focus))}
     }
-    if(setup)AlertDialog(onDismissRequest={setup=false},title={Text("Discover words")},text={
-        Column(verticalArrangement=Arrangement.spacedBy(10.dp)){
-            Pick("Discover by",level,levels+"Academic"){level=it;topic="All"}
-            Pick(if(level=="Academic")"Academic category" else "Topic",topic,listOf("All")+(if(level=="Academic")state.categories.values.distinct().sorted() else state.topics)){topic=it}
-            OutlinedTextField(target,{target=it},label={Text("Daily new-word goal (1–500)")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number))
-            Hint("Already known words do not use a place in your goal.")
+    if(setup){
+        val discoverLevels=remember{levels+"Academic"}
+        val topicOptions=remember(level,state.categories,state.topics){
+            listOf("All")+(if(level=="Academic")state.categories.values.distinct().sorted() else state.topics)
         }
-    },confirmButton={TextButton({val n=target.toInt();setup=false;resume();vm.run{startDiscovery(level,topic,n)}},enabled=target.toIntOrNull() in 1..500){Text("Begin discovery")}},
-        dismissButton={TextButton({setup=false}){Text("Cancel")}})
+        AlertDialog(onDismissRequest={setup=false},title={Text("Discover words")},text={
+            Column(verticalArrangement=Arrangement.spacedBy(10.dp)){
+                Pick("Discover by",level,discoverLevels){level=it;topic="All"}
+                Pick(if(level=="Academic")"Academic category" else "Topic",topic,topicOptions){topic=it}
+                OutlinedTextField(target,{target=it},label={Text("Daily new-word goal (1–500)")},singleLine=true,keyboardOptions=KeyboardOptions(keyboardType=KeyboardType.Number))
+                Hint("Already known words do not use a place in your goal.")
+            }
+        },confirmButton={TextButton({val n=target.toInt();setup=false;resume();vm.run{startDiscovery(level,topic,n)}},enabled=target.toIntOrNull() in 1..500){Text("Begin discovery")}},
+            dismissButton={TextButton({setup=false}){Text("Cancel")}})
+    }
     if(preview){
         var all by rememberSaveable{mutableStateOf(false)}
         val lv=if(all)"All" else level
         val t=if(all)"All" else topic
-        val queue=state.selected.filter{it.matches(lv,t)}
+        val queue=remember(state.selected,lv,t){state.selected.filter{it.matches(lv,t)}}
 
         AlertDialog(onDismissRequest={preview=false},title={Text("Your selected words")},text={
             Column {

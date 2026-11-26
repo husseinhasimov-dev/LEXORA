@@ -8,17 +8,40 @@ plugins {
 val cloud = Properties().apply {
     rootProject.file("cloud.properties").takeIf { it.isFile }?.inputStream()?.use { load(it) }
 }
+val signing = Properties().apply {
+    rootProject.file("signing.properties").takeIf { it.isFile }?.inputStream()?.use { load(it) }
+}
+fun signingValue(key: String, envKey: String, default: String = ""): String =
+    signing.getProperty(key)?.trim()?.takeIf { it.isNotEmpty() }
+        ?: providers.environmentVariable(envKey).orNull?.trim()?.takeIf { it.isNotEmpty() }
+        ?: default
 providers.environmentVariable("LEXORA_BUILD_DIR").orNull?.let { layout.buildDirectory.set(file(it)) }
 
 android {
     namespace = "org.lexora.study"
     compileSdk = 35
+    signingConfigs {
+        val keystorePath = signingValue("KEYSTORE_FILE", "LEXORA_KEYSTORE_FILE")
+        if (keystorePath.isNotEmpty()) {
+            val keystoreFile = rootProject.file(keystorePath)
+            require(keystoreFile.isFile) {
+                "Configured KEYSTORE_FILE does not exist: ${keystoreFile.absolutePath}. " +
+                    "Point signing.properties (or LEXORA_KEYSTORE_FILE) to your original LEXORA keystore."
+            }
+            getByName("debug") {
+                storeFile = keystoreFile
+                storePassword = signingValue("KEYSTORE_PASSWORD", "LEXORA_KEYSTORE_PASSWORD", "android")
+                keyAlias = signingValue("KEY_ALIAS", "LEXORA_KEY_ALIAS", "androiddebugkey")
+                keyPassword = signingValue("KEY_PASSWORD", "LEXORA_KEY_PASSWORD", "android")
+            }
+        }
+    }
     defaultConfig {
         applicationId = "org.lexora.study"
         minSdk = 26
         targetSdk = 35
-        versionCode = 6
-        versionName = "0.5.1"
+        versionCode = 7
+        versionName = "0.5.2"
         for (key in listOf("FIREBASE_APP_ID","FIREBASE_API_KEY","FIREBASE_PROJECT_ID","GOOGLE_WEB_CLIENT_ID")) {
             val v = cloud.getProperty(key, "")
             require(v.all { it.isLetterOrDigit() || it in "_.:-" })
