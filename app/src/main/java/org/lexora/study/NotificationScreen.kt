@@ -11,6 +11,7 @@ import android.text.format.DateFormat
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -29,17 +30,21 @@ import java.time.format.FormatStyle
 import java.util.UUID
 
 private val dayNames=listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
+private val time24Formatter=DateTimeFormatter.ofPattern("HH:mm")
+private val time12Formatter=DateTimeFormatter.ofPattern("h:mm a")
+private val localizedDateTimeFormatter=DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT)
 
 @Composable fun NotificationScreen(state:ScreenState,vm:StudyModel,close:()->Unit){
     val ctx=LocalContext.current
     val lifecycle=LocalLifecycleOwner.current.lifecycle
+    val reducedMotion=LocalReducedMotion.current
     var panel by rememberSaveable{mutableStateOf("")}
     var editing by rememberSaveable{mutableStateOf("")}
     var deleting by rememberSaveable{mutableStateOf("")}
     var preview by rememberSaveable{mutableStateOf("")}
     var requestFor by rememberSaveable{mutableStateOf("")}
     var refresh by remember{mutableIntStateOf(0)}
-    val manager=ctx.getSystemService(NotificationManager::class.java)
+    val manager=remember(ctx){ctx.getSystemService(NotificationManager::class.java)}
 
     fun test(delayed:Boolean){
         vm.run{
@@ -73,99 +78,108 @@ private val dayNames=listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
     }
     fun back(){when{editing.isNotEmpty()->editing="";panel.isNotEmpty()->panel="";else->close()}}
     BackHandler{back()}
-    if(editing.isNotEmpty()){
-        val s=state.schedules.find{it.id==editing}?:ReminderSchedule(editing,"custom",true,19,0,"1,2,3,4,5,6,7","Custom Reminder","")
-        key(editing){ReminderEditor(s,{editing=""}){changed->
-            vm.run{saveReminder(ctx,changed);null}
-            editing=""
-            if(changed.enabled)enablePermission()
-        }}
-        return
-    }
 
-    val log=remember(refresh,state){ReminderLog.entries(ctx).asReversed()}
-    val permission=remember(refresh,state){Reminder.permission(ctx)}
-    val next=state.nextReminders
     val master=state.prefs["notificationsMaster"]=="true"
-    if(panel=="health"){
-        val clipboard=LocalClipboardManager.current
-        val time=next.minByOrNull{it.value}?.let{entry->
-            val name=state.schedules.firstOrNull{it.id==entry.key}?.name?: "Two-minute test"
-            name+" · "+displayTime(entry.value)
-        }?:"None scheduled"
-        val channelStates=(state.schedules+Reminder.testSchedule).distinctBy(Reminder::channel).map{s->
-            val channel=manager.getNotificationChannel(Reminder.channel(s))
-            val status=when(channel?.importance){null->"Not created yet";NotificationManager.IMPORTANCE_NONE->"Blocked";else->"Enabled"}
-            (channel?.name?.toString()?:Reminder.channel(s)) to status
-        }
-        val rows=listOf("Android notification permission" to if(Build.VERSION.SDK_INT<33)"Not required" else if(permission)"Allowed" else "Denied",
-            "App notifications" to if(manager.areNotificationsEnabled())"Enabled" else "Blocked",
-            "Scheduling method" to "Inexact wake-up alarm",
-            "Exact-alarm access" to "Not used by LEXORA",
-            "Next expected reminder" to time)+ReminderLog.battery(ctx)+channelStates+
-            listOf("Schedule requested","Schedule accepted","Receiver executed","Post attempted","Post submitted","error").map{
-                (if(it=="error")"Last error" else it) to (ReminderLog.last(ctx,it)?:"No recorded event")
-            }
-        Page{
-            TextButton({back()}){Text("Back to notifications")}
-            Heading("Notification Health Check")
-            Hint("Android can delay an alarm. A submitted post only confirms that Android accepted the request.")
-            Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
-                TextButton({refresh++;vm.run{Reminder.plan(ctx,this,reason="Health Check",forceRegister=true);null}}){Text("Refresh")}
-                TextButton({
-                    val report=(rows.map{it.first+" · "+it.second}+log).joinToString("\n")
-                    clipboard.setText(AnnotatedString(report))
-                }){Text("Copy report")}
-            }
-            Secondary("Android notification settings"){ctx.startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE,ctx.packageName))}
-            Secondary("App and battery settings"){ctx.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.parse("package:"+ctx.packageName)))}
-            rows.forEach{(name,value)->Sheet{Label(name);Text(value)}}
-            Label("Recent events")
-            if(log.isEmpty())Hint("No recorded events yet.")
-            log.forEach{Text(it,style=MaterialTheme.typography.bodySmall)}
-        }
-        return
-    }
+    val log=remember(refresh,state.schedules,state.nextReminders,master){ReminderLog.entries(ctx).asReversed()}
+    val permission=remember(refresh,state.schedules,state.nextReminders,master){Reminder.permission(ctx)}
+    val next=state.nextReminders
+    val subview=when{editing.isNotEmpty()->"editor:$editing";panel=="health"->"health";else->"main"}
 
-    val quiet=QuietHours(state.prefs["quietStart"]?.toIntOrNull()?:0,state.prefs["quietEnd"]?.toIntOrNull()?:0)
-    Page{
-        TextButton(close){Text("Back to profile")}
-        Heading("Notifications")
-        Sheet{
-            SwitchRow("Allow study reminders",master){on->vm.preference("notificationsMaster",on.toString());if(on)enablePermission()}
-            Hint(when{!master->"Study reminders are paused.";!permission || !manager.areNotificationsEnabled()->"Android is blocking notification posts.";else->"Study reminders are on."})
-        }
-        Sheet{
-            Primary("Send Test Notification"){enablePermission("immediate")}
-            Secondary("Schedule Test in 2 Minutes"){enablePermission("delayed")}
-            if(Reminder.TEST in next)Hint("Delayed test expected · "+displayTime(next.getValue(Reminder.TEST)))
-            Secondary("Notification Health Check"){panel="health"}
-        }
-        Sheet{
-            SwitchRow("Quiet hours",quiet.start!=quiet.end){enabled->
-                vm.run{set("quietStart",if(enabled)"1380" else "0");set("quietEnd",if(enabled)"420" else "0");Reminder.plan(ctx,this,reason="Quiet hours edited");null}
+    AnimatedContent(
+        targetState=subview,
+        modifier=Modifier.fillMaxSize(),
+        transitionSpec={drillTransition(targetState!="main",reducedMotion)},
+        label="notificationSubview"
+    ){view->
+        if(view.startsWith("editor:")){
+            val editId=view.removePrefix("editor:")
+            val s=state.schedules.find{it.id==editId}?:ReminderSchedule(editId,"custom",true,19,0,"1,2,3,4,5,6,7","Custom Reminder","")
+            ReminderEditor(s,{editing=""}){changed->
+                vm.run{saveReminder(ctx,changed);null}
+                editing=""
+                if(changed.enabled)enablePermission()
             }
-            if(quiet.start!=quiet.end){
-                LocalTimeButton("Starts",quiet.start/60,quiet.start%60){h,m->vm.preference("quietStart",(h*60+m).toString())}
-                LocalTimeButton("Ends",quiet.end/60,quiet.end%60){h,m->vm.preference("quietEnd",(h*60+m).toString())}
-                Hint("Study reminders wait until quiet hours end. Test notifications run on their own schedule.")
+        }else if(view=="health"){
+            val clipboard=LocalClipboardManager.current
+            val time=next.minByOrNull{it.value}?.let{entry->
+                val name=state.schedules.firstOrNull{it.id==entry.key}?.name?: "Two-minute test"
+                name+" · "+displayTime(entry.value)
+            }?:"None scheduled"
+            val channelStates=(state.schedules+Reminder.testSchedule).distinctBy(Reminder::channel).map{s->
+                val channel=manager.getNotificationChannel(Reminder.channel(s))
+                val status=when(channel?.importance){null->"Not created yet";NotificationManager.IMPORTANCE_NONE->"Blocked";else->"Enabled"}
+                (channel?.name?.toString()?:Reminder.channel(s)) to status
             }
-        }
-        Label("Schedules")
-        Primary("Add reminder"){editing=UUID.randomUUID().toString()}
-        state.schedules.forEach{s->
-            Sheet{
-                SwitchRow(s.name,s.enabled){on->vm.run{saveReminder(ctx,s.copy(enabled=on));null};if(on)enablePermission()}
-                Hint(Reminder.names.getValue(s.category)+" · "+if(s.once)"One time" else s.days.split(",").mapNotNull{it.toIntOrNull()?.let{n->dayNames.getOrNull(n-1)}}.joinToString(" · "))
-                Hint(next[s.id]?.let{"Next expected · "+displayTime(it)}?:if(!s.enabled || !master)"Paused" else "No future occurrence")
-                Row(horizontalArrangement=Arrangement.spacedBy(2.dp)){
-                    TextButton({editing=s.id}){Text("Edit")}
-                    TextButton({preview=s.id}){Text("Preview")}
-                    TextButton({deleting=s.id}){Text("Delete")}
+            val rows=listOf("Android notification permission" to if(Build.VERSION.SDK_INT<33)"Not required" else if(permission)"Allowed" else "Denied",
+                "App notifications" to if(manager.areNotificationsEnabled())"Enabled" else "Blocked",
+                "Scheduling method" to "Inexact wake-up alarm",
+                "Exact-alarm access" to "Not used by LEXORA",
+                "Next expected reminder" to time)+ReminderLog.battery(ctx)+channelStates+
+                listOf("Schedule requested","Schedule accepted","Receiver executed","Post attempted","Post submitted","error").map{
+                    (if(it=="error")"Last error" else it) to (ReminderLog.last(ctx,it)?:"No recorded event")
                 }
+            Page{
+                TextButton({back()}){Text("Back to notifications")}
+                Heading("Notification Health Check")
+                Hint("Android can delay an alarm. A submitted post only confirms that Android accepted the request.")
+                Row(horizontalArrangement=Arrangement.spacedBy(8.dp)){
+                    TextButton({refresh++;vm.run{Reminder.plan(ctx,this,reason="Health Check",forceRegister=true);null}}){Text("Refresh")}
+                    TextButton({
+                        val report=(rows.map{it.first+" · "+it.second}+log).joinToString("\n")
+                        clipboard.setText(AnnotatedString(report))
+                    }){Text("Copy report")}
+                }
+                Secondary("Android notification settings"){ctx.startActivity(Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE,ctx.packageName))}
+                Secondary("App and battery settings"){ctx.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,Uri.parse("package:"+ctx.packageName)))}
+                rows.forEach{(name,value)->Sheet{Label(name);Text(value)}}
+                Label("Recent events")
+                if(log.isEmpty())Hint("No recorded events yet.")
+                log.forEach{Text(it,style=MaterialTheme.typography.bodySmall)}
+            }
+        }else{
+            val quiet=QuietHours(state.prefs["quietStart"]?.toIntOrNull()?:0,state.prefs["quietEnd"]?.toIntOrNull()?:0)
+            Page{
+                TextButton(close){Text("Back to profile")}
+                Heading("Notifications")
+                Sheet{
+                    SwitchRow("Allow study reminders",master){on->vm.preference("notificationsMaster",on.toString());if(on)enablePermission()}
+                    Hint(when{!master->"Study reminders are paused.";!permission || !manager.areNotificationsEnabled()->"Android is blocking notification posts.";else->"Study reminders are on."})
+                }
+                Sheet{
+                    Primary("Send Test Notification"){enablePermission("immediate")}
+                    Secondary("Schedule Test in 2 Minutes"){enablePermission("delayed")}
+                    if(Reminder.TEST in next)Hint("Delayed test expected · "+displayTime(next.getValue(Reminder.TEST)))
+                    Secondary("Notification Health Check"){panel="health"}
+                }
+                Sheet{
+                    SwitchRow("Quiet hours",quiet.start!=quiet.end){enabled->
+                        vm.run{set("quietStart",if(enabled)"1380" else "0");set("quietEnd",if(enabled)"420" else "0");Reminder.plan(ctx,this,reason="Quiet hours edited");null}
+                    }
+                    AnimatedVisibility(visible=quiet.start!=quiet.end,enter=panelEnter(reducedMotion),exit=panelExit(reducedMotion)){
+                        Column(verticalArrangement=Arrangement.spacedBy(10.dp)){
+                            LocalTimeButton("Starts",quiet.start/60,quiet.start%60){h,m->vm.preference("quietStart",(h*60+m).toString())}
+                            LocalTimeButton("Ends",quiet.end/60,quiet.end%60){h,m->vm.preference("quietEnd",(h*60+m).toString())}
+                            Hint("Study reminders wait until quiet hours end. Test notifications run on their own schedule.")
+                        }
+                    }
+                }
+                Label("Schedules")
+                Primary("Add reminder"){editing=UUID.randomUUID().toString()}
+                state.schedules.forEach{s->
+                    Sheet{
+                        SwitchRow(s.name,s.enabled){on->vm.run{saveReminder(ctx,s.copy(enabled=on));null};if(on)enablePermission()}
+                        Hint(Reminder.names.getValue(s.category)+" · "+if(s.once)"One time" else s.days.split(",").mapNotNull{it.toIntOrNull()?.let{n->dayNames.getOrNull(n-1)}}.joinToString(" · "))
+                        Hint(next[s.id]?.let{"Next expected · "+displayTime(it)}?:if(!s.enabled || !master)"Paused" else "No future occurrence")
+                        Row(horizontalArrangement=Arrangement.spacedBy(2.dp)){
+                            TextButton({editing=s.id}){Text("Edit")}
+                            TextButton({preview=s.id}){Text("Preview")}
+                            TextButton({deleting=s.id}){Text("Delete")}
+                        }
+                    }
+                }
+                Hint("Times use your device’s local time zone. Android may delay delivery when the device is idle.")
             }
         }
-        Hint("Times use your device’s local time zone. Android may delay delivery when the device is idle.")
     }
 
     state.schedules.find{it.id==preview}?.let{s->
@@ -188,11 +202,11 @@ private val dayNames=listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
 
 @Composable private fun LocalTimeButton(label:String,h:Int,m:Int,save:(Int,Int)->Unit){
     val ctx=LocalContext.current
-    val formatted=LocalTime.of(h,m).format(DateTimeFormatter.ofPattern(if(DateFormat.is24HourFormat(ctx))"HH:mm" else "h:mm a"))
-    Secondary("$label · $formatted"){TimePickerDialog(ctx,{_,hh,mm->save(hh,mm)},h,m,DateFormat.is24HourFormat(ctx)).show()}
+    val is24=DateFormat.is24HourFormat(ctx)
+    val formatted=remember(h,m,is24){LocalTime.of(h,m).format(if(is24)time24Formatter else time12Formatter)}
+    Secondary("$label · $formatted"){TimePickerDialog(ctx,{_,hh,mm->save(hh,mm)},h,m,is24).show()}
 }
-private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault())
-    .format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT))
+private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.systemDefault()).format(localizedDateTimeFormatter)
 
 @Composable private fun DateButton(label:String,value:String,change:(String)->Unit){
     val ctx=LocalContext.current
@@ -219,11 +233,13 @@ private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.syst
     var vibrate by rememberSaveable{mutableStateOf(s.vibration)}
     val candidate=s.copy(category=cat,enabled=on,hour=h,minute=m,days=days,title=title.trim(),message=message.trim(),
         name=name.trim(),once=once,start=start,end=if(once)"" else end,sound=sound,vibration=vibrate)
+    val categoryOptions=remember(s.category){Reminder.names.filterKeys{it!="goalReminder" || it==s.category}.values.toList()}
+    val selectedDays=remember(days){days.split(",").filter(String::isNotEmpty).toSet()}
     Page{
         TextButton(close){Text("Cancel")}
         Heading("Reminder schedule")
         SwitchRow("Enabled",on){on=it}
-        Pick("Category",Reminder.names.getValue(cat),Reminder.names.filterKeys{it!="goalReminder" || it==s.category}.values.toList()){label->
+        Pick("Category",Reminder.names.getValue(cat),categoryOptions){label->
             if(name==Reminder.names[cat])name=label
             if(title==Reminder.names[cat])title=label
             cat=Reminder.names.entries.first{it.value==label}.key
@@ -245,8 +261,8 @@ private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.syst
             if(start.isNotEmpty() || end.isNotEmpty())TextButton({start="";end=""}){Text("Clear date limits")}
             Label("Days of the week")
             for(group in (1..7).chunked(4))Row(horizontalArrangement=Arrangement.spacedBy(4.dp)){
-                group.forEach{n->val selected=n.toString() in days.split(",")
-                    FilterChip(selected,{val set=days.split(",").filter(String::isNotEmpty).toMutableSet()
+                group.forEach{n->val selected=n.toString() in selectedDays
+                    FilterChip(selected,{val set=selectedDays.toMutableSet()
                         if(selected)set.remove(n.toString())else set.add(n.toString());days=set.sorted().joinToString(",")},{Text(dayNames[n-1])})
                 }
             }
@@ -258,8 +274,9 @@ private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.syst
             ctx.startActivity(Intent(Settings.ACTION_CHANNEL_NOTIFICATION_SETTINGS)
                 .putExtra(Settings.EXTRA_APP_PACKAGE,ctx.packageName).putExtra(Settings.EXTRA_CHANNEL_ID,Reminder.channel(candidate)))
         }){Text("Android category settings")}
-        val valid=runCatching{candidate.validate()}.isSuccess
-        if(valid && on && nextReminder(candidate,ZonedDateTime.now())==null)Hint("Choose a future date and time, or disable this schedule.")
-        Primary("Save reminder",valid && (!on || nextReminder(candidate,ZonedDateTime.now())!=null)){save(candidate)}
+        val valid=remember(candidate){runCatching{candidate.validate()}.isSuccess}
+        val nextOccurrence=remember(candidate,valid,on){if(valid && on)nextReminder(candidate,ZonedDateTime.now()) else null}
+        if(valid && on && nextOccurrence==null)Hint("Choose a future date and time, or disable this schedule.")
+        Primary("Save reminder",valid && (!on || nextOccurrence!=null)){save(candidate)}
     }
 }
