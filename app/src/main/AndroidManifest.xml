@@ -1,0 +1,15 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <queries><intent><action android:name="android.intent.action.TTS_SERVICE"/></intent></queries>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application android:name=".LexoraApp" android:label="Lexora" android:icon="@drawable/ic_lexora" android:theme="@style/AppTheme" android:allowBackup="false" android:supportsRtl="true">
+        <receiver android:name=".ReminderAlarm" android:exported="false"/>
+        <receiver android:name=".ClockChanged" android:exported="false">
+            <intent-filter><action android:name="android.intent.action.TIMEZONE_CHANGED"/><action android:name="android.intent.action.TIME_SET"/><action android:name="android.intent.action.BOOT_COMPLETED"/><action android:name="android.intent.action.MY_PACKAGE_REPLACED"/></intent-filter>
+        </receiver>
+        <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize">
+            <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+        </activity>
+    </application>
+</manifest>

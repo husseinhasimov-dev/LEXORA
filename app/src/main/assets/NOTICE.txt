@@ -1,0 +1,29 @@
+LEXORA vocabulary
+
+The packaged catalog is an adaptation licensed under Creative Commons Attribution-ShareAlike 4.0 International. Redistribution and commercial use are allowed subject to attribution and share-alike. License and upstream notices are included in assets/licenses.
+https://creativecommons.org/licenses/by-sa/4.0/
+
+English Wiktionary contributors supplied the entries, senses, grammar, IPA and example translations. Each word links to its source page in the catalog. Extraction by Tatu Ylönen and Wiktextract contributors via Kaikki.
+https://en.wiktionary.org/
+https://kaikki.org/dictionary/German/
+
+Wordhoard by natema and contributors supplied frequency and level evidence. Frequency is based on OpenSubtitles via Hermit Dave's FrequencyWords. Wordhoard uses spaCy, Wiktionary, german-nouns and Goethe A1–B1 calibration. Frequency rank refers to this subtitle corpus. Level labels are vocabulary ordering estimates.
+https://github.com/natema/wordhoard/releases/tag/v0.1.0
+https://github.com/gambolputty/german-nouns
+https://github.com/hermitdave/FrequencyWords
+FrequencyWords licenses its frequency-list content under CC BY-SA 4.0 and its generator code under MIT. The vocabulary adaptation follows the content license.
+https://spacy.io/
+
+LEXORA joins matching lemmas and parts of speech, selects senses, removes duplicates and derives cloze prompts. Original LEXORA lessons in data/lessons.tsv also use CC BY-SA 4.0. Some entries lack examples or grammar fields. FSRS scheduling uses Java-FSRS by Open Spaced Repetition under the MIT license.
+https://github.com/open-spaced-repetition/java-fsrs
+
+Privacy
+Study data is stored on this device. The unconfigured build requires no account. In a configured build, signing in stores account information with Firebase and syncs packaged-word learning events to the account's Firestore collection. Device voice playback requires an installed offline German voice. Lexora does not record sound. Exported backups contain readable study data. Android's document picker controls where those files are saved.
+
+Version 0.4 sentence additions
+German-English sentence pairs from Tatoeba, compiled by ManyThings, February 13, 2026.
+https://www.manythings.org/anki/ · https://tatoeba.org/
+CC BY 2.0 France · https://creativecommons.org/licenses/by/2.0/fr/
+Individual sentence IDs and authors are displayed in Word details and stored in content-v4.jsonl.
+For a sentence with ID N, open https://tatoeba.org/en/sentences/show/N.
+LEXORA selected examples and generated gap-fill prompts. Editorial lessons and corrections are identified separately.

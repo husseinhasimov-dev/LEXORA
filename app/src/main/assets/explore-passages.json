@@ -1,0 +1,278 @@
+[
+  {
+    "id": "story-1",
+    "kind": "R",
+    "level": "A1",
+    "topic": "Everyday",
+    "title": "Der zweite Schlüssel",
+    "de": "Mila steht vor der [Tür]. Ihr Schlüssel ist in der Wohnung. Sie klingelt bei Frau Klein. Die Nachbarin holt einen zweiten [Schlüssel]. Jetzt kann Mila hinein. Am Abend bringt sie Frau Klein Blumen.",
+    "en": "Mila is locked out. Her neighbour has a spare key. That evening Mila brings her flowers.",
+    "questions": [
+      [
+        "Where is Mila’s own key?",
+        "Inside the flat",
+        "In the garden",
+        "At school"
+      ],
+      [
+        "What does Mila bring later?",
+        "Flowers",
+        "Bread",
+        "A letter"
+      ]
+    ]
+  },
+  {
+    "id": "story-2",
+    "kind": "R",
+    "level": "A1",
+    "topic": "Travel",
+    "title": "Ein Platz am Fenster",
+    "de": "Am [Bahnhof] kauft Ali eine Fahrkarte. Im Zug ist nur noch ein Platz am [Fenster] frei. Eine Frau möchte dort sitzen. Ali gibt ihr den Platz. Sie zeigt ihm draußen einen großen See.",
+    "en": "Ali buys a ticket at the station. He gives a woman the last window seat, and she points out a large lake.",
+    "questions": [
+      [
+        "Who gets the window seat?",
+        "The woman",
+        "The driver",
+        "Ali"
+      ],
+      [
+        "What does she point out?",
+        "A lake",
+        "A house",
+        "A station"
+      ]
+    ]
+  },
+  {
+    "id": "story-3",
+    "kind": "R",
+    "level": "A2",
+    "topic": "Everyday",
+    "title": "Das falsche Paket",
+    "de": "Ein [Paket] liegt vor Ninas Tür. Auf dem Zettel steht ihr Haus, aber der [Name] ist falsch. Nina geht ein Stockwerk höher. Dort wartet ein Vater auf das Geburtstagsgeschenk für seine Tochter. Er bedankt sich und lädt Nina zum Kuchen ein.",
+    "en": "A parcel arrives at the correct building but the wrong door. Upstairs a father is waiting for his daughter’s birthday present. He thanks Nina and invites her for cake.",
+    "questions": [
+      [
+        "Why does Nina go upstairs?",
+        "The parcel has another name",
+        "She needs a pen",
+        "She is looking for her cat"
+      ],
+      [
+        "Who is the present for?",
+        "The daughter",
+        "Nina",
+        "The father"
+      ]
+    ]
+  },
+  {
+    "id": "story-4",
+    "kind": "R",
+    "level": "A2",
+    "topic": "Travel",
+    "title": "Der letzte Bus",
+    "de": "Als Ben aus dem Kino kommt, ist der letzte [Bus] schon weg. Sein Handy hat keinen Strom. Im Café am [Markt] darf er kurz telefonieren. Seine Schwester kommt mit zwei Fahrrädern zum Markt. Gemeinsam fahren sie nach Hause.",
+    "en": "Ben misses the last bus and his phone is flat. He calls from a café. His sister brings two bicycles and they ride home together.",
+    "questions": [
+      [
+        "Why does Ben use the café phone?",
+        "His phone has no power",
+        "He lost his bag",
+        "The bus is late"
+      ],
+      [
+        "How do they get home?",
+        "By bicycle",
+        "By taxi",
+        "On foot"
+      ]
+    ]
+  },
+  {
+    "id": "story-5",
+    "kind": "R",
+    "level": "B1",
+    "topic": "Community",
+    "title": "Die stille Stunde",
+    "de": "In der [Bibliothek] streitet eine Lerngruppe mit einem Mann, der in Ruhe lesen möchte. Statt die Gruppe wegzuschicken, öffnet die Leiterin einen kleinen Raum für Gespräche. Eine Woche später fragt sie beide Seiten nach ihrer [Erfahrung]. Der Mann liest wieder gern dort, und die Gruppe kann ihre Aufgaben laut besprechen.",
+    "en": "A reading-room dispute is settled by opening a separate discussion room. After a week the library manager asks both sides how it went. Both can now use the library as they wish.",
+    "questions": [
+      [
+        "What solution does the manager try?",
+        "A separate discussion room",
+        "Closing the library",
+        "Banning group work"
+      ],
+      [
+        "Why does she ask again a week later?",
+        "To see whether the change works",
+        "To collect a fine",
+        "To sell books"
+      ]
+    ]
+  },
+  {
+    "id": "story-6",
+    "kind": "R",
+    "level": "B1",
+    "topic": "University",
+    "title": "Ein freier Stuhl",
+    "de": "Nach der ersten [Vorlesung] bleibt ein Stuhl im Seminarraum frei. Jana bemerkt, dass ein neuer Student draußen den falschen Raum sucht. Sie zeigt ihm den Weg. Später erklärt er ihr eine [Aufgabe], die sie allein schwer fand. In der nächsten Woche halten sie einander wieder einen Platz frei.",
+    "en": "Jana helps a new student find the seminar room. Later he helps her with a difficult task. Next week they save seats for each other.",
+    "questions": [
+      [
+        "Why is the student outside?",
+        "He is looking for the wrong room",
+        "He has missed a train",
+        "He is waiting for a teacher"
+      ],
+      [
+        "How does he help Jana?",
+        "He explains a task",
+        "He lends her money",
+        "He books a room"
+      ]
+    ]
+  },
+  {
+    "id": "story-7",
+    "kind": "R",
+    "level": "B2",
+    "topic": "Research",
+    "title": "Ein auffälliger Wert",
+    "de": "Im Labor fällt Mira ein ungewöhnlicher [Wert] auf. Ihr Kollege möchte ihn aus der Tabelle streichen, weil er den Durchschnitt verändert. Mira prüft zunächst das Protokoll. Der Sensor war an diesem Tag anders befestigt. Im [Bericht] veröffentlicht sie beide Berechnungen und erläutert, weshalb die Messbedingungen für den Vergleich entscheidend sind.",
+    "en": "Mira investigates an unusual reading before excluding it. The sensor was mounted differently that day. She reports both calculations and explains why the measurement conditions matter.",
+    "questions": [
+      [
+        "What makes the reading hard to compare?",
+        "The sensor was mounted differently",
+        "The table was empty",
+        "The average was unchanged"
+      ],
+      [
+        "What does Mira publish?",
+        "Both calculations and an explanation",
+        "Only the smaller average",
+        "A new sensor design"
+      ]
+    ]
+  },
+  {
+    "id": "story-8",
+    "kind": "R",
+    "level": "B2",
+    "topic": "Community",
+    "title": "Wer kommt zu Wort?",
+    "de": "Eine Stadt plant einen neuen [Park]. Bei der öffentlichen Sitzung sprechen vor allem Menschen, die abends Zeit haben. Eine Planerin schlägt deshalb kurze Gespräche direkt an den Bushaltestellen vor. So erreicht sie auch Schichtarbeiter. Deren Wunsch nach sicheren Wegen verändert den [Entwurf], obwohl die Fläche des Parks gleich bleibt.",
+    "en": "Evening meetings leave some residents out of the park consultation. Interviews at bus stops reach shift workers. Their wish for safe paths changes the design without changing the park’s area.",
+    "questions": [
+      [
+        "Whom do the interviews help reach?",
+        "Shift workers",
+        "Only city officials",
+        "Only architects"
+      ],
+      [
+        "What stays the same?",
+        "The area of the park",
+        "The original paths",
+        "The meeting time"
+      ]
+    ]
+  },
+  {
+    "id": "audio-9",
+    "kind": "L",
+    "level": "A1",
+    "topic": "Everyday",
+    "title": "Beim Bäcker",
+    "de": "Guten Morgen! Ich möchte ein [Brot] und zwei Brötchen kaufen. Das Brot ist für meine [Mutter]. Sie kommt heute zum Frühstück. Die Brötchen nehme ich mit zur Arbeit. Haben Sie auch eine Tüte? Danke, dann kann ich alles gut tragen. Ich gehe zu Fuß nach Hause. Meine Mutter wartet schon an der Tür. Auf dem Tisch stehen Butter und Käse. Jetzt fehlt nur noch der Kaffee.",
+    "en": "The customer buys bread for their mother’s visit and takes two rolls to work. They ask for a bag to carry everything. At home, their mother is waiting. The butter and cheese are ready, and they still need coffee.",
+    "questions": [
+      [
+        "Who is coming for breakfast?",
+        "The customer’s mother",
+        "A colleague",
+        "The baker"
+      ],
+      [
+        "Where are the rolls going?",
+        "To work",
+        "To school",
+        "To the station"
+      ]
+    ]
+  },
+  {
+    "id": "audio-10",
+    "kind": "L",
+    "level": "A2",
+    "topic": "Travel",
+    "title": "Eine Durchsage",
+    "de": "Liebe Fahrgäste, unser [Zug] fährt heute zehn Minuten später ab. Bitte bleiben Sie auf diesem Bahnsteig. Der Zug auf der anderen Seite fährt nach Bremen. Wer nach Hamburg möchte, wartet hier. Im kleinen Laden neben der Treppe können Sie noch [Wasser] kaufen. Wir sagen Ihnen Bescheid, wenn Sie einsteigen können. Halten Sie bitte die Türen frei, damit die Reisenden zuerst aussteigen können. Vielen Dank für Ihre Geduld.",
+    "en": "The train to Hamburg is ten minutes late. Passengers should stay on this platform. The other train goes to Bremen. Water is available near the stairs. Staff will announce boarding. Passengers should keep the doors clear so others can get off first.",
+    "questions": [
+      [
+        "Who should wait here?",
+        "Passengers for Hamburg",
+        "Passengers for Bremen",
+        "Everyone buying tickets"
+      ],
+      [
+        "How late is the train?",
+        "Ten minutes",
+        "Five minutes",
+        "Half an hour"
+      ]
+    ]
+  },
+  {
+    "id": "audio-11",
+    "kind": "L",
+    "level": "B1",
+    "topic": "Community",
+    "title": "Die Tauschbörse",
+    "de": "Am Samstag öffnet unsere Tauschbörse zum ersten Mal. Bringen Sie bitte nur Kleidung mit, die sauber und noch in gutem Zustand ist. Für jedes abgegebene Stück erhalten Sie eine [Karte]. Diese können Sie gegen ein anderes Stück eintauschen. Wer nichts findet, darf die Karte beim nächsten [Termin] wieder benutzen. Bitte schreiben Sie Ihren Namen auf die Rückseite. So können wir Ihnen die Karte zurückgeben, falls sie im Raum liegen bleibt.",
+    "en": "At the clothes swap, clean wearable items earn a card that can be exchanged for another item. Unused cards are valid at the next event. Participants should put their names on the cards so lost cards can be returned.",
+    "questions": [
+      [
+        "What earns a card?",
+        "Handing in suitable clothing",
+        "Paying an entry fee",
+        "Booking online"
+      ],
+      [
+        "What happens to unused cards?",
+        "They remain valid next time",
+        "They are refunded in cash",
+        "They expire immediately"
+      ]
+    ]
+  },
+  {
+    "id": "audio-12",
+    "kind": "L",
+    "level": "B2",
+    "topic": "Research",
+    "title": "Die zweite Befragung",
+    "de": "In unserer ersten [Studie] haben wir ausschließlich Studierende befragt, die freiwillig an einem Sportkurs teilnahmen. Daraus lässt sich kaum ableiten, wie häufig sich alle Studierenden bewegen. Für die zweite Befragung ziehen wir deshalb eine zufällige Stichprobe aus der gesamten Universität. Erst danach wollen wir die beiden Gruppen miteinander vergleichen und den möglichen Einfluss der [Auswahl] diskutieren.",
+    "en": "The first study sampled volunteers in a sport class. A random sample from the whole university is planned to examine how participant selection affects the findings.",
+    "questions": [
+      [
+        "Why change the sample?",
+        "Sport volunteers may be unrepresentative",
+        "The first survey was anonymous",
+        "The university has closed"
+      ],
+      [
+        "What will the team compare?",
+        "The two groups",
+        "Two sports halls",
+        "Two cities"
+      ]
+    ]
+  }
+]
