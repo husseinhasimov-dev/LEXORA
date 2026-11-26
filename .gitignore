@@ -9,6 +9,7 @@ data/raw/
 __pycache__/
 app/google-services.json
 cloud.properties
+signing.properties
 
 .env
 .env.*
