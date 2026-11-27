@@ -135,11 +135,25 @@ import java.util.Locale
         if(message.isNotBlank())Hint(message)
     }
 }
-@Composable fun Statistics(state:ScreenState){
+@Composable fun Statistics(
+    state:ScreenState,
+    onSelectDay:(String)->Unit={},
+    onOpenWord:(String)->Unit={},
+){
     val s=state.stats
+    val summary=remember(state.dailyHistory){summarizeHistory(state.dailyHistory)}
+    val dailyGoal=state.prefs["goal"]?.toIntOrNull()?.coerceAtLeast(1) ?: 10
     Page {
         Label("Learning record");Heading("Statistics")
-        Row(horizontalArrangement=Arrangement.spacedBy(10.dp)){Metric(s.started.toString(),"Words studied",Modifier.weight(1f));Metric("${s.minutes} min","Active study",Modifier.weight(1f))}
+        TotalStatisticsOverview(s,state.goalCounts,summary)
+        StudyCalendarAndTable(
+            records=state.dailyHistory,
+            selectedDay=state.selectedCalendarDay,
+            selectedDayWords=state.selectedDayWords,
+            dailyGoal=dailyGoal,
+            onSelectDay=onSelectDay,
+            onOpenWord=onOpenWord,
+        )
         Sheet {Label("Last seven days");Bars(s.week);Hint("Daily rated words · oldest to newest")
             Hint("New words each day · "+s.newWeek.joinToString(" / ")) }
         Sheet {

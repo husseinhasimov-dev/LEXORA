@@ -18,7 +18,8 @@ data class ScreenState(val ready:Boolean=false,val busy:Boolean=false,val error:
     val selected:List<Selection> = emptyList(),val undoId:Long=0,val canBack:Boolean=false,
     val studyWords:List<Word> = emptyList(),val question:Question?=null,val currentGrade:Int=0,
     val academic:List<Word> = emptyList(),val categories:Map<String,String> = emptyMap(),val credit:String="",
-    val schedules:List<ReminderSchedule> = emptyList(),val nextReminders:Map<String,Long> = emptyMap(),val weekly:WeeklyGoals=WeeklyGoals(),val goalCounts:GoalCounts=GoalCounts(0,0,0,0),val detailGrade:Int=0,val latestRating:Pair<String,Int>?=null,val assessedToday:Int=0)
+    val schedules:List<ReminderSchedule> = emptyList(),val nextReminders:Map<String,Long> = emptyMap(),val weekly:WeeklyGoals=WeeklyGoals(),val goalCounts:GoalCounts=GoalCounts(0,0,0,0),val detailGrade:Int=0,val latestRating:Pair<String,Int>?=null,val assessedToday:Int=0,
+    val dailyHistory:List<DailyRecord> = emptyList(),val selectedCalendarDay:String="",val selectedDayWords:List<Word> = emptyList())
 
 class StudyModel(val app:Application):AndroidViewModel(app) {
     private var repository:StudyRepository?=null
@@ -30,6 +31,7 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
     val state=mutable.asStateFlow()
     private var filter=Filters()
     private var detailId:String?=null
+    private var calendarDay:String?=null
     private var startedAt=0L
     private var timerWord:String?=null
     init { run { null } }
@@ -39,7 +41,7 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
                 mutable.update { it.copy(busy=true) }
                 try {
                     val next=withContext(Dispatchers.IO){
-                        if(repository?.owner!=Cloud.uid()){repository?.close();repository=null;shelf=null;detailId=null;filter=Filters()}
+                        if(repository?.owner!=Cloud.uid()){repository?.close();repository=null;shelf=null;detailId=null;calendarDay=null;filter=Filters()}
                         val repo=repository ?: StudyRepository(app).also { repository=it;Reminder.plan(app,it,forceRegister=true) }
                         repo.upgradeCourse()
                         if(repo.db.long("SELECT count(*) FROM pref WHERE k LIKE 'dailyTarget.%'")==0L)repo.set("dailyTarget."+repo.day(),repo.pref("goal"))
@@ -48,6 +50,9 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
                         val detail=detailId?.let(repo::word)
                         val keys=repo.defaults.keys+listOf("notificationsMaster","weeklyReviewGoal")+listOf("discoveryTopic","discoveryLevel")+Reminder.keys+Reminder.names.keys.flatMap {k->listOf("$k.hour","$k.minute","$k.days")}
                         val stats=repo.stats()
+                        val activeCalendarDay=calendarDay ?: repo.day()
+                        val dailyHistory=repo.dailyHistory()
+                        val selectedDayWords=repo.wordsLearnedOn(activeCalendarDay)
                         if(exploreOpen && shelf==null)shelf=ExploreShelf(repo.db.rows("SELECT * FROM word ORDER BY rank,id"){it.word()}, passages(app))
                         val relatives=if(detail==null)emptyList() else familyLinks.filter{it.first==detail.lemma || it.second==detail.lemma}.map{edge->
                             val lemma=if(edge.first==detail.lemma)edge.second else edge.first
@@ -64,7 +69,8 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
                             fav=detail?.let {repo.favorite(it.id)}?:false,selected=repo.selections(),undoId=repo.latestStep(),
                             canBack=s!=null && repo.db.long("SELECT EXISTS(SELECT 1 FROM undo_step WHERE word<>? AND before_session<>'')",s.current)>0,
                             detailGrade=detail?.let {repo.grade(it.id)}?:0,latestRating=detail?.let {repo.lastRating(it.id)},
-                            assessedToday=repo.db.long("SELECT count(DISTINCT word) FROM effective_event WHERE kind IN ('known','assess') AND day=?",repo.day()).toInt())
+                            assessedToday=repo.db.long("SELECT count(DISTINCT word) FROM effective_event WHERE kind IN ('known','assess') AND day=?",repo.day()).toInt(),
+                            dailyHistory=dailyHistory,selectedCalendarDay=activeCalendarDay,selectedDayWords=selectedDayWords)
                     }
                     mutable.value=next
                 }catch(e:CancellationException){throw e}
@@ -93,6 +99,7 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
     }
     fun filters(f:Filters)=run {filter=f;null}
     fun detail(id:String?)=run {detailId=id;null}
+    fun selectCalendarDay(day:String)=run {calendarDay=day;null}
     fun preference(k:String,v:String)=run {if(k=="goal")setDailyGoal(v.toInt()) else set(k,v);if(k.substringBefore('.') in Reminder.keys)Reminder.plan(app,this);null}
     fun start(mode:Mode,f:Filters=Filters())=run {start(mode,f)}
     fun action(s:Session,key:String,value:String=""){

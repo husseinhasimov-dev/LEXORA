@@ -122,13 +122,13 @@ class MainActivity:ComponentActivity(){
             if(!state.ready) Box(Modifier.align(Alignment.Center)){if(state.error.isEmpty())CircularProgressIndicator() else Primary("Retry opening library"){vm.clear();vm.run{null}}}
             else key(tab,practice && session!=null){
                 when(tab){
-                    "Home"->Home(state,vm,{tab="Learn";practice=false;discoverRequested=true},{begin(Mode.Review)},{tab="Learn";practice=true}, {tab="Academic"},{tab="Explore"})
+                    "Home"->Home(state,vm,{tab="Learn";practice=false;discoverRequested=true},{begin(Mode.Review)},{tab="Learn";practice=true}, {tab="Academic"},{tab="Explore"},{tab="Statistics"})
                     "Explore"->ExploreScreen(state,vm,voice){tab="Home"}
                     "Learn"->if(practice && session!=null && state.word!=null)Exercise(state,vm,voice){practice=false}
                         else Learn(state,vm,{m,f->begin(m,f)},{practice=true},previewRequested,{previewRequested=false},discoverRequested,{tab="Explore"}){discoverRequested=false}
                     "Academic"->AcademicScreen(state,vm,voice){tab="Library"}
                     "Library"->Library(state,vm,voice){tab="Academic"}
-                    "Statistics"->Statistics(state)
+                    "Statistics"->Statistics(state,vm::selectCalendarDay,vm::detail)
                     "Profile"->Profile(state,vm){begin(Mode.Placement)}
                 }
             }
@@ -147,7 +147,7 @@ class MainActivity:ComponentActivity(){
         }){Text(if(message==selectionReady && state.selected.isNotEmpty())"Review selection" else "Done")}})
 }
 
-@Composable fun Home(state:ScreenState,vm:StudyModel,discover:()->Unit,scheduled:()->Unit,resume:()->Unit,academic:()->Unit,explore:()->Unit={}){
+@Composable fun Home(state:ScreenState,vm:StudyModel,discover:()->Unit,scheduled:()->Unit,resume:()->Unit,academic:()->Unit,explore:()->Unit={},openStats:()->Unit={}){
     val stats=state.stats
     val goal=state.prefs.getValue("goal").toInt()
     val weeklyTarget=state.prefs.getValue("weeklyReviewGoal").toInt()
@@ -183,6 +183,7 @@ class MainActivity:ComponentActivity(){
             Text("Scheduled reviews completed · "+state.weekly.scheduled+" / "+weeklyTarget)
             Progress(state.weekly.scheduled.toFloat()/weeklyTarget)
             Pick("Weekly review goal",weeklyTarget.toString(),listOf("5","10","20","30","50","100")){vm.preference("weeklyReviewGoal",it)}
+            Secondary("Study calendar & daily table",onClick=openStats)
         }
         Secondary("Practice & Explore",onClick=explore)
         PreparationGoal(state.goalCounts)
