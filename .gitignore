@@ -12,6 +12,7 @@ cloud.properties
 
 .env
 .env.*
+.github-token
 *.apk
 *.aab
 *.zip
