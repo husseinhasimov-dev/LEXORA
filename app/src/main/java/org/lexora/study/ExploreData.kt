@@ -59,7 +59,17 @@ fun StudyRepository.nextExplore(id:String,step:Int)=db.tx{
     val history=j.optJSONArray("responses")?:JSONArray()
     history.put(j.getString("feedback"));j.put("responses",history)
     j.remove("feedback");j.put("step",step+1)
-    if(step+1==j.getJSONArray("qs").length())recordExplore(j.getString("mode"),j.getString("item"),"Completed",null,null,"",true)
+    if(step+1==j.getJSONArray("qs").length()){
+        val mode=j.getString("mode");val item=j.getString("item");val questions=j.getJSONArray("qs")
+        recordExplore(mode,item,"Completed",null,null,"",true)
+        val skill=when(mode){"Listening in Context"->"Listening";"Mini Stories"->"Reading";else->"Vocabulary"}
+        val correct=(0 until questions.length()).count{Prompt.read(questions.getJSONObject(it)).accepts(history.getString(it))}
+        // Include keyed prompts so changing the custom exercise set can earn new credit.
+        val signature=(0 until questions.length()).map{Prompt.read(questions.getJSONObject(it))}.map{it.prompt+"|"+it.key}.sorted().joinToString("\n")
+        val key=UUID.nameUUIDFromBytes(signature.toByteArray(Charsets.UTF_8))
+        record(Evidence("explore/"+id,skill,mode,item,attempted=questions.length(),correct=correct),
+            "explore/"+mode+"/"+item+"/"+key,AcademyXp.points(if(skill=="Listening")25 else 12,null,correct.toDouble()/questions.length()),"Completed "+mode+" · "+correct+"/"+questions.length())
+    }
     set("explore.session",j.toString())
 }
 fun options(key:String,wrong:List<String>,seed:String)=(listOf(key)+wrong.filter{it!=key}.distinct().take(3)).shuffled(kotlin.random.Random(seed.hashCode()))

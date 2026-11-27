@@ -78,6 +78,13 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
             }
         }
     }
+    internal suspend fun <T> academyQuery(op:StudyRepository.()->T):T=lock.withLock {
+        withContext(Dispatchers.IO) {
+            val repo=requireNotNull(repository)
+            check(repo.owner==Cloud.uid()){"Profile changed. Reopen the academy."}
+            repo.op()
+        }
+    }
     fun clear(){mutable.update {it.copy(notice="",error="")}}
     fun deleteAccount(){
         viewModelScope.launch {

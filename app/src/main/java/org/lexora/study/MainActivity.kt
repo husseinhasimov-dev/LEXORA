@@ -122,10 +122,11 @@ class MainActivity:ComponentActivity(){
             if(!state.ready) Box(Modifier.align(Alignment.Center)){if(state.error.isEmpty())CircularProgressIndicator() else Primary("Retry opening library"){vm.clear();vm.run{null}}}
             else key(tab,practice && session!=null){
                 when(tab){
-                    "Home"->Home(state,vm,{tab="Learn";practice=false;discoverRequested=true},{begin(Mode.Review)},{tab="Learn";practice=true}, {tab="Academic"},{tab="Explore"},{tab="Statistics"})
+                    "Home"->Home(state,vm,{tab="Learn";practice=false;discoverRequested=true},{begin(Mode.Review)},{tab="Learn";practice=true}, {tab="Academic"},{tab="Explore"},{tab="Statistics"},{tab="Academy"})
+                    "Academy"->AcademyScreen(vm,voice,{tab="Learn";practice=true},{tab="Explore"},{begin(Mode.Lab)},{begin(Mode.Review)})
                     "Explore"->ExploreScreen(state,vm,voice){tab="Home"}
                     "Learn"->if(practice && session!=null && state.word!=null)Exercise(state,vm,voice){practice=false}
-                        else Learn(state,vm,{m,f->begin(m,f)},{practice=true},previewRequested,{previewRequested=false},discoverRequested,{tab="Explore"}){discoverRequested=false}
+                        else Learn(state,vm,{m,f->begin(m,f)},{practice=true},previewRequested,{previewRequested=false},discoverRequested,{tab="Explore"},{tab="Academy"}){discoverRequested=false}
                     "Academic"->AcademicScreen(state,vm,voice){tab="Library"}
                     "Library"->Library(state,vm,voice){tab="Academic"}
                     "Statistics"->Statistics(state,vm::selectCalendarDay,vm::detail)
@@ -147,7 +148,7 @@ class MainActivity:ComponentActivity(){
         }){Text(if(message==selectionReady && state.selected.isNotEmpty())"Review selection" else "Done")}})
 }
 
-@Composable fun Home(state:ScreenState,vm:StudyModel,discover:()->Unit,scheduled:()->Unit,resume:()->Unit,academic:()->Unit,explore:()->Unit={},openStats:()->Unit={}){
+@Composable fun Home(state:ScreenState,vm:StudyModel,discover:()->Unit,scheduled:()->Unit,resume:()->Unit,academic:()->Unit,explore:()->Unit={},openStats:()->Unit={},academy:()->Unit={}){
     val stats=state.stats
     val goal=state.prefs.getValue("goal").toInt()
     val weeklyTarget=state.prefs.getValue("weeklyReviewGoal").toInt()
@@ -157,6 +158,7 @@ class MainActivity:ComponentActivity(){
     Page {
         Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Label("Lexora");Hint(LocalDate.now().format(DateTimeFormatter.ofPattern("EEE, MMM d",Locale.ENGLISH)))}
         Heading("Your study day")
+        Secondary("Learning Academy",onClick=academy)
         Sheet {
             Text("Today’s words",style=MaterialTheme.typography.headlineSmall)
             Text(state.goalCounts.today.toString()+" / "+goal+" successfully recalled",style=MaterialTheme.typography.titleMedium)
@@ -193,12 +195,13 @@ class MainActivity:ComponentActivity(){
     }
 }
 
-@Composable fun Learn(state:ScreenState,vm:StudyModel,begin:(Mode,Filters)->Unit,resume:()->Unit,previewRequested:Boolean,consumePreview:()->Unit,discoverRequested:Boolean,explore:()->Unit,consumeDiscovery:()->Unit){
+@Composable fun Learn(state:ScreenState,vm:StudyModel,begin:(Mode,Filters)->Unit,resume:()->Unit,previewRequested:Boolean,consumePreview:()->Unit,discoverRequested:Boolean,explore:()->Unit,academy:()->Unit={},consumeDiscovery:()->Unit){
     var level by rememberSaveable{mutableStateOf("All")};var deck by rememberSaveable{mutableStateOf("All")}
     var status by rememberSaveable{mutableStateOf("All")}
     var topic by rememberSaveable{mutableStateOf("All")}
     Page {
         Label("Practice");Heading("Learn")
+        Secondary("Learning Academy",onClick=academy)
         if(state.session!=null)Sheet {Text(state.session.mode.label);Hint(if(state.session.stage==Stage.Assess)"Discovery in progress" else "Word ${state.session.index+1} of ${state.session.limit}")
             Primary("Resume session",!state.busy,resume)
             var confirm by remember{mutableStateOf(false)}
