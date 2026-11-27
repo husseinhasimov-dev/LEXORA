@@ -90,7 +90,7 @@ fun StudyRepository.backup():JSONObject = db.tx {
     val result=JSONObject().put("format","lexora-local-v1")
     val queries=mapOf("exploration" to "SELECT * FROM exploration ORDER BY at,id","personal" to "SELECT * FROM word WHERE source='Personal'","events" to "SELECT * FROM event ORDER BY at,id",
         "favorites" to "SELECT * FROM favorite","decks" to "SELECT * FROM deck","preferences" to "SELECT * FROM pref WHERE k!='session'")
-    queries.forEach { (name,sql) -> result.put(name,JSONArray(db.rows(sql){it.jsonRow()})) }
+    (queries + academyTables.associateWith { "SELECT * FROM "+it }).forEach { (name,sql) -> result.put(name,JSONArray(db.rows(sql){it.jsonRow()})) }
     result
 }
 fun StudyRepository.mergeEvents(events:List<JSONObject>):Int=db.tx {
@@ -138,6 +138,12 @@ fun StudyRepository.restore(backup:JSONObject):String=db.tx {
         db.execSQL("INSERT OR IGNORE INTO exploration VALUES(?,?,?,?,?,?,?,?,?)", arrayOf("id","mode","item","part","target","other","answer","correct","at").map { if(e.isNull(it))null else e.getString(it) }.toTypedArray())
     }
     val added=mergeEvents(items("events"))
+    for(table in academyTables) {
+        if(!backup.has(table))continue
+        val columns=db.rows("PRAGMA table_info("+table+")"){it.getString(1)}
+        val sql="INSERT OR IGNORE INTO "+table+"("+columns.joinToString(",")+") VALUES("+columns.joinToString(","){"?"}+")"
+        items(table).forEach { row -> db.execSQL(sql,columns.map { if(row.isNull(it))null else row.get(it) }.toTypedArray()) }
+    }
     for(p in items("preferences")){
         val k=p.getString("k"); val v=p.getString("v")
         val valid=when(k) {
@@ -152,6 +158,7 @@ fun StudyRepository.restore(backup:JSONObject):String=db.tx {
             "speed"->v.toFloatOrNull()?.let { it in 0.5f..2f }==true
             "writing","context","hints","welcome"->v in listOf("true","false")
             else->when {
+                k.startsWith("academy.")->true
                 k.startsWith("revisit.")->db.long("SELECT count(*) FROM word WHERE id=?",k.removePrefix("revisit."))==1L && runCatching{LocalDate.parse(v)}.isSuccess
                 k.startsWith("dailyTarget.")->runCatching{LocalDate.parse(k.removePrefix("dailyTarget."))}.isSuccess && v.toIntOrNull() in 1..500
                 k.startsWith("notify.")->v=="deleted" || runCatching{ReminderSchedule.parse(k.removePrefix("notify."),v)}.isSuccess

@@ -72,8 +72,8 @@ class ExploreTest{
     @Test fun v4MigrationPreservesActualRatingsAndSettings(){
         val w=shelf.byLemma.getValue("wohnen");repo.event(w.id,"new",3)
         val c=Memory.review(w.id,null,3,repo.now(),90);repo.db.saveCard(w.id,c);repo.setDailyGoal(32)
-        repo.db.execSQL("DROP TABLE exploration");repo.db.version=4;repo.close();repo=StudyRepository(ctx,owner)
-        assertEquals(5,repo.db.version);assertEquals(32,repo.pref("goal").toInt());assertEquals(c.due.toEpochMilli(),repo.db.long("SELECT due FROM card"))
+        removeAcademySchema(repo.db);repo.db.execSQL("DROP TABLE exploration");repo.db.version=4;repo.close();repo=StudyRepository(ctx,owner)
+        assertEquals(6,repo.db.version);assertEquals(32,repo.pref("goal").toInt());assertEquals(c.due.toEpochMilli(),repo.db.long("SELECT due FROM card"))
         assertEquals(1,repo.today("new"));assertEquals(0,repo.db.long("SELECT count(*) FROM pragma_foreign_key_check"))
     }
 }
