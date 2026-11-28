@@ -2,13 +2,11 @@ package org.lexora.study
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.compose.BackHandler
+import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
@@ -17,217 +15,517 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
+import kotlinx.coroutines.withContext
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import java.util.UUID
 
-val blue=Color(0xffa6caff)
-val mint=Color(0xff9dd8b9)
-val ink=Color(0xff0d1521)
-val panel=Color(0xff182535)
-val faint=Color(0xffbcc9d6)
-val amber=Color(0xfff4c68c)
-class MainActivity:ComponentActivity(){
-    private val model:StudyModel by viewModels()
-    private lateinit var voice:Voice
-    override fun onCreate(savedInstanceState:Bundle?){
+class MainActivity : ComponentActivity() {
+    private val model: StudyModel by viewModels()
+    private lateinit var voice: Voice
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
-            navigationBarStyle=androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT))
-        voice=Voice(this)
-        setContent { LexoraApp(model,voice) }
+        enableEdgeToEdge(
+            statusBarStyle = androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+        )
+        voice = Voice(this)
+        setContent { LexoraApp(model, voice) }
     }
-    override fun onDestroy(){voice.close();super.onDestroy()}
+    override fun onDestroy() { voice.close(); super.onDestroy() }
 }
-@Composable fun LexoraApp(model:StudyModel,voice:Voice){
-    MaterialTheme(colorScheme=darkColorScheme(primary=blue,onPrimary=Color(0xff102c4d),
-        background=ink,surface=ink,surfaceContainer=panel,onBackground=Color(0xffedf4ef),
-        onSurface=Color(0xffedf4ef),onSurfaceVariant=faint,secondary=mint,outline=Color(0xff53677b))){
-        App(model,voice)
+
+@Composable
+fun LexoraApp(model: StudyModel, voice: Voice) {
+    MaterialTheme(colorScheme = LexoraColorScheme) {
+        App(model, voice)
     }
 }
 
-@Composable fun Heading(text:String){Text(text,fontSize=32.sp,lineHeight=38.sp,fontWeight=FontWeight.SemiBold,letterSpacing=(-1).sp)}
-@Composable fun Label(text:String){Text(text.uppercase(Locale.ENGLISH),fontSize=11.sp,fontWeight=FontWeight.Bold,color=mint,letterSpacing=1.5.sp)}
-@Composable fun Hint(text:String){Text(text,color=faint,style=MaterialTheme.typography.bodyMedium)}
-@Composable fun Sheet(content:@Composable ColumnScope.()->Unit){
-    Column(Modifier.fillMaxWidth().background(panel,RoundedCornerShape(18.dp)).border(1.dp,Color(0xff304153),RoundedCornerShape(18.dp)).padding(18.dp),
-        verticalArrangement=Arrangement.spacedBy(10.dp),content=content)
-}
-@Composable fun Primary(text:String,enabled:Boolean=true,onClick:()->Unit){
-    Button(onClick,Modifier.fillMaxWidth().heightIn(min=50.dp),enabled,shape=RoundedCornerShape(15.dp)){Text(text,fontWeight=FontWeight.Bold)}
-}
-@Composable fun Secondary(text:String,enabled:Boolean=true,onClick:()->Unit){
-    OutlinedButton(onClick,Modifier.fillMaxWidth().heightIn(min=48.dp),enabled,shape=RoundedCornerShape(15.dp),colors=ButtonDefaults.outlinedButtonColors(contentColor=mint)){Text(text)}
-}
-@Composable fun Progress(value:Float){
-    LinearProgressIndicator(progress={value.coerceIn(0f,1f)},modifier=Modifier.fillMaxWidth().height(5.dp),color=mint,trackColor=Color(0xff35423e))
-}
-@Composable fun Metric(value:String,title:String,modifier:Modifier=Modifier){
-    Column(modifier.background(panel,RoundedCornerShape(16.dp)).padding(13.dp)){
-        Text(value,fontSize=23.sp,fontWeight=FontWeight.SemiBold,color=Color.White);Hint(title)
-    }
-}
-@Composable fun Page(content:@Composable ColumnScope.()->Unit){
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(horizontal=20.dp,vertical=16.dp),
-        verticalArrangement=Arrangement.spacedBy(14.dp),content=content)
-}
-@Composable fun Pick(label:String,value:String,options:List<String>,onChange:(String)->Unit){
-    var open by remember {mutableStateOf(false)}
-    Box {
-        OutlinedButton({open=true},shape=RoundedCornerShape(12.dp)) {Text("$label · $value  ▾")}
-        DropdownMenu(open,{open=false},modifier=Modifier.heightIn(max=360.dp)){
-            options.forEach { DropdownMenuItem(text={Text(it)},onClick={open=false;onChange(it)}) }
-        }
-    }
-}
-
-@Composable fun App(vm:StudyModel,voice:Voice){
+@Composable
+fun App(vm: StudyModel, voice: Voice) {
     val state by vm.state.collectAsStateWithLifecycle()
-    var tab by rememberSaveable{mutableStateOf("Home")}
-    var practice by rememberSaveable{mutableStateOf(false)}
-    var discoverRequested by rememberSaveable{mutableStateOf(false)}
-    var previewRequested by rememberSaveable {mutableStateOf(false)}
-    var openedWelcome by rememberSaveable{mutableStateOf(true)}
-    val bars=listOf("Home" to Icons.Default.Home,"Learn" to Icons.Default.PlayArrow,"Library" to Icons.Default.List,
-        "Statistics" to Icons.Default.DateRange,"Profile" to Icons.Default.Person)
-    val session=state.session
-    val lifecycle=LocalLifecycleOwner.current.lifecycle
-    val active=if(practice && tab=="Learn")session?.current else null
-    DisposableEffect(active,lifecycle){
-        val observer=LifecycleEventObserver { _,event ->
-            when(event){Lifecycle.Event.ON_RESUME->vm.timing(active);Lifecycle.Event.ON_PAUSE->vm.timing(null);else->Unit}
+    var tab by rememberSaveable { mutableStateOf("Home") }
+    var learnRoute by rememberSaveable { mutableStateOf("Vocab") }
+    var learnBackStack by rememberSaveable { mutableStateOf(listOf<String>()) }
+    var roadmapSection by rememberSaveable { mutableStateOf("Roadmap") }
+    var progressSection by rememberSaveable { mutableStateOf("Analytics") }
+    var practice by rememberSaveable { mutableStateOf(false) }
+    var discoverRequested by rememberSaveable { mutableStateOf(false) }
+    var previewRequested by rememberSaveable { mutableStateOf(false) }
+    var openedWelcome by rememberSaveable { mutableStateOf(true) }
+    var showFinder by rememberSaveable { mutableStateOf(false) }
+
+    // Intelligence & Academy shared state
+    var revision by remember { mutableIntStateOf(0) }
+    val writeLock = remember { Mutex() }
+    val scope = rememberCoroutineScope()
+    var academyError by rememberSaveable { mutableStateOf("") }
+    var analyticsWindow by rememberSaveable { mutableStateOf(AnalyticsWindow.LAST_30) }
+    var customFromStr by rememberSaveable { mutableStateOf(LocalDate.now().minusDays(13).toString()) }
+    var customToStr by rememberSaveable { mutableStateOf(LocalDate.now().toString()) }
+    var journalFrom by rememberSaveable { mutableStateOf(LocalDate.now().minusDays(6).toString()) }
+    var journalTo by rememberSaveable { mutableStateOf(LocalDate.now().toString()) }
+
+    val owner = Cloud.uid()
+    var resourcesCache by remember(owner) { mutableStateOf<Triple<List<Reading>, GrammarCatalog, ReadingIndex>?>(null) }
+    var wordVersion by remember { mutableLongStateOf(-1L) }
+    var snapshot by remember { mutableStateOf<IntelligenceSnapshot?>(null) }
+
+    LaunchedEffect(
+        state.ready, owner, revision, state.stats.started, state.stats.due, state.stats.todayReview,
+        analyticsWindow, customFromStr, customToStr, journalFrom, journalTo,
+    ) {
+        if (!state.ready) return@LaunchedEffect
+        withContext(Dispatchers.Main.immediate) {
+            try {
+                val old = resourcesCache
+                val ver = vm.academyQuery { db.long("SELECT coalesce((SELECT max(rowid) FROM event),0)*1000000+(SELECT count(*) FROM word)") }
+                val res = if (old != null && ver == wordVersion) old else vm.academyQuery {
+                    Triple(
+                        old?.first ?: OfflineReadings.passages(vm.app),
+                        old?.second ?: loadGrammarCatalog(vm.app),
+                        readingIndex(),
+                    )
+                }.also { resourcesCache = it; wordVersion = ver }
+                val customFrom = runCatching { LocalDate.parse(customFromStr) }.getOrDefault(LocalDate.now().minusDays(13))
+                val customTo = runCatching { LocalDate.parse(customToStr) }.getOrDefault(LocalDate.now())
+                snapshot = vm.academyQuery {
+                    val acData = academyData(res.first, res.second.lessons, res.third, journalFrom, journalTo)
+                    val an = computeAnalytics(analyticsWindow, res.first, res.second.lessons, res.second.guides, customFrom, customTo)
+                    val mc = computeMissionControl(an, res.first)
+                    val today = LocalDate.parse(day())
+                    val pendingQuests = acData.quests.count { !it.first.bonus && it.second < it.first.target }
+                    val alerts = generateLearningAlerts(an, mc, alertStates(), today, pendingQuests)
+                    val proposals = generateStudyPlanProposals(an, mc, proposalDecisions(), today)
+                    val catPrefs = AlertCategory.entries.associateWith { cat ->
+                        val v = pref(alertCategoryPrefKey(cat))
+                        if (v.isEmpty()) cat == AlertCategory.EXAM || cat == AlertCategory.STUDY_PLANNING else v == "true"
+                    }
+                    IntelligenceSnapshot(res.second, acData, an, mc, alerts, proposals, catPrefs)
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                academyError = e.localizedMessage ?: "Could not load learning intelligence"
+            }
         }
-        if(lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED))vm.timing(active)
-        lifecycle.addObserver(observer)
-        onDispose { lifecycle.removeObserver(observer);vm.timing(null) }
     }
-    LaunchedEffect(state.ready,session==null){if(state.ready && session==null && !state.busy)practice=false}
-    fun begin(mode:Mode,f:Filters=Filters()){
-        if(state.busy)return
-        tab="Learn";practice=true;vm.start(mode,f)
-    }
-    BackHandler(enabled=state.detail!=null || practice || tab!="Home"){
-        when {state.detail!=null -> vm.detail(null);practice -> practice=false;tab=="Academic"->tab="Library";else -> tab="Home"}
-    }
-    Scaffold(containerColor=ink,bottomBar={if(!practice || session==null)NavigationBar(containerColor=Color(0xff131f2e)){
-        bars.forEach { (name,icon)->NavigationBarItem(selected=name==tab || tab=="Academic" && name=="Library",onClick={tab=name;practice=false},
-            icon={Icon(icon,null)},label={Text(name,fontSize=11.sp,maxLines=1)},colors=NavigationBarItemDefaults.colors(indicatorColor=Color(0xff29415f),selectedIconColor=blue)) }
-    }}){inner->
-        Box(Modifier.fillMaxSize().padding(inner)){
-            if(!state.ready) Box(Modifier.align(Alignment.Center)){if(state.error.isEmpty())CircularProgressIndicator() else Primary("Retry opening library"){vm.clear();vm.run{null}}}
-            else key(tab,practice && session!=null){
-                when(tab){
-                    "Home"->Home(state,vm,{tab="Learn";practice=false;discoverRequested=true},{begin(Mode.Review)},{tab="Learn";practice=true}, {tab="Academic"},{tab="Explore"},{tab="Statistics"},{tab="Academy"})
-                    "Academy"->AcademyScreen(vm,voice,{tab="Learn";practice=true},{tab="Explore"},{begin(Mode.Lab)},{begin(Mode.Review)})
-                    "Explore"->ExploreScreen(state,vm,voice){tab="Home"}
-                    "Learn"->if(practice && session!=null && state.word!=null)Exercise(state,vm,voice){practice=false}
-                        else Learn(state,vm,{m,f->begin(m,f)},{practice=true},previewRequested,{previewRequested=false},discoverRequested,{tab="Explore"},{tab="Academy"}){discoverRequested=false}
-                    "Academic"->AcademicScreen(state,vm,voice){tab="Library"}
-                    "Library"->Library(state,vm,voice){tab="Academic"}
-                    "Statistics"->Statistics(state,vm::selectCalendarDay,vm::detail)
-                    "Profile"->Profile(state,vm){begin(Mode.Placement)}
+
+    fun writeAcademy(op: StudyRepository.() -> Unit, done: () -> Unit = {}) {
+        scope.launch(Dispatchers.Main.immediate) {
+            writeLock.withLock {
+                try {
+                    vm.academyQuery { db.tx { op() } }
+                    revision++
+                    vm.run { null }
+                    done()
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    academyError = e.localizedMessage ?: "Could not save"
                 }
             }
         }
     }
-    if(state.ready && state.prefs["welcome"]=="true" && openedWelcome)AlertDialog(onDismissRequest={openedWelcome=false;vm.preference("welcome","false")},
-        title={Text("Where would you like to start?")},text={Text("Try eight vocabulary questions to choose a starting level, or begin at A1. You can change your level in Profile.")},
-        confirmButton={TextButton({openedWelcome=false;vm.preference("welcome","false");begin(Mode.Placement)}){Text("Try assessment")}},
-        dismissButton={TextButton({openedWelcome=false;vm.preference("welcome","false")}){Text("Start at A1")}})
-    if(state.detail!=null)WordDetail(state,vm,voice)
-    val message=state.error.ifEmpty{state.notice}
-    if(message.isNotEmpty())AlertDialog(onDismissRequest=vm::clear,title={Text(if(state.error.isNotEmpty())"Couldn’t finish" else "Study update")},
-        text={Text(message)},confirmButton={TextButton({
-            vm.clear()
-            if(message==selectionReady && state.selected.isNotEmpty()){tab="Learn";practice=false;previewRequested=true}
-        }){Text(if(message==selectionReady && state.selected.isNotEmpty())"Review selection" else "Done")}})
+
+    val bars = listOf(
+        "Home" to Icons.Default.Home,
+        "Learn" to Icons.Default.PlayArrow,
+        "Roadmap" to Icons.Default.Star,
+        "Progress" to Icons.Default.DateRange,
+        "Profile" to Icons.Default.Person,
+    )
+
+    val session = state.session
+    val lifecycle = LocalLifecycleOwner.current.lifecycle
+    val active = if (practice && tab == "Learn") session?.current else null
+    DisposableEffect(active, lifecycle) {
+        val observer = LifecycleEventObserver { _, event ->
+            when (event) {
+                Lifecycle.Event.ON_RESUME -> vm.timing(active)
+                Lifecycle.Event.ON_PAUSE -> vm.timing(null)
+                else -> Unit
+            }
+        }
+        if (lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) vm.timing(active)
+        lifecycle.addObserver(observer)
+        onDispose { lifecycle.removeObserver(observer); vm.timing(null) }
+    }
+    LaunchedEffect(state.ready, session == null) { if (state.ready && session == null && !state.busy) practice = false }
+
+    fun begin(mode: Mode, f: Filters = Filters()) {
+        if (state.busy) return
+        tab = "Learn"; practice = true; vm.start(mode, f)
+    }
+
+    fun pushLearn(next: String) {
+        if (next == "JumpTestDaF") {
+            tab = "Progress"; progressSection = "TestDaF"; return
+        }
+        if (learnRoute != next) {
+            learnBackStack = (learnBackStack + learnRoute).takeLast(12)
+            learnRoute = next
+        }
+    }
+
+    fun popLearn() {
+        voice.stop()
+        if (learnBackStack.isNotEmpty()) {
+            learnRoute = learnBackStack.last()
+            learnBackStack = learnBackStack.dropLast(1)
+        } else {
+            learnRoute = "Vocab"
+        }
+    }
+
+    fun navigate(route: String) {
+        practice = false
+        voice.stop()
+        val head = route.substringBefore(':')
+        val tail = route.substringAfter(':', "")
+        when (head) {
+            "Home" -> tab = "Home"
+            "Learn" -> {
+                tab = "Learn"
+                when (tail) {
+                    "Review" -> begin(Mode.Review)
+                    "Lab" -> begin(Mode.Lab)
+                    "Vocab", "" -> { learnBackStack = emptyList(); learnRoute = "Vocab" }
+                    "Library", "Academic", "Explore", "Reading", "Grammar", "Inbox", "DiscoverAcademy", "Recovery" -> pushLearn(tail)
+                    else -> if (tail.startsWith("Read:") || tail.startsWith("Lesson:") || tail.startsWith("Quiz:")) pushLearn(tail)
+                }
+            }
+            "Roadmap" -> {
+                tab = "Roadmap"
+                roadmapSection = when (tail) {
+                    "Quests" -> "Quests"
+                    "Recommendations", "Smart Plan" -> "Smart Plan"
+                    else -> "Roadmap"
+                }
+            }
+            "Progress" -> {
+                tab = "Progress"
+                progressSection = when (tail) {
+                    "XP" -> "XP & Growth"
+                    "Skills" -> "Skills"
+                    "TestDaF" -> "TestDaF"
+                    "Alerts" -> "Alerts"
+                    "Journal" -> "Journal"
+                    else -> "Analytics"
+                }
+            }
+            "Profile" -> tab = "Profile"
+        }
+    }
+
+    val academyActions = remember {
+        AcademyActions(
+            go = { next ->
+                when (next) {
+                    "Quests" -> navigate("Roadmap:Quests")
+                    "Journal" -> navigate("Progress:Journal")
+                    "Discover" -> { tab = "Learn"; pushLearn("DiscoverAcademy") }
+                    else -> { tab = "Learn"; pushLearn(next) }
+                }
+            },
+            back = { popLearn() },
+            edit = { op, done -> writeAcademy(op, done) },
+            study = { tab = "Learn"; practice = true },
+            detail = vm::detail,
+            explore = { navigate("Learn:Explore") },
+            lab = { begin(Mode.Lab) },
+            review = { begin(Mode.Review) },
+        )
+    }
+
+    BackHandler(enabled = state.detail != null || practice || (tab == "Learn" && learnRoute != "Vocab") || tab != "Home") {
+        when {
+            state.detail != null -> vm.detail(null)
+            practice -> practice = false
+            tab == "Learn" && learnRoute != "Vocab" -> popLearn()
+            else -> tab = "Home"
+        }
+    }
+
+    Scaffold(
+        containerColor = ink,
+        bottomBar = {
+            if (!practice || session == null) {
+                NavigationBar(containerColor = Color(0xff101b29)) {
+                    bars.forEach { (name, icon) ->
+                        val selected = name == tab
+                        NavigationBarItem(
+                            selected = selected,
+                            onClick = {
+                                voice.stop()
+                                practice = false
+                                if (name == tab && name == "Learn") {
+                                    learnBackStack = emptyList()
+                                    learnRoute = "Vocab"
+                                }
+                                tab = name
+                            },
+                            icon = { Icon(icon, contentDescription = name) },
+                            label = { Text(name, fontSize = 11.sp, maxLines = 1, overflow = TextOverflow.Ellipsis) },
+                            colors = NavigationBarItemDefaults.colors(
+                                indicatorColor = blueSurface,
+                                selectedIconColor = blue,
+                                selectedTextColor = blue,
+                                unselectedIconColor = faint,
+                                unselectedTextColor = faint,
+                            ),
+                        )
+                    }
+                }
+            }
+        },
+    ) { inner ->
+        Box(Modifier.fillMaxSize().padding(inner)) {
+            if (!state.ready) {
+                Box(Modifier.align(Alignment.Center).padding(24.dp)) {
+                    if (state.error.isEmpty()) CircularProgressIndicator(color = blue)
+                    else Primary("Retry opening library") { vm.clear(); vm.run { null } }
+                }
+            } else {
+                when (tab) {
+                    "Home" -> HomeV61(
+                        state = state,
+                        vm = vm,
+                        snapshot = snapshot,
+                        onOpenFinder = { showFinder = true },
+                        onDiscover = { tab = "Learn"; learnRoute = "Vocab"; practice = false; discoverRequested = true },
+                        onScheduled = { begin(Mode.Review) },
+                        onResume = { tab = "Learn"; practice = true },
+                        onNavigate = ::navigate,
+                    )
+                    "Learn" -> if (practice && session != null && state.word != null) {
+                        Exercise(state, vm, voice) { practice = false }
+                    } else {
+                        LearnHubV61(
+                            state = state,
+                            vm = vm,
+                            voice = voice,
+                            snapshot = snapshot,
+                            subRoute = learnRoute,
+                            onSubRoute = ::pushLearn,
+                            onBegin = ::begin,
+                            onResume = { practice = true },
+                            previewRequested = previewRequested,
+                            consumePreview = { previewRequested = false },
+                            discoverRequested = discoverRequested,
+                            consumeDiscovery = { discoverRequested = false },
+                            academyActions = academyActions,
+                            onOpenVocabTopic = { topicName ->
+                                vm.filters(Filters(topic = topicName))
+                                pushLearn("Library")
+                            },
+                        )
+                    }
+                    "Roadmap" -> RoadmapHubV61(
+                        snapshot = snapshot,
+                        initialSection = roadmapSection,
+                        academyActions = academyActions,
+                        onAcceptProposal = { p, bonus -> writeAcademy({ acceptProposal(p, bonus) }) },
+                        onRejectProposal = { p -> writeAcademy({ rejectProposal(p) }) },
+                        onNavigate = ::navigate,
+                    )
+                    "Progress" -> ProgressHubV61(
+                        state = state,
+                        snapshot = snapshot,
+                        initialSection = progressSection,
+                        analyticsWindow = analyticsWindow,
+                        customFrom = runCatching { LocalDate.parse(customFromStr) }.getOrDefault(LocalDate.now().minusDays(13)),
+                        customTo = runCatching { LocalDate.parse(customToStr) }.getOrDefault(LocalDate.now()),
+                        onWindowChange = { analyticsWindow = it },
+                        onCustomRangeChange = { f, t -> customFromStr = f.toString(); customToStr = t.toString() },
+                        onSelectCalendarDay = vm::selectCalendarDay,
+                        onOpenWord = vm::detail,
+                        onLogManualStudy = { skill, mins, note ->
+                            writeAcademy({
+                                record(
+                                    Evidence(
+                                        id = "manual/${UUID.randomUUID()}",
+                                        skill = skill,
+                                        activity = "Reported task",
+                                        content = note.ifBlank { "$skill practice ($mins min)" },
+                                        method = "self-reported",
+                                        activeMs = mins * 60_000L,
+                                        answer = note.takeIf { it.isNotBlank() },
+                                    ),
+                                )
+                            })
+                        },
+                        onSaveExamConfig = { cfg -> writeAcademy({ saveTestDaFConfig(cfg) }) },
+                        onAddAssessment = { rec -> writeAcademy({ saveTestDaFAssessment(rec) }) },
+                        onDeleteAssessment = { id -> writeAcademy({ deleteTestDaFAssessment(id) }) },
+                        onToggleAlertPref = { cat, enabled -> writeAcademy({ set(alertCategoryPrefKey(cat), enabled.toString()) }) },
+                        onAcknowledgeAlert = { fp -> writeAcademy({ setAlertState(fp, "acknowledged") }) },
+                        onDismissAlert = { fp -> writeAcademy({ setAlertState(fp, "dismissed") }) },
+                        onRestoreAlerts = { writeAcademy({ clearAlertStates() }) },
+                        journalFrom = journalFrom,
+                        journalTo = journalTo,
+                        onJournalRange = { f, t -> journalFrom = f; journalTo = t },
+                        academyActions = academyActions,
+                        onNavigate = ::navigate,
+                    )
+                    "Profile" -> Profile(state, vm) { begin(Mode.Placement) }
+                }
+            }
+        }
+    }
+
+    if (showFinder) {
+        FeatureFinderDialog({ showFinder = false }) { route -> navigate(route) }
+    }
+
+    if (state.ready && state.prefs["welcome"] == "true" && openedWelcome) {
+        AlertDialog(
+            onDismissRequest = { openedWelcome = false; vm.preference("welcome", "false") },
+            title = { Text("Where would you like to start?") },
+            text = { Text("Try eight vocabulary questions to choose a starting level, or begin at A1. You can change your level in Profile.") },
+            confirmButton = {
+                TextButton({ openedWelcome = false; vm.preference("welcome", "false"); begin(Mode.Placement) }) {
+                    Text("Try assessment")
+                }
+            },
+            dismissButton = {
+                TextButton({ openedWelcome = false; vm.preference("welcome", "false") }) { Text("Start at A1") }
+            },
+        )
+    }
+
+    if (state.detail != null) WordDetail(state, vm, voice)
+
+    val message = state.error.ifEmpty { state.notice }.ifEmpty { academyError }
+    if (message.isNotEmpty()) {
+        AlertDialog(
+            onDismissRequest = { vm.clear(); academyError = "" },
+            title = { Text(if (state.error.isNotEmpty() || academyError.isNotEmpty()) "Couldn’t finish" else "Study update") },
+            text = { Text(message) },
+            confirmButton = {
+                TextButton({
+                    vm.clear(); academyError = ""
+                    if (message == selectionReady && state.selected.isNotEmpty()) {
+                        tab = "Learn"; learnRoute = "Vocab"; practice = false; previewRequested = true
+                    }
+                }) { Text(if (message == selectionReady && state.selected.isNotEmpty()) "Review selection" else "Done") }
+            },
+        )
+    }
 }
 
-@Composable fun Home(state:ScreenState,vm:StudyModel,discover:()->Unit,scheduled:()->Unit,resume:()->Unit,academic:()->Unit,explore:()->Unit={},openStats:()->Unit={},academy:()->Unit={}){
-    val stats=state.stats
-    val goal=state.prefs.getValue("goal").toInt()
-    val weeklyTarget=state.prefs.getValue("weeklyReviewGoal").toInt()
-    val available=state.session==null && !state.busy
-    val reviewing=state.session?.let{it.mode==Mode.Review || it.batch=="date-review"}==true
-    var dateReview by rememberSaveable{mutableStateOf(false)}
+// Preserved composable entry points for existing UI tests & compatibility
+@Composable
+fun Home(
+    state: ScreenState,
+    vm: StudyModel,
+    discover: () -> Unit,
+    scheduled: () -> Unit,
+    resume: () -> Unit,
+    academic: () -> Unit,
+    explore: () -> Unit = {},
+    openStats: () -> Unit = {},
+    academy: () -> Unit = {},
+) {
+    val stats = state.stats
+    val goal = state.prefs.getValue("goal").toInt()
+    val available = state.session == null && !state.busy
+    val reviewing = state.session?.let { it.mode == Mode.Review || it.batch == "date-review" } == true
+    var dateReview by rememberSaveable { mutableStateOf(false) }
     Page {
-        Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){Label("Lexora");Hint(LocalDate.now().format(DateTimeFormatter.ofPattern("EEE, MMM d",Locale.ENGLISH)))}
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Label("Lexora"); Hint(LocalDate.now().format(DateTimeFormatter.ofPattern("EEE, MMM d", Locale.ENGLISH)))
+        }
         Heading("Your study day")
-        Secondary("Learning Academy",onClick=academy)
         Sheet {
-            Text("Today’s words",style=MaterialTheme.typography.headlineSmall)
-            Text(state.goalCounts.today.toString()+" / "+goal+" successfully recalled",style=MaterialTheme.typography.titleMedium)
-            Progress(state.goalCounts.today.toFloat()/goal)
-            Hint(state.weekly.selectedToday.toString()+" selected today · "+stats.todayNew+" first studied today")
-            Hint(state.selected.size.toString()+" waiting in my learning list")
-            if(state.session!=null && !reviewing)Primary("Continue "+state.session.mode.label.lowercase(),!state.busy,resume)
-            else if(state.selected.isNotEmpty())Primary("Learn selected words",available){resume();vm.run{startSelected()}}
-            else Primary("Discover words",available,discover)
-            if(state.session==null && state.selected.isNotEmpty())TextButton(discover){Text("Discover more words")}
-            EditDailyGoal(goal,!state.busy){vm.preference("goal",it.toString())}
+            Text("Today’s words", style = MaterialTheme.typography.headlineSmall)
+            Text("${state.goalCounts.today} / $goal successfully recalled", style = MaterialTheme.typography.titleMedium)
+            Progress(state.goalCounts.today.toFloat() / goal)
+            if (state.session != null && !reviewing) Primary("Continue ${state.session.mode.label.lowercase()}", !state.busy, onClick = resume)
+            else if (state.selected.isNotEmpty()) Primary("Learn selected words", available) { resume(); vm.run { startSelected() } }
+            else Primary("Discover words", available, onClick = discover)
+            EditDailyGoal(goal, !state.busy) { vm.preference("goal", it.toString()) }
         }
-        Sheet{
-            Text("Review words",style=MaterialTheme.typography.headlineSmall)
-            Hint("Choose words by the date you first studied them.")
-            if(reviewing)Primary("Continue review",!state.busy,resume) else Primary("Review by date",available){dateReview=true}
-            Secondary("Scheduled reviews · "+stats.due+" due",available && stats.due>0,scheduled)
+        Sheet {
+            Text("Review words", style = MaterialTheme.typography.headlineSmall)
+            if (reviewing) Primary("Continue review", !state.busy, onClick = resume) else Primary("Review by date", available) { dateReview = true }
+            Secondary("Scheduled reviews · ${stats.due} due", available && stats.due > 0, onClick = scheduled)
         }
-        Secondary("TestDaF Academic Dictionary",onClick=academic)
-        Sheet{
-            Label("Weekly goals · Monday to Sunday")
-            Text("Daily learning targets met · "+state.weekly.learningDays+" / 7 days")
-            Progress(state.weekly.learningDays/7f)
-            Text("Scheduled reviews completed · "+state.weekly.scheduled+" / "+weeklyTarget)
-            Progress(state.weekly.scheduled.toFloat()/weeklyTarget)
-            Pick("Weekly review goal",weeklyTarget.toString(),listOf("5","10","20","30","50","100")){vm.preference("weeklyReviewGoal",it)}
-            Secondary("Study calendar & daily table",onClick=openStats)
-        }
-        Secondary("Practice & Explore",onClick=explore)
+        Secondary("Learning Academy", onClick = academy)
+        Secondary("TestDaF Academic Dictionary", onClick = academic)
+        Secondary("Practice & Explore", onClick = explore)
+        Secondary("Study calendar & daily table", onClick = openStats)
         PreparationGoal(state.goalCounts)
     }
-    if(dateReview)ReviewChooser({dateReview=false}){range,order,size,from,to->
-        resume();vm.run{startDateReview(range,order,size,from,to)}
+    if (dateReview) ReviewChooser({ dateReview = false }) { range, order, size, from, to ->
+        resume(); vm.run { startDateReview(range, order, size, from, to) }
     }
 }
 
-@Composable fun Learn(state:ScreenState,vm:StudyModel,begin:(Mode,Filters)->Unit,resume:()->Unit,previewRequested:Boolean,consumePreview:()->Unit,discoverRequested:Boolean,explore:()->Unit,academy:()->Unit={},consumeDiscovery:()->Unit){
-    var level by rememberSaveable{mutableStateOf("All")};var deck by rememberSaveable{mutableStateOf("All")}
-    var status by rememberSaveable{mutableStateOf("All")}
-    var topic by rememberSaveable{mutableStateOf("All")}
+@Composable
+fun Learn(
+    state: ScreenState,
+    vm: StudyModel,
+    begin: (Mode, Filters) -> Unit,
+    resume: () -> Unit,
+    previewRequested: Boolean,
+    consumePreview: () -> Unit,
+    discoverRequested: Boolean,
+    explore: () -> Unit,
+    academy: () -> Unit = {},
+    consumeDiscovery: () -> Unit,
+) {
+    var level by rememberSaveable { mutableStateOf("All") }
+    var deck by rememberSaveable { mutableStateOf("All") }
+    var status by rememberSaveable { mutableStateOf("All") }
+    var topic by rememberSaveable { mutableStateOf("All") }
     Page {
-        Label("Practice");Heading("Learn")
-        Secondary("Learning Academy",onClick=academy)
-        if(state.session!=null)Sheet {Text(state.session.mode.label);Hint(if(state.session.stage==Stage.Assess)"Discovery in progress" else "Word ${state.session.index+1} of ${state.session.limit}")
-            Primary("Resume session",!state.busy,resume)
-            var confirm by remember{mutableStateOf(false)}
-            TextButton({confirm=true}){Text("End this session")}
-            if(confirm)Confirm("End this session?","Completed ratings and answers are already saved.",{confirm=false}){vm.run{save(null);null}}
+        Label("Practice"); Heading("Learn")
+        Secondary("Learning Academy", onClick = academy)
+        if (state.session != null) Sheet {
+            Text(state.session.mode.label)
+            Primary("Resume session", !state.busy, onClick = resume)
         }
-        DailyLearning(state,vm,resume,begin,previewRequested,consumePreview,discoverRequested,consumeDiscovery)
-        Secondary("Practice & Explore",onClick=explore)
-        Label("More practice")
-        Pick("Time",state.prefs.getValue("duration"),listOf("0","5","10","15")){vm.preference("duration",it)}
-        Hint("0 follows your word target. Timed sessions finish after the current word.")
-        for(mode in listOf(Mode.Quick,Mode.Custom,Mode.Placement)){
+        DailyLearning(state, vm, resume, begin, previewRequested, consumePreview, discoverRequested, consumeDiscovery)
+        Secondary("Practice & Explore", onClick = explore)
+        for (mode in listOf(Mode.Quick, Mode.Custom, Mode.Placement)) {
             Sheet {
-                Text(mode.label,style=MaterialTheme.typography.titleLarge)
-                Hint(when(mode){Mode.New->"Discover, recognize and write new vocabulary.";Mode.Review->"${state.stats.due} due now · FSRS";Mode.Lab->"Practice words you missed, outside your review schedule.";Mode.Quick->"Up to five recognition questions at your starting level.";Mode.Custom->"Practice a selection from your library.";else->"Eight adaptive questions to suggest a starting level."})
-                if(mode==Mode.Custom){Pick("Level",level,listOf("All")+levels){level=it};Pick("Deck",deck,listOf("All")+state.decks){deck=it};Pick("Group",status,listOf("All","Favorites","Missed","Learning","Known")){status=it}}
-                if(mode==Mode.Custom)Pick("Topic",topic,listOf("All")+state.topics){topic=it}
-                Secondary("Start "+mode.label.lowercase(),!state.busy && state.session==null){begin(mode,Filters(level=level,deck=deck,topic=topic,status=status))}
+                Text(mode.label, style = MaterialTheme.typography.titleLarge)
+                if (mode == Mode.Custom) {
+                    Pick("Level", level, listOf("All") + levels) { level = it }
+                    Pick("Deck", deck, listOf("All") + state.decks) { deck = it }
+                    Pick("Group", status, listOf("All", "Favorites", "Missed", "Learning", "Known")) { status = it }
+                    Pick("Topic", topic, listOf("All") + state.topics) { topic = it }
+                }
+                Secondary("Start ${mode.label.lowercase()}", !state.busy && state.session == null) {
+                    begin(mode, Filters(level = level, deck = deck, topic = topic, status = status))
+                }
             }
         }
     }
 }
 
-@Composable fun Confirm(title:String,body:String,dismiss:()->Unit,accept:()->Unit){
-    AlertDialog(onDismissRequest=dismiss,title={Text(title)},text={Text(body)},confirmButton={TextButton({dismiss();accept()}){Text("Confirm")}},dismissButton={TextButton(dismiss){Text("Cancel")}})
+@Composable
+fun Confirm(title: String, body: String, dismiss: () -> Unit, accept: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = dismiss,
+        title = { Text(title) },
+        text = { Text(body) },
+        confirmButton = { TextButton({ dismiss(); accept() }) { Text("Confirm") } },
+        dismissButton = { TextButton(dismiss) { Text("Cancel") } },
+    )
 }

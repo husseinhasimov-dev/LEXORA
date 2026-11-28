@@ -101,8 +101,9 @@ internal class AcademyActions(val go:(String)->Unit,val back:()->Unit,val edit:(
                 route.startsWith("Read:")->Reader(d,a,voice,d.readings.first{it.id==route.substringAfter(':')})
                 route=="Inbox"->InboxScreen(d,a)
                 route=="Discover"->AcademyDiscover(d,a)
-                route=="Grammar" || route=="Roadmap"->Curriculum(d,a,route)
-                route.startsWith("Lesson:")->LessonScreen(d,a,d.lessons.first{it.id==route.substringAfter(':')})
+                route=="Grammar"->GrammarHubScreen(d,remember(d.lessons){emptyMap()},a,{a.go("Discover")})
+                route=="Roadmap"->Curriculum(d,a,route)
+                route.startsWith("Lesson:")->ExpandedLessonScreen(d,d.lessons.first{it.id==route.substringAfter(':')},null,a,{a.go("Discover")})
                 route.startsWith("Quiz:")->{
                     val (skill,id,mode)=route.substringAfter(':').split('/')
                     val activity=if(skill=="Reading")d.readings.first{it.id==id}.activity() else d.lessons.first{it.id==id}.activity(mode)
@@ -199,7 +200,7 @@ internal class AcademyActions(val go:(String)->Unit,val back:()->Unit,val edit:(
                 var selected by rememberSaveable(r.id,r.step){mutableStateOf(ArrayList(List(pairs.size){""}))}
                 pairs.forEachIndexed{i,pair->Pick(pair.first,selected[i].ifBlank{"Choose"},choices){v->selected=ArrayList(selected).also{it[i]=v}}}
                 Primary("Check matches",selected.all{it.isNotBlank()}){submit(pairs.indices.joinToString("; "){pairs[it].first+" → "+selected[it]})}
-            }else if(q.type=="Word ordering" || q.type=="Ordering" && " → " in q.key){
+            }else if(q.type=="Word ordering" || q.type=="Word order" || q.type=="Sentence construction" || q.type=="Ordering" && " → " in q.key){
                 val separator=if(q.type=="Ordering")" → " else " "
                 val pieces=remember(q){q.key.split(separator).shuffled(kotlin.random.Random((r.id+r.step).hashCode()))}
                 var used by rememberSaveable(r.id,r.step){mutableStateOf(arrayListOf<Int>())}

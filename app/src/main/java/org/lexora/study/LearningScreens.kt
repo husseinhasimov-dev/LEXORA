@@ -169,7 +169,7 @@ import kotlinx.coroutines.delay
             
             Secondary("Listen to word"){say(w.german)}
             Secondary(if(state.fav)"Remove favorite" else "Add to favorites",!state.busy){vm.run{toggle(w.id);null}}
-            OutlinedTextField(deck,{deck=it},label={Text("Deck name")},singleLine=true)
+            OutlinedTextField(deck,{deck=it},Modifier.fillMaxWidth(),label={Text("Deck name")},singleLine=true)
             TextButton({vm.run{addDeck(deck,w.id);"Added to deck."}},enabled=deck.isNotBlank() && !state.busy){Text("Add to deck")}
             if(w.source=="Personal")TextButton({edit=true}){Text("Edit personal entry")}
             Primary("Done"){vm.detail(null)}
@@ -182,10 +182,10 @@ import kotlinx.coroutines.delay
     var de by rememberSaveable{mutableStateOf(word?.lemma?:"")};var en by rememberSaveable{mutableStateOf(word?.meaning?:"")}
     var lv by rememberSaveable{mutableStateOf(word?.level?:"A1")};var pos by rememberSaveable{mutableStateOf(word?.pos?:"noun")}
     var art by rememberSaveable{mutableStateOf(word?.article?.ifEmpty{"der"}?:"der")};var topic by rememberSaveable{mutableStateOf(word?.topic?:"Personal")}
-    AlertDialog(onDismissRequest=dismiss,title={Text("Personal vocabulary")},text={Column(Modifier.verticalScroll(rememberScrollState())){
-        OutlinedTextField(de,{de=it},label={Text("German headword")});OutlinedTextField(en,{en=it},label={Text("English meaning")})
+    AlertDialog(onDismissRequest=dismiss,title={Text("Personal vocabulary")},text={Column(Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(8.dp)){
+        OutlinedTextField(de,{de=it},Modifier.fillMaxWidth(),label={Text("German headword")},singleLine=true);OutlinedTextField(en,{en=it},Modifier.fillMaxWidth(),label={Text("English meaning")})
         Pick("Level",lv,levels){lv=it};Pick("Class",pos,classes.keys.toList()){pos=it};if(pos=="noun")Pick("Article",art,listOf("der","die","das")){art=it}
-        OutlinedTextField(topic,{topic=it},label={Text("Topic")})
+        OutlinedTextField(topic,{topic=it},Modifier.fillMaxWidth(),label={Text("Topic")},singleLine=true)
     }},confirmButton={TextButton({save(listOf(de,en,lv,pos,if(pos=="noun")art else "",topic));dismiss()},enabled=de.isNotBlank() && en.isNotBlank()){Text("Save")}},
         dismissButton={TextButton(dismiss){Text("Cancel")}})
 }

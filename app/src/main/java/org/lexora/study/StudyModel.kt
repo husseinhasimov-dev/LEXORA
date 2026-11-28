@@ -48,7 +48,7 @@ class StudyModel @JvmOverloads constructor(val app:Application,private val curre
                         val msg=repo.op()
                         val s=repo.session();val w=s?.let {repo.word(it.current)}
                         val detail=detailId?.let(repo::word)
-                        val keys=repo.defaults.keys+listOf("notificationsMaster","weeklyReviewGoal")+listOf("discoveryTopic","discoveryLevel")+Reminder.keys+Reminder.names.keys.flatMap {k->listOf("$k.hour","$k.minute","$k.days")}
+                        val keys=repo.defaults.keys+listOf("notificationsMaster","weeklyReviewGoal")+listOf("discoveryTopic","discoveryLevel")+AlertCategory.entries.map(alertCategoryPrefKey)+Reminder.keys+Reminder.names.keys.flatMap {k->listOf("$k.hour","$k.minute","$k.days")}
                         val stats=repo.stats()
                         val activeCalendarDay=calendarDay ?: repo.day()
                         val dailyHistory=repo.dailyHistory()

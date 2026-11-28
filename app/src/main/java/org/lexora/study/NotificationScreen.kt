@@ -12,6 +12,10 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -151,6 +155,15 @@ private val dayNames=listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
                 Hint("Study reminders wait until quiet hours end. Test notifications run on their own schedule.")
             }
         }
+        Sheet{
+            Label("Intelligence Alert Categories")
+            Hint("Choose which alert categories may notify you when system notifications are allowed. All alerts remain accessible in Progress → Alerts.")
+            AlertCategory.entries.forEach{cat->
+                val key=alertCategoryPrefKey(cat)
+                val enabled=state.prefs[key]?.let{it=="true"} ?: (cat==AlertCategory.EXAM || cat==AlertCategory.STUDY_PLANNING)
+                SwitchRow(cat.label,enabled){on->vm.preference(key,on.toString())}
+            }
+        }
         Label("Schedules")
         Primary("Add reminder"){editing=UUID.randomUUID().toString()}
         state.schedules.forEach{s->
@@ -158,7 +171,8 @@ private val dayNames=listOf("Mon","Tue","Wed","Thu","Fri","Sat","Sun")
                 SwitchRow(s.name,s.enabled){on->vm.run{saveReminder(ctx,s.copy(enabled=on));null};if(on)enablePermission()}
                 Hint(Reminder.names.getValue(s.category)+" · "+if(s.once)"One time" else s.days.split(",").mapNotNull{it.toIntOrNull()?.let{n->dayNames.getOrNull(n-1)}}.joinToString(" · "))
                 Hint(next[s.id]?.let{"Next expected · "+displayTime(it)}?:if(!s.enabled || !master)"Paused" else "No future occurrence")
-                Row(horizontalArrangement=Arrangement.spacedBy(2.dp)){
+                @OptIn(ExperimentalLayoutApi::class)
+                FlowRow(horizontalArrangement=Arrangement.spacedBy(4.dp)){
                     TextButton({editing=s.id}){Text("Edit")}
                     TextButton({preview=s.id}){Text("Preview")}
                     TextButton({deleting=s.id}){Text("Delete")}
@@ -234,9 +248,9 @@ private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.syst
             "weekly"->Hint("Sends if this week’s learning or scheduled review goals are unfinished.")
             "streakReminder"->Hint("Sends if you have a study streak and no recorded study yet today.")
         }
-        OutlinedTextField(name,{name=it.take(100)},label={Text("Reminder name")},singleLine=true)
-        OutlinedTextField(title,{title=it.take(100)},label={Text("Notification title")},singleLine=true)
-        OutlinedTextField(message,{message=it.take(300)},label={Text("Custom message")})
+        OutlinedTextField(name,{name=it.take(100)},Modifier.fillMaxWidth(),label={Text("Reminder name")},singleLine=true)
+        OutlinedTextField(title,{title=it.take(100)},Modifier.fillMaxWidth(),label={Text("Notification title")},singleLine=true)
+        OutlinedTextField(message,{message=it.take(300)},Modifier.fillMaxWidth(),label={Text("Custom message")})
         LocalTimeButton("Time",h,m){hh,mm->h=hh;m=mm}
         SwitchRow("One-time reminder",once){once=it;if(it && start.isEmpty())start=LocalDate.now().plusDays(1).toString()}
         DateButton(if(once)"Date" else "Start date",start){start=it}
@@ -244,8 +258,9 @@ private fun displayTime(time:Long)=Instant.ofEpochMilli(time).atZone(ZoneId.syst
             DateButton("End date",end){end=it}
             if(start.isNotEmpty() || end.isNotEmpty())TextButton({start="";end=""}){Text("Clear date limits")}
             Label("Days of the week")
-            for(group in (1..7).chunked(4))Row(horizontalArrangement=Arrangement.spacedBy(4.dp)){
-                group.forEach{n->val selected=n.toString() in days.split(",")
+            @OptIn(ExperimentalLayoutApi::class)
+            FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp),verticalArrangement=Arrangement.spacedBy(4.dp)){
+                (1..7).forEach{n->val selected=n.toString() in days.split(",")
                     FilterChip(selected,{val set=days.split(",").filter(String::isNotEmpty).toMutableSet()
                         if(selected)set.remove(n.toString())else set.add(n.toString());days=set.sorted().joinToString(",")},{Text(dayNames[n-1])})
                 }

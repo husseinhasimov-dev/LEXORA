@@ -17,8 +17,8 @@ android {
         applicationId = "org.lexora.study"
         minSdk = 26
         targetSdk = 35
-        versionCode = 8
-        versionName = "0.6.0"
+        versionCode = 9
+        versionName = "0.6.1"
         for (key in listOf("FIREBASE_APP_ID","FIREBASE_API_KEY","FIREBASE_PROJECT_ID","GOOGLE_WEB_CLIENT_ID")) {
             val v = cloud.getProperty(key, "")
             require(v.all { it.isLetterOrDigit() || it in "_.:-" })

@@ -1,6 +1,8 @@
 package org.lexora.study
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.text.ClickableText
@@ -47,7 +49,10 @@ import java.time.ZoneId
             EntryField("Find a dictionary target",query){query=it}
             val choices=if(query.isBlank())d.index.entries.filter{v->d.inbox.any{it.id==v.word.id}}.take(12)
                 else d.index.entries.filter{it.word.lemma.contains(query,true)}.take(12)
-            for(v in choices){FilterChip(v.word.id in targets,{targets=ArrayList(if(v.word.id in targets)targets-v.word.id else targets+v.word.id)},label={Text(v.word.german)})}
+            @OptIn(ExperimentalLayoutApi::class)
+            FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp),verticalArrangement=Arrangement.spacedBy(4.dp)){
+                for(v in choices){FilterChip(v.word.id in targets,{targets=ArrayList(if(v.word.id in targets)targets-v.word.id else targets+v.word.id)},label={Text(v.word.german)})}
+            }
             Hint(targets.size.toString()+" selected targets")
         }
         if(topic=="Random topic"){
@@ -103,8 +108,10 @@ import java.time.ZoneId
         ClickableText(display,style=MaterialTheme.typography.bodyLarge.copy(color=MaterialTheme.colorScheme.onBackground,fontSize=font.sp,lineHeight=(font+spacing).sp),onClick=::inspect)
         if(!focus){
             TextButton({wordList=!wordList}){Text(if(wordList)"Hide paragraph words" else "Words in this paragraph")}
-            if(wordList)germanToken.findAll(paragraph).distinctBy{it.value}.forEach{m->TextButton({inspect(m.range.first)}){Text(m.value)}}
-            else Hint("Tap a word for its dictionary entry or save it for later.")
+            if(wordList) @OptIn(ExperimentalLayoutApi::class) FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp),verticalArrangement=Arrangement.spacedBy(4.dp)){
+                germanToken.findAll(paragraph).distinctBy{it.value}.forEach{m->OutlinedButton({inspect(m.range.first)},contentPadding=PaddingValues(horizontal=10.dp,vertical=4.dp)){Text(m.value)}}
+            }
+            else Hint("Tap any word to inspect or save it.")
         }
         if(n>0)Secondary("Previous paragraph"){a.write{readerPosition(p.id,n-1)}}
         if(n<p.paragraphs.lastIndex)Primary("Next paragraph"){a.write{readerPosition(p.id,n+1)}}

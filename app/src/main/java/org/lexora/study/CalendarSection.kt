@@ -4,6 +4,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -57,34 +59,40 @@ fun TotalStatisticsOverview(
             Label("Overall totals")
             Row(
                 Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
             ) {
                 Column(Modifier.weight(1f)) {
                     Text(
                         "${goals.covered} / 6,000",
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = Color.White,
+                        color = textMain,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
-                    Hint("Total covered")
+                    Hint("Covered")
                 }
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
                         "$avgText / day",
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = mint,
+                        color = greenText,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
-                    Hint("Daily average")
+                    Hint("Daily avg")
                 }
                 Column(Modifier.weight(1f), horizontalAlignment = Alignment.End) {
                     Text(
                         "${summary.goalsMetDays} days",
-                        fontSize = 18.sp,
+                        fontSize = 16.sp,
                         fontWeight = FontWeight.SemiBold,
                         color = blue,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
                     )
-                    Hint("Goals reached")
+                    Hint("Goals met")
                 }
             }
             summary.bestDay?.let { best ->
@@ -123,15 +131,17 @@ fun StudyCalendarAndTable(
     Sheet {
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Column {
+            Column(Modifier.weight(1f)) {
                 Label("Daily learning log")
                 Text(
                     "Calendar & Table",
-                    style = MaterialTheme.typography.titleLarge,
+                    style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
             ModeToggle(
@@ -223,12 +233,13 @@ fun StudyCalendarAndTable(
         } else {
             Row(
                 Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Hint(
-                    if (tableScope == "Month") "Days studied in ${activeMonth.format(monthFormatter)}"
-                    else "All recorded study days"
+                    if (tableScope == "Month") "Studied in ${activeMonth.format(monthFormatter)}"
+                    else "All recorded study days",
+                    modifier = Modifier.weight(1f),
                 )
                 ModeToggle(
                     options = listOf("Month", "All"),
@@ -305,11 +316,11 @@ private fun MiniStat(value: String, label: String, accent: Color, modifier: Modi
     Column(
         modifier
             .background(Color(0xff121d2b), RoundedCornerShape(10.dp))
-            .padding(horizontal = 8.dp, vertical = 8.dp),
+            .padding(horizontal = 6.dp, vertical = 8.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Text(value, fontSize = 16.sp, fontWeight = FontWeight.Bold, color = accent, maxLines = 1)
-        Text(label, fontSize = 11.sp, color = faint, maxLines = 1)
+        Text(value, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = accent, maxLines = 1, overflow = TextOverflow.Ellipsis)
+        Text(label, fontSize = 11.sp, color = faint, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -353,14 +364,14 @@ private fun CalendarGrid(
                             isFuture -> Color(0xff101925)
                             learned == 0 && reviews == 0 -> Color(0xff121f2e)
                             learned == 0 && reviews > 0 -> Color(0xff1b2d42)
-                            ratio >= 1f -> Color(0xff235744)
-                            ratio >= 0.5f -> Color(0xff1c4239)
-                            else -> Color(0xff173236)
+                            ratio >= 1f -> greenBg
+                            ratio >= 0.5f -> Color(0xff133827)
+                            else -> Color(0xff142c33)
                         }
                         val borderColor = when {
                             isSelected -> amber
                             isToday -> blue
-                            rec?.goalMet == true -> mint.copy(alpha = 0.65f)
+                            rec?.goalMet == true -> green.copy(alpha = 0.75f)
                             else -> Color(0xff243446)
                         }
                         val borderWidth = if (isSelected || isToday) 1.5.dp else 1.dp
@@ -414,22 +425,18 @@ private fun CalendarGrid(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 private fun CalendarLegend() {
-    Row(
+    FlowRow(
         Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Hint("Number = words learned")
-        Row(
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            LegendChip(Color(0xff173236), "Part")
-            LegendChip(Color(0xff235744), "Goal")
-            LegendChip(Color(0xff1b2d42), "Rev")
-        }
+        LegendChip(Color(0xff142c33), "Part")
+        LegendChip(greenBg, "Goal")
+        LegendChip(Color(0xff1b2d42), "Rev")
     }
 }
 
@@ -627,20 +634,23 @@ private fun SelectedDayDetail(
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Row(
             Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(heading, fontSize = 15.sp, fontWeight = FontWeight.SemiBold, color = Color.White)
-            val badgeText = if (learned >= target) "Goal met ✓" else "$learned / $target target"
             Text(
-                badgeText,
-                fontSize = 11.sp,
-                fontWeight = FontWeight.Bold,
-                color = if (learned >= target) mint else faint,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(if (learned >= target) Color(0xff1d4638) else Color(0xff131f2e))
-                    .padding(horizontal = 8.dp, vertical = 3.dp),
+                heading,
+                modifier = Modifier.weight(1f),
+                fontSize = 15.sp,
+                fontWeight = FontWeight.SemiBold,
+                color = textMain,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+            )
+            val badgeText = if (learned >= target) "Goal met ✓" else "$learned / $target"
+            BadgePill(
+                text = badgeText,
+                color = if (learned >= target) greenText else faint,
+                background = if (learned >= target) greenBg else Color(0xff131f2e),
             )
         }
         Progress(learned.toFloat() / target.toFloat())

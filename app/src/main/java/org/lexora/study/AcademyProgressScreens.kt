@@ -1,6 +1,8 @@
 package org.lexora.study
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
@@ -64,11 +66,17 @@ import java.util.UUID
             EntryField("Weekly study minutes",weekly){weekly=it};EntryField("Digital TestDaF date · YYYY-MM-DD",exam){exam=it}
             Hint("Target · TDN 4 in reading, listening, speaking and writing. Select your study days.")
             Hint("Additional skills for longer days or the final four weeks before the exam")
-            listOf("Listening","Speaking","Writing").forEach{s->
-                FilterChip(s in focus.split(","),{focus=(if(s in focus.split(","))focus.split(",")-s else focus.split(",")+s).filter(String::isNotEmpty).joinToString(",")},label={Text(s)})
+            @OptIn(ExperimentalLayoutApi::class)
+            FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp),verticalArrangement=Arrangement.spacedBy(4.dp)){
+                listOf("Listening","Speaking","Writing").forEach{s->
+                    FilterChip(s in focus.split(","),{focus=(if(s in focus.split(","))focus.split(",")-s else focus.split(",")+s).filter(String::isNotEmpty).joinToString(",")},label={Text(s)})
+                }
             }
-            DayOfWeek.values().forEach{day->val id=day.value.toString();val enabled=id in days.split(",")
-                FilterChip(enabled,{days=(if(enabled)days.split(",")-id else days.split(",")+id).filter(String::isNotEmpty).distinct().sorted().joinToString(",")},label={Text(day.getDisplayName(TextStyle.FULL,Locale.ENGLISH))})}
+            @OptIn(ExperimentalLayoutApi::class)
+            FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp),verticalArrangement=Arrangement.spacedBy(4.dp)){
+                DayOfWeek.values().forEach{day->val id=day.value.toString();val enabled=id in days.split(",")
+                    FilterChip(enabled,{days=(if(enabled)days.split(",")-id else days.split(",")+id).filter(String::isNotEmpty).distinct().sorted().joinToString(",")},label={Text(day.getDisplayName(TextStyle.SHORT,Locale.ENGLISH))})}
+            }
         }},confirmButton={TextButton({a.write{set("academy.weekly",weekly);set("academy.days",days.ifEmpty{"rest"});set("academy.exam",exam);set("academy.focus",focus);set("academy.plan."+day(),"")};settings=false},
             enabled=weekly.toIntOrNull() in 1..3000 && (exam.isBlank() || runCatching{LocalDate.parse(exam)}.isSuccess)){Text("Save schedule")}},dismissButton={TextButton({settings=false}){Text("Cancel")}})
     }
@@ -85,7 +93,12 @@ import java.util.UUID
     Page{
         SectionTitle("Learning journal",a);Text(d.xp.toString()+" total XP");Pick("Period",period,listOf("Day","Week","Month")){period=it;show(today,it)}
         Text(from+" — "+to)
-        Row{TextButton({show(LocalDate.parse(from).minusDays(1),period)}){Text("Earlier")};TextButton({show(today,period)}){Text("Current")};TextButton({show(LocalDate.parse(to).plusDays(1),period)}){Text("Later")}}
+        @OptIn(ExperimentalLayoutApi::class)
+        FlowRow(horizontalArrangement=Arrangement.spacedBy(6.dp)){
+            OutlinedButton({show(LocalDate.parse(from).minusDays(1),period)}){Text("‹ Earlier")}
+            OutlinedButton({show(today,period)}){Text("Current")}
+            OutlinedButton({show(LocalDate.parse(to).plusDays(1),period)}){Text("Later ›")}
+        }
         val active=d.journal.sumOf{it.activeMs?:0}
         Hint("Recorded question interaction time · "+active/1000+" seconds")
         if(d.badges.isNotEmpty())Sheet{Label("Achievements");d.badges.forEach{Text(it)}}

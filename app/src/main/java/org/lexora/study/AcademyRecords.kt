@@ -37,8 +37,8 @@ internal fun createAcademy(db: SQLiteDatabase) {
 }
 
 internal fun removeAcademySchema(db:SQLiteDatabase) {
-    db.execSQL("DROP VIEW academy_vocab")
-    academyTables.reversed().forEach { db.execSQL("DROP TABLE "+it) }
+    db.execSQL("DROP VIEW IF EXISTS academy_vocab")
+    (academyTables + intelligenceTables).reversed().forEach { db.execSQL("DROP TABLE IF EXISTS "+it) }
 }
 
 internal data class Evidence(val id:String,val skill:String,val activity:String,val content:String,

@@ -81,7 +81,7 @@ class RepositoryTest{
         r.db.execSQL("DROP TABLE undo_step");r.db.execSQL("DROP INDEX event_correction")
         r.db.execSQL("DROP TABLE exploration");r.db.execSQL("DROP TABLE content_v4");r.db.execSQL("DROP TABLE synced");r.db.version=1;r.close()
         r=StudyRepository(ctx,owner){tick}
-        assertEquals(6,r.db.version);assertEquals("15",r.pref("goal"));assertEquals(1,r.db.long("SELECT count(*) FROM event"))
+        assertEquals(7,r.db.version);assertEquals("15",r.pref("goal"));assertEquals(1,r.db.long("SELECT count(*) FROM event"))
     }
     @Test fun hundredsOfDueCardsRespectReviewLimitAfterSeveralOfflineDays(){
         val words=r.words(Filters(),250)

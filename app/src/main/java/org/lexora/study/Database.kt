@@ -11,7 +11,7 @@ import io.github.openspacedrepetition.Card
 import io.github.openspacedrepetition.State
 import java.time.Instant
 
-class StudyDatabase private constructor(private val ctx:Context,name:String):SQLiteOpenHelper(ctx, name, null, 6) {
+class StudyDatabase private constructor(private val ctx:Context,name:String):SQLiteOpenHelper(ctx, name, null, 7) {
     override fun onConfigure(db:SQLiteDatabase) { db.setForeignKeyConstraintsEnabled(true) }
     override fun onCreate(db:SQLiteDatabase) {
         check(db.long("SELECT count(*) FROM word") > 0)
@@ -28,14 +28,16 @@ class StudyDatabase private constructor(private val ctx:Context,name:String):SQL
         installContent(db)
         createExplore(db)
         createAcademy(db)
+        createIntelligenceSchema(db)
     }
     override fun onUpgrade(db:SQLiteDatabase, old:Int, new:Int) {
-        check(old in 1..5 && new==6)
+        check(old in 1..6 && new==7)
         if(old==1) createSyncIndex(db)
         if(old<3)createLearningSchema(db)
         if(old<4)installContent(db)
         if(old<5)createExplore(db)
-        createAcademy(db)
+        if(old<6)createAcademy(db)
+        if(old<7)createIntelligenceSchema(db)
     }
     private fun createExplore(db:SQLiteDatabase){
         db.execSQL("CREATE TABLE exploration(id TEXT PRIMARY KEY, mode TEXT NOT NULL,item TEXT NOT NULL,part TEXT NOT NULL,target TEXT REFERENCES word(id) ON DELETE CASCADE,other TEXT REFERENCES word(id) ON DELETE CASCADE,answer TEXT NOT NULL,correct INTEGER NOT NULL,at INTEGER NOT NULL)")

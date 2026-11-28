@@ -145,7 +145,7 @@ class AcademyTest {
         val baseline=r.backup();removeAcademySchema(r.db);r.db.version=5;restart()
         val updated=r.backup()
         for(key in listOf("events","preferences","decks","favorites","exploration","personal"))assertEquals(key,baseline.getJSONArray(key).toString(),updated.getJSONArray(key).toString())
-        assertEquals(6,r.db.version);assertEquals(6546L,r.db.long("SELECT count(*) FROM word"))
+        assertEquals(7,r.db.version);assertEquals(6546L,r.db.long("SELECT count(*) FROM word"))
         assertEquals(old.due.toEpochMilli(),r.db.long("SELECT due FROM card"))
         assertEquals("ok",r.db.str("PRAGMA integrity_check"));assertEquals(0L,r.db.long("SELECT count(*) FROM pragma_foreign_key_check"))
         val originalId=r.lastRating(word.id)!!.first;r.correctRating(word.id,originalId,1);assertEquals(0L,r.academyXp())

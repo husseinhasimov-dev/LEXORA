@@ -236,8 +236,8 @@ class StudyRepository(context:Context,val owner:String?=Cloud.uid(),val now:()->
     }
     fun reset()=db.tx {
         db.execSQL("DELETE FROM pref WHERE k LIKE 'revisit.%' OR k='explore.session'")
-        academyTables.reversed().forEach { db.delete(it,null,null) }
-        db.execSQL("DELETE FROM pref WHERE k LIKE 'academy.%'")
+        (academyTables + intelligenceTables).reversed().forEach { db.delete(it,null,null) }
+        db.execSQL("DELETE FROM pref WHERE k LIKE 'academy.%' OR k LIKE 'v61.%'")
         listOf("exploration","undo_step","card","event").forEach { db.delete(it,null,null) }
         save(null)
     }

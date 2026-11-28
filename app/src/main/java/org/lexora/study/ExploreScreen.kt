@@ -61,7 +61,7 @@ import org.json.JSONObject
     var search by rememberSaveable{mutableStateOf("")}
     val filters=listOf("All contexts","Selected today","Recent study","Difficult words","Academic")+p.decks.keys.map{"Deck · "+it}
     Pick("Words",pool,filters){pool=it};Pick("Level",level,listOf("All")+levels){level=it}
-    OutlinedTextField(search,{search=it},label={Text("Find a German word")},singleLine=true)
+    OutlinedTextField(search,{search=it},Modifier.fillMaxWidth(),label={Text("Find a German word")},singleLine=true)
     val scores=remember(p.attempts){p.attempts.filter{it.mode=="Context Mastery" && it.target!=null}.groupBy{it.target}}
     val ids=when(pool){"Selected today"->p.selected;"Recent study"->p.recent;"Difficult words"->p.difficult;"Academic"->state.categories.keys;"All contexts"->null;else->p.decks[pool.removePrefix("Deck · ")].orEmpty()}
     val filtered=remember(pool,level,search,p){shelf.contexts.filter{(ids==null || it.id in ids) && (level=="All" || it.level==level) && it.lemma.contains(search,true)}
@@ -77,8 +77,8 @@ import org.json.JSONObject
 
 @Composable private fun ConfusionBrowser(shelf:ExploreShelf,p:ExploreProgress,vm:StudyModel,enabled:Boolean,start:(String,List<Prompt>)->Unit){
     var first by rememberSaveable{mutableStateOf("")};var second by rememberSaveable{mutableStateOf("")}
-    OutlinedTextField(first,{first=it},label={Text("First German headword")},singleLine=true)
-    OutlinedTextField(second,{second=it},label={Text("Second German headword")},singleLine=true)
+    OutlinedTextField(first,{first=it},Modifier.fillMaxWidth(),label={Text("First German headword")},singleLine=true)
+    OutlinedTextField(second,{second=it},Modifier.fillMaxWidth(),label={Text("Second German headword")},singleLine=true)
     val a=shelf.byLemma[first.trim()];val b=shelf.byLemma[second.trim()]
     Secondary("Mark pair",a!=null && b!=null && a!=b){if(a!=null && b!=null)vm.run{recordExplore("confusion",pairKey(a.id,b.id),"Marked",a.id,b.id,"",true);null}}
     Hint("Pairs appear after two observed mix-ups or a manual mark. Try wissen and kennen.")
@@ -202,7 +202,7 @@ import org.json.JSONObject
         TextButton({indexes=used.dropLast(1).joinToString(",")}){Text("Remove last word")}
         Primary("Check sequence",used.size==q.choices.size && !busy){submit(used.joinToString(" "){q.choices[it]})}
     }else if(q.choices.isEmpty()){
-        OutlinedTextField(typed,{typed=it},label={Text("German answer")});Primary("Check answer",typed.isNotBlank() && !busy){submit(typed)}
+        OutlinedTextField(typed,{typed=it},Modifier.fillMaxWidth(),label={Text("German answer")});Primary("Check answer",typed.isNotBlank() && !busy){submit(typed)}
     }else q.choices.forEach{Secondary(it,!busy && (q.spoken.isEmpty() || voice.ready)){submit(it)}}
     if(passage!=null && (passage.kind=="R" || answered)){
         TextButton({transcript=!transcript}){Text(if(passage.kind=="L")"Study transcript" else "Reread story")}

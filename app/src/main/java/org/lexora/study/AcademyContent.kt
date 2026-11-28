@@ -53,17 +53,7 @@ internal object OfflineReadings:ReadingProvider {
     }
 }
 internal data class Lesson(val id:String,val level:String,val title:String,val prerequisite:String,val explanation:String,val example:String,val mistake:String,val tasks:List<AcademyQuestion>)
-internal fun grammarLessons(context:Context)=context.assets.open("academy-grammar.tsv").bufferedReader().useLines{lines->
-    lines.filter{it.isNotBlank() && !it.startsWith("#")}.map{line->
-        val f=line.split('|');require(f.size==15){"Invalid grammar lesson: "+f.first()}
-        Lesson(f[0],f[1],f[2],f[3],f[4],f[5],f[6],(7..13 step 2).map{i->
-            val prompt=f[i]
-            val choices=Regex("\\(([^() ]+)/([^() ]+)\\)").find(prompt)?.groupValues?.drop(1).orEmpty().filterNot{it.equals(f[i+1],true)}
-            AcademyQuestion(when{prompt.startsWith("Order")->"Word ordering";prompt.startsWith("Correct")->"Error correction";choices.isNotEmpty()->"Choice";else->"Written response"},
-                prompt,f[i+1],choices,f[4])
-        })
-    }.toList()
-}
+internal fun grammarLessons(context:Context)=loadGrammarCatalog(context).lessons
 internal data class LexicalState(val word:Word,val known:Boolean,val weak:Boolean,val due:Boolean,val missed:Boolean,val unseen:Boolean,val academic:Boolean,val fsrs:String?)
 internal class ReadingIndex(val entries:List<LexicalState>){
     private val exact=entries.groupBy{it.word.lemma}
