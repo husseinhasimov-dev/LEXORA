@@ -14,6 +14,12 @@ internal fun StudyRepository.collect(surface:String,id:String?,source:String,sen
     db.execSQL("UPDATE academy_inbox SET archived=0 WHERE id=?",arrayOf(key))
     return key
 }
+internal fun StudyRepository.resolveInbox(entry:InboxWord,wordId:String)=db.tx{
+    require(entry.id==null && db.long("SELECT count(*) FROM word WHERE id=?",wordId)==1L)
+    val key=collect(entry.name,wordId,entry.source,entry.sentence,entry.topic)
+    db.execSQL("UPDATE academy_inbox SET priority=max(priority,?),at=min(at,?),label=CASE WHEN label='' THEN ? ELSE label END WHERE id=?",arrayOf(entry.priority,entry.at,entry.label,key))
+    db.delete("academy_inbox","id=? AND word IS NULL",arrayOf(entry.key))
+}
 internal data class InboxWord(val key:String,val id:String?,val name:String,val source:String,val sentence:String,val topic:String,val at:Long,
     val priority:Int,val label:String,val archived:Boolean,val status:String,val level:String)
 internal fun StudyRepository.inbox()=db.rows("""SELECT i.*,a.grade,c.state,w.level FROM academy_inbox i LEFT JOIN assessment a ON a.word=i.word
@@ -45,6 +51,10 @@ internal fun StudyRepository.round(key:String):Round?=pref("academy.round."+key)
 }
 internal fun StudyRepository.beginRound(key:String) {
     if(round(key)?.finished==false)return
+    if(key.startsWith("Grammar/") && key.endsWith("/Delayed review")){
+        val assessed=topicProgress(key.substringAfter('/').substringBefore('/')).lastAssessment
+        require(assessed>0 && now()-assessed>=MasteryRules().delayMs){"Delayed review opens one day after the assessment."}
+    }
     set("academy.round."+key,JSONObject().put("id",UUID.randomUUID().toString()).put("step",0).put("started",now()).toString())
 }
 internal data class AcademyActivity(val skill:String,val mode:String,val item:String,val level:String,val questions:List<AcademyQuestion>,val base:Int,val version:Int=1){
@@ -60,7 +70,8 @@ internal fun StudyRepository.answerAcademy(a:AcademyActivity,expected:Round,valu
     if(r!=expected || r.finished || r.result!=null || value.isBlank())return@tx
     val q=a.questions[r.step];val correct=q.accepts(value)
     val e=Evidence(r.id+"/"+r.step,a.skill,a.mode+" answer",a.item,a.level,1,if(correct)1 else 0,value,
-        grammar=a.item.takeIf{a.skill=="Grammar"},kind=if(a.mode=="Assessment")"topic assessment" else "practice",version=a.version,activeMs=activeMs?.coerceIn(0,30_000))
+        grammar=a.item.takeIf{a.skill=="Grammar"},kind=if(a.mode=="Assessment")"topic assessment" else "practice",version=a.version,activeMs=activeMs?.coerceIn(0,30_000),
+        questionId=a.item+"/v"+a.version+"/"+UUID.nameUUIDFromBytes(q.text.toByteArray(Charsets.UTF_8)))
     record(e)
     val j=JSONObject(pref("academy.round."+a.key)).put("result",value)
     set("academy.round."+a.key,j.toString())

@@ -50,8 +50,11 @@ import java.time.ZoneId
             for(v in choices){FilterChip(v.word.id in targets,{targets=ArrayList(if(v.word.id in targets)targets-v.word.id else targets+v.word.id)},label={Text(v.word.german)})}
             Hint(targets.size.toString()+" selected targets")
         }
-        if(topic=="Random topic")Secondary("Shuffle recommendations"){seed++}
-        Label("Offline library · "+ranked.size+" passages")
+        if(topic=="Random topic"){
+            Secondary("Shuffle recommendations"){seed++}
+            Secondary("Read a random match",ranked.isNotEmpty()){val pick=ranked.random().p;a.edit({readerPosition(pick.id,d.marks[pick.id]?.paragraph?:0)},{a.go("Read:"+pick.id)})}
+        }
+        Label("Matching passages · "+ranked.size+" of "+d.readings.size)
         for(hit in ranked){
             val p=hit.p
             Sheet{
@@ -72,6 +75,7 @@ import java.time.ZoneId
     val paragraph=p.paragraphs[n]
     var focus by rememberSaveable{mutableStateOf(false)}
     var surface by rememberSaveable{mutableStateOf("")}
+    var wordList by rememberSaveable{mutableStateOf(false)}
     var sentence by rememberSaveable{mutableStateOf("")}
     val font=d.prefs["academy.font"]?.toIntOrNull()?.coerceIn(16,28)?:20
     val spacing=d.prefs["academy.spacing"]?.toIntOrNull()?.coerceIn(4,18)?:10
@@ -97,7 +101,11 @@ import java.time.ZoneId
             if(!focus)germanToken.findAll(paragraph).forEach{m->if(d.inbox.any{it.name==m.value && !it.archived})addStyle(SpanStyle(color=mint),m.range.first,m.range.last+1)}
         }}
         ClickableText(display,style=MaterialTheme.typography.bodyLarge.copy(color=MaterialTheme.colorScheme.onBackground,fontSize=font.sp,lineHeight=(font+spacing).sp),onClick=::inspect)
-        if(!focus)Hint("Tap a word for its dictionary entry or save it for later.")
+        if(!focus){
+            TextButton({wordList=!wordList}){Text(if(wordList)"Hide paragraph words" else "Words in this paragraph")}
+            if(wordList)germanToken.findAll(paragraph).distinctBy{it.value}.forEach{m->TextButton({inspect(m.range.first)}){Text(m.value)}}
+            else Hint("Tap a word for its dictionary entry or save it for later.")
+        }
         if(n>0)Secondary("Previous paragraph"){a.write{readerPosition(p.id,n-1)}}
         if(n<p.paragraphs.lastIndex)Primary("Next paragraph"){a.write{readerPosition(p.id,n+1)}}
         if(!focus){
@@ -116,6 +124,7 @@ import java.time.ZoneId
             if(w!=null){
                 Text(w.meaning);Hint(listOf(w.pos,w.level,w.plural.takeIf{it.isNotBlank()}?.let{"Plural "+it},usageScore(w.rank)?.let{"Usage "+it+"/100"}).filterNotNull().joinToString(" · "))
                 if(w.grammar.isNotBlank())Hint(w.grammar)
+                if(v.fsrs!=null)Hint("FSRS · "+v.fsrs.lowercase())
                 if(w.example.isNotBlank())Text(w.example)
                 Hint(when{v.due->"FSRS review due";v.weak->"Learning or weak FSRS card";v.known->"Familiar";v.unseen->"Unseen";else->"Selected or learning"})
                 Secondary("Pronounce",voice.ready){voice.play(w.german,1f)}
@@ -167,6 +176,11 @@ import java.time.ZoneId
     }
     d.inbox.find{it.key==editing}?.let{w->
         var lemma by rememberSaveable(w.key){mutableStateOf("")}
+        var personal by rememberSaveable(w.key){mutableStateOf(false)}
+        var meaning by rememberSaveable(w.key){mutableStateOf("")}
+        var pos by rememberSaveable(w.key){mutableStateOf("noun")}
+        var level by rememberSaveable(w.key){mutableStateOf("A1")}
+        var article by rememberSaveable(w.key){mutableStateOf("der")}
         AlertDialog(onDismissRequest={editing=""},title={Text(w.name)},text={Column(Modifier.verticalScroll(rememberScrollState())){
             EntryField("Personal label",label){label=it}
             Secondary("Save label"){a.write{db.execSQL("UPDATE academy_inbox SET label=? WHERE id=?",arrayOf(label,w.key))};editing=""}
@@ -177,7 +191,22 @@ import java.time.ZoneId
                 EntryField("Find the dictionary lemma",lemma){lemma=it}
                 if(lemma.isNotBlank())d.index.entries.filter{it.word.lemma.contains(lemma,true)}.take(8).forEach{v->
                     Secondary(v.word.german+" · "+v.word.meaning.take(45)){
-                        a.write{val key=collect(w.name,v.word.id,w.source,w.sentence,w.topic);db.execSQL("UPDATE academy_inbox SET priority=max(priority,?),label=CASE WHEN label='' THEN ? ELSE label END WHERE id=?",arrayOf(w.priority,w.label,key));db.delete("academy_inbox","id=?",arrayOf(w.key))};editing=""
+                        a.write{resolveInbox(w,v.word.id)};editing=""
+                    }
+                }
+                TextButton({personal=!personal;if(lemma.isBlank())lemma=w.name}){Text("Create a personal dictionary entry")}
+                if(personal){
+                    Hint("Enter the dictionary form and meaning you have checked.")
+                    EntryField("English meaning",meaning){meaning=it}
+                    Pick("Part of speech",pos,classes.keys.toList()){pos=it};Pick("Estimated level",level,levels){level=it}
+                    if(pos=="noun")Pick("Article",article,listOf("der","die","das")){article=it}
+                    Secondary("Save personal word",lemma.isNotBlank() && meaning.isNotBlank()){
+                        val fields=listOf(lemma.trim(),meaning,level,pos,if(pos=="noun")article else "","Personal")
+                        a.write{
+                            require(this.personal(fields)){"This lemma already exists. Choose its dictionary entry above."}
+                            val id=requireNotNull(db.str("SELECT id FROM word WHERE lemma=? AND source='Personal'",java.text.Normalizer.normalize(fields[0],java.text.Normalizer.Form.NFC)))
+                            resolveInbox(w,id)
+                        };editing=""
                     }
                 }
             }
@@ -196,7 +225,15 @@ import java.time.ZoneId
         FilterChip(academic,{academic=!academic},label={Text("Academic vocabulary")});EntryField("Number of words",count){count=it.filter(Char::isDigit).take(3)}
         Hint(results.size.toString()+" catalog matches")
         if(results.isNotEmpty()){Primary("Save list to inbox"){a.write{results.forEach{v->collect(v.word.lemma,v.word.id,"Discovery",v.word.example,v.word.topic)}}}
-            Secondary("Study this selection"){a.learn(results.map{it.word.id})}}
+            val fresh=results.filter{it.fsrs==null}
+            if(fresh.isNotEmpty())Secondary("Study new words in selection"){a.learn(fresh.map{it.word.id})}
+            val practice=results.filter{it.fsrs!=null}
+            if(practice.isNotEmpty())Secondary("Practice existing cards"){a.edit({
+                check(session()==null){"Resume or finish the current vocabulary session first."}
+                val ids=practice.map{it.word.id}
+                db.delete("undo_step",null,null)
+                save(Session(Mode.Custom,ids,Stage.Recognize,limit=ids.size))
+            },a.study)}}
         results.forEach{v->Sheet{Text(v.word.german);Hint(v.word.meaning);TextButton({a.detail(v.word.id)}){Text("Dictionary entry")}}}
     }
 }

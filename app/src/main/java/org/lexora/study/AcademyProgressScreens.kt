@@ -22,6 +22,14 @@ import java.util.UUID
         SectionTitle("Daily quests",a)
         Hint(d.today+" · "+required.count{it.second>=it.first.target}+" / "+required.size+" planned tasks")
         if(required.isEmpty())Hint("No required tasks today. Extra learning is available.")
+        else{
+            val skills=required.groupBy{it.first.skill}
+            Hint("Planned skills completed · "+skills.values.count{group->group.all{it.second>=it.first.target}}+" / "+skills.size)
+        }
+        val bonus=d.quests.filter{it.first.bonus}
+        if(bonus.isNotEmpty())Hint("Bonus tasks · "+bonus.count{it.second>=it.first.target}+" / "+bonus.size)
+        Hint("Graded answers · "+d.daily.correct+" / "+d.daily.attempted+" · Scheduled reviews completed · "+d.daily.reviews)
+        Hint("Recorded question interaction time · "+d.daily.interactionMs/1000+" seconds")
         d.quests.forEach{(q,n)->Sheet{
             Text(q.title,style=MaterialTheme.typography.titleMedium);Hint(q.skill+" · "+q.metric+(if(q.bonus)" · Bonus" else "")+(if(q.recurring)" · Daily" else ""))
             Progress((n.toFloat()/q.target).coerceAtMost(1f));Text(n.toString()+" / "+q.target)
@@ -51,12 +59,17 @@ import java.util.UUID
     if(settings){
         var days by rememberSaveable{mutableStateOf(d.prefs["academy.days"]?:"1,2,3,4,5,6,7")};var weekly by rememberSaveable{mutableStateOf(d.prefs["academy.weekly"]?:"150")}
         var exam by rememberSaveable{mutableStateOf(d.prefs["academy.exam"].orEmpty())}
+        var focus by rememberSaveable{mutableStateOf(d.prefs["academy.focus"].orEmpty())}
         AlertDialog(onDismissRequest={settings=false},title={Text("Weekly study schedule")},text={Column(Modifier.verticalScroll(rememberScrollState())){
             EntryField("Weekly study minutes",weekly){weekly=it};EntryField("Digital TestDaF date · YYYY-MM-DD",exam){exam=it}
             Hint("Target · TDN 4 in reading, listening, speaking and writing. Select your study days.")
+            Hint("Additional skills for longer days or the final four weeks before the exam")
+            listOf("Listening","Speaking","Writing").forEach{s->
+                FilterChip(s in focus.split(","),{focus=(if(s in focus.split(","))focus.split(",")-s else focus.split(",")+s).filter(String::isNotEmpty).joinToString(",")},label={Text(s)})
+            }
             DayOfWeek.values().forEach{day->val id=day.value.toString();val enabled=id in days.split(",")
                 FilterChip(enabled,{days=(if(enabled)days.split(",")-id else days.split(",")+id).filter(String::isNotEmpty).distinct().sorted().joinToString(",")},label={Text(day.getDisplayName(TextStyle.FULL,Locale.ENGLISH))})}
-        }},confirmButton={TextButton({a.write{set("academy.weekly",weekly);set("academy.days",days.ifEmpty{"rest"});set("academy.exam",exam)};settings=false},
+        }},confirmButton={TextButton({a.write{set("academy.weekly",weekly);set("academy.days",days.ifEmpty{"rest"});set("academy.exam",exam);set("academy.focus",focus);set("academy.plan."+day(),"")};settings=false},
             enabled=weekly.toIntOrNull() in 1..3000 && (exam.isBlank() || runCatching{LocalDate.parse(exam)}.isSuccess)){Text("Save schedule")}},dismissButton={TextButton({settings=false}){Text("Cancel")}})
     }
 }
@@ -81,7 +94,10 @@ import java.util.UUID
         d.journal.take(limit).forEach{e->Sheet{
             Label(e.day+" · "+e.skill);Text(e.activity+" · "+(d.lessons.find{it.id==e.content}?.title?:d.readings.find{it.id==e.content}?.title?:e.content))
             Hint(e.method+(e.attempted?.let{" · "+e.correct+"/"+it}.orEmpty()))
-            if(e.answer!=null)Hint("Response · "+e.answer)
+            if(e.activity=="Daily plan" && e.answer!=null){
+                val plan=org.json.JSONObject(e.answer)
+                Hint("Planned study · "+plan.optInt("minutes")+" minutes")
+            }else if(e.answer!=null)Hint("Response · "+e.answer)
             if(e.xp>0)Text("+"+e.xp+" XP · "+e.reason,color=mint)
         }}
         if(limit<d.journal.size)Secondary("Show earlier entries"){limit+=40}
@@ -96,6 +112,10 @@ import java.util.UUID
         Hint(unstable.toString()+" unstable vocabulary cards · "+d.due+" due now")
         if(d.due>0)Secondary("Review due cards",onClick=a.review)
         weak.forEach{(id,p)->val l=d.lessons.first{it.id==id};Sheet{Text(l.title);Hint(p.errors.toString()+" missed answers · "+p.status);Secondary("Targeted grammar practice"){a.go("Lesson:"+id)}}}
+        d.repairs.forEach{(id,outcome)->
+            val title=d.lessons.find{it.id==id}?.title?:d.readings.find{it.id==id}?.title?:id
+            Hint(title+" · "+outcome.second+" of "+outcome.first+" previously missed questions answered correctly on the latest attempt")
+        }
         Label("Recent incorrect answers · journal period")
         if(missed.isEmpty())Hint("No incorrect answers recorded for this period.")
         missed.distinctBy{it.content to it.activity}.take(30).forEach{e->Sheet{Text(e.activity+" · "+e.content);Hint(e.day+" · "+e.answer.orEmpty())

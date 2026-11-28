@@ -11,7 +11,7 @@ internal fun createAcademy(db: SQLiteDatabase) {
         zone TEXT NOT NULL, skill TEXT NOT NULL, activity TEXT NOT NULL, content TEXT NOT NULL, level TEXT,
         method TEXT NOT NULL, confidence TEXT NOT NULL, source TEXT NOT NULL, version INTEGER NOT NULL,
         attempted INTEGER, correct INTEGER, answer TEXT, started INTEGER, active_ms INTEGER,
-        rubric TEXT, quest TEXT, word TEXT REFERENCES word(id), grammar TEXT, assessment_type TEXT NOT NULL)""")
+        rubric TEXT, quest TEXT, word TEXT REFERENCES word(id), grammar TEXT, assessment_type TEXT NOT NULL, question_id TEXT)""")
     db.execSQL("CREATE INDEX academy_event_topic ON academy_event(skill,content,activity,at)")
     db.execSQL("CREATE INDEX academy_event_day ON academy_event(day,activity)")
     db.execSQL("""CREATE TABLE academy_credit(reward_key TEXT PRIMARY KEY,event_id TEXT UNIQUE NOT NULL
@@ -28,7 +28,12 @@ internal fun createAcademy(db: SQLiteDatabase) {
     db.execSQL("""CREATE VIEW academy_vocab AS SELECT e.id,e.word,e.kind,e.at,e.day,e.score,w.level,w.lemma,
         CASE WHEN e.score>=3 AND (e.kind='new' OR e.kind='review' AND e.detail='scheduled')
         THEN CASE WHEN e.kind='new' THEN 3 ELSE 2 END ELSE 0 END xp
-        FROM effective_event e JOIN word w ON e.word=w.id WHERE e.kind IN ('new','review')""")
+        FROM effective_event e JOIN word w ON e.word=w.id WHERE e.kind IN ('new','review')
+        UNION ALL SELECT e.id,e.word,'First successful retry',e.at,e.day,e.score,w.level,w.lemma,3
+        FROM effective_event e JOIN word w ON e.word=w.id WHERE e.kind='answer' AND e.score=1 AND e.detail='New-word retry recalled'
+        AND NOT EXISTS(SELECT 1 FROM effective_event prior WHERE prior.word=e.word
+        AND (prior.at<e.at OR prior.at=e.at AND prior.id<e.id)
+        AND (prior.kind IN ('new','review') AND prior.score>=3 OR prior.kind='answer' AND prior.score=1 AND prior.detail='New-word retry recalled'))""")
 }
 
 internal fun removeAcademySchema(db:SQLiteDatabase) {
@@ -39,7 +44,7 @@ internal fun removeAcademySchema(db:SQLiteDatabase) {
 internal data class Evidence(val id:String,val skill:String,val activity:String,val content:String,
     val level:String?=null,val attempted:Int?=null,val correct:Int?=null,val answer:String?=null,
     val method:String="answer key",val kind:String="practice",val version:Int=1,val start:Long?=null,
-    val activeMs:Long?=null,val quest:String?=null,val grammar:String?=null,val word:String?=null)
+    val activeMs:Long?=null,val quest:String?=null,val grammar:String?=null,val word:String?=null,val questionId:String?=null)
 
 internal object AcademyXp {
     fun points(base:Int,level:String?,ratio:Double,novelty:Double=1.0):Int {
@@ -55,11 +60,11 @@ internal fun StudyRepository.record(e:Evidence, rewardKey:String?=null,amount:In
     if(db.long("SELECT count(*) FROM academy_event WHERE id=?",e.id)>0)return@tx false
     val at=now()
     db.execSQL("""INSERT INTO academy_event(id,at,day,zone,skill,activity,content,level,method,confidence,source,version,
-        attempted,correct,answer,started,active_ms,rubric,quest,word,grammar,assessment_type)
-        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",arrayOf(e.id,at,day(at),ZoneId.systemDefault().id,e.skill,
-        e.activity,e.content,e.level,e.method,if(e.method=="answer key")"deterministic" else "reported",
+        attempted,correct,answer,started,active_ms,rubric,quest,word,grammar,assessment_type,question_id)
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",arrayOf(e.id,at,day(at),ZoneId.systemDefault().id,e.skill,
+        e.activity,e.content,e.level,e.method,when(e.method){"answer key"->"deterministic";"activity record"->"recorded";else->"reported"},
         "lexora-local",e.version,e.attempted,e.correct,e.answer,e.start,e.activeMs,if(e.method=="answer key")"key-v1" else null,
-        e.quest,e.word,e.grammar,e.kind))
+        e.quest,e.word,e.grammar,e.kind,e.questionId))
     if(rewardKey!=null && amount>0)db.execSQL("INSERT OR IGNORE INTO academy_credit VALUES(?,?,?,?)",arrayOf(rewardKey,e.id,amount,reason))
     true
 }

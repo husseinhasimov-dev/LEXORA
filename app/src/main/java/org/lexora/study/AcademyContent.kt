@@ -24,7 +24,11 @@ internal data class Reading(val id:String,val title:String,val level:String,val 
 internal interface ReadingProvider { fun passages(context:Context):List<Reading> }
 internal object OfflineReadings:ReadingProvider {
     override fun passages(context:Context):List<Reading> {
-        val entries=JSONArray(context.assets.open("academy-readings.json").bufferedReader().use{it.readText()})
+        val entries=JSONArray()
+        for(file in listOf("academy-readings.json","academy-readings-extended.json")){
+            val batch=JSONArray(context.assets.open(file).bufferedReader().use{it.readText()})
+            for(i in 0 until batch.length())entries.put(batch.getJSONObject(i))
+        }
         val newTexts=List(entries.length()){i->
             val r=entries.getJSONObject(i);val f=r.getJSONObject("forms");val qs=r.getJSONArray("questions")
             Reading(r.getString("id"),r.getString("title"),r.getString("level"),r.getString("topic"),r.getString("text"),
@@ -60,7 +64,7 @@ internal fun grammarLessons(context:Context)=context.assets.open("academy-gramma
         })
     }.toList()
 }
-internal data class LexicalState(val word:Word,val known:Boolean,val weak:Boolean,val due:Boolean,val missed:Boolean,val unseen:Boolean,val academic:Boolean)
+internal data class LexicalState(val word:Word,val known:Boolean,val weak:Boolean,val due:Boolean,val missed:Boolean,val unseen:Boolean,val academic:Boolean,val fsrs:String?)
 internal class ReadingIndex(val entries:List<LexicalState>){
     private val exact=entries.groupBy{it.word.lemma}
     fun lookup(surface:String,passage:Reading):LexicalState? {
@@ -78,7 +82,7 @@ internal fun StudyRepository.readingIndex():ReadingIndex {
     return ReadingIndex(db.rows("""SELECT w.*,a.grade,c.state,c.stability,c.due,x.category FROM word w
         LEFT JOIN assessment a ON a.word=w.id LEFT JOIN active_card c ON c.word=w.id LEFT JOIN content_v4 x ON x.word=w.id"""){c->
         val w=c.word();val state=c.getString(20);val weak=state!=null && (state!="REVIEW" || c.getDouble(21)<7)
-        LexicalState(w,c.getInt(19)==4 || state=="REVIEW",weak,state!=null && c.getLong(22)<=now(),w.id in missed,c.isNull(19)&&state==null,!c.getString(23).isNullOrBlank())
+        LexicalState(w,c.getInt(19)==4 || state=="REVIEW",weak,state!=null && c.getLong(22)<=now(),w.id in missed,c.isNull(19)&&state==null,!c.getString(23).isNullOrBlank(),state)
     })
 }
 internal data class ReadingPrefs(val level:String="A1",val topic:String="Random topic",val length:String="Any",val mix:String="Balanced",
@@ -104,11 +108,22 @@ internal fun recommend(all:List<Reading>,index:ReadingIndex,prefs:ReadingPrefs,h
         if(lengthMiss>0)mismatches+="Length: "+p.tokens.size+" words"
         val hit=ids.intersect(prefs.targets)
         if(hit.size<prefs.targets.size)mismatches+="Contains "+hit.size+" of "+prefs.targets.size+" targets"
+        if(prefs.mix=="Previously missed" && words.none{it.missed})mismatches+="No identified previously missed word"
+        if(prefs.mix=="Due for review" && words.none{it.due})mismatches+="No identified due review word"
+        if(prefs.mix=="Weak FSRS" && words.none{it.weak})mismatches+="No identified weak card"
+        if(prefs.mix=="Mostly known" && known*2<count)mismatches+="Few known dictionary matches"
         val prior=history[p.id]
         val score= (if(topicMatch)32 else 0)-distance*24-lengthMiss.coerceAtMost(1000)*0.025+
             mixScore*12+(if(prefs.targets.isEmpty())0.0 else 18.0*hit.size/prefs.targets.size)-
             (if(prefs.unknownCount>0)abs(count-known-prefs.unknownCount).coerceAtMost(50)*0.15 else 0.0)-
             (prior?.let{if(it.second>=0.8)5.0 else 1.0}?:0.0)
         RankedText(p,words.size-known,known,count.takeIf{words.isNotEmpty()}?:0,hit,score,mismatches)
-    }.sortedByDescending{it.score}
+    }.let{ranked->
+        val sameLevel=ranked.filter{it.p.level==prefs.level}
+        val exact=sameLevel.filter{prefs.topic=="Random topic" || it.p.topic==prefs.topic}
+        val pool=exact.ifEmpty{ranked}
+        val length=lengthBands.getValue(prefs.length)
+        val shortList=pool.filter{it.p.tokens.size in length}
+        (if(exact.isEmpty())ranked else shortList.ifEmpty{pool}).sortedByDescending{it.score}
+    }
 }

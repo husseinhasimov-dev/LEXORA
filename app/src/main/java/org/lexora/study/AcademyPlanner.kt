@@ -3,13 +3,15 @@ package org.lexora.study
 import java.time.LocalDate
 import java.time.DayOfWeek
 import java.util.UUID
+import org.json.JSONArray
 
 internal val academySkills=listOf("Vocabulary","Reading","Grammar","Listening","Speaking","Writing")
 internal data class JournalRow(val id:String,val day:String,val at:Long,val skill:String,val activity:String,val content:String,val method:String,
     val attempted:Int?,val correct:Int?,val xp:Int,val reason:String,val activeMs:Long?,val answer:String?)
 internal fun StudyRepository.journal(from:String,to:String)=db.rows("""SELECT e.id,e.day,e.at,e.skill,e.activity,e.content,e.method,e.attempted,e.correct,
     coalesce(c.amount,0),c.reason,e.active_ms,e.answer FROM academy_event e LEFT JOIN academy_credit c ON c.event_id=e.id WHERE e.day BETWEEN ? AND ?
-    UNION ALL SELECT id,day,at,'Vocabulary',kind,lemma,'FSRS rating',NULL,NULL,xp,'Effective FSRS rating '||score,NULL,NULL FROM academy_vocab WHERE day BETWEEN ? AND ?
+    UNION ALL SELECT id,day,at,'Vocabulary',kind,lemma,CASE WHEN kind='First successful retry' THEN 'self-reported recall' ELSE 'FSRS rating' END,
+        NULL,NULL,xp,CASE WHEN kind='First successful retry' THEN 'First successful recall after a missed new word' ELSE 'Effective FSRS rating '||score END,NULL,NULL FROM academy_vocab WHERE day BETWEEN ? AND ?
     UNION ALL SELECT x.id,date(x.at/1000,'unixepoch','localtime'),x.at,CASE x.mode WHEN 'Listening in Context' THEN 'Listening' WHEN 'Mini Stories' THEN 'Reading' ELSE 'Vocabulary' END,
         x.mode,x.item,'answer key',1,x.correct,0,NULL,NULL,x.answer FROM exploration x WHERE x.mode IN ('Listening in Context','Mini Stories','Context Mastery','Word Families','Confusion Lab')
         AND x.part!='Completed' AND date(x.at/1000,'unixepoch','localtime') BETWEEN ? AND ? ORDER BY 3 DESC,1 DESC""",listOf(from,to,from,to,from,to)){c->
@@ -31,7 +33,18 @@ internal fun StudyRepository.quests(date:LocalDate,progress:Map<String,TopicProg
         Quest(it.getString(0),it.getString(1),it.getString(2),it.getString(3),it.getInt(4),it.getString(5),it.getInt(6)==1,it.getInt(7)==1)}
     val days=(pref("academy.days").ifEmpty{"1,2,3,4,5,6,7"}).split(",")
     val mins=(pref("academy.weekly").toIntOrNull()?:150)/days.size.coerceAtLeast(1)
+    fun withEdits(auto:List<Quest>):List<Quest>{
+        val overridden=db.rows("SELECT id FROM academy_quest WHERE id LIKE 'auto/%'"){it.getString(0)}.toSet()
+        return (auto.filterNot{it.id in overridden}+custom).filterNot{pref("academy.hide."+it.id)=="true"}
+    }
+    val planKey="academy.plan."+day
+    val saved=pref(planKey)
     val auto=mutableListOf<Quest>()
+    if(saved.isNotEmpty()){
+        val plan=JSONArray(saved)
+        for(i in 0 until plan.length()){val q=plan.getJSONArray(i);auto+=Quest(q.getString(0),q.getString(1),q.getString(2),q.getString(3),q.getInt(4),day)}
+        return withEdits(auto)
+    }
     if(date.dayOfWeek.value.toString() in days) {
         fun add(title:String,skill:String,metric:String,target:Int){
             auto+=Quest("auto/"+day+"/"+metric,title,skill,metric,target,day)
@@ -47,8 +60,27 @@ internal fun StudyRepository.quests(date:LocalDate,progress:Map<String,TopicProg
         val readingNeedsWork=recent.firstOrNull{it.activity=="Comprehension"}?.let{(it.correct?:0)*5<(it.attempted?:0)*4}?:false
         if(weak!=null || !readingNeedsWork && date.dayOfWeek.value%2==0)add("Complete grammar practice","Grammar","Practice",1)
         else add("Complete a reading","Reading","Comprehension",1)
+        val preferred=pref("academy.focus").split(",").filter{it in listOf("Listening","Writing","Speaking")}
+        val exam=pref("academy.exam").takeIf{it.isNotEmpty()}?.let{runCatching{LocalDate.parse(it)}.getOrNull()}
+        val near=exam!=null && exam.toEpochDay()-date.toEpochDay() in 0..28
+        val slot=days.indexOf(date.dayOfWeek.value.toString())
+        if(preferred.isNotEmpty() && (mins>=30 || near) && slot>=0){
+            val skill=preferred[(slot+date.get(java.time.temporal.IsoFields.WEEK_OF_WEEK_BASED_YEAR))%preferred.size]
+            if(skill=="Listening")add("Complete a listening round",skill,"Listening in Context",1)
+            else add("Complete a "+skill.lowercase()+" task",skill,"Self-reported",1)
+        }
     }
-    return (auto.filterNot{a->custom.any{it.id==a.id}}+custom).filterNot{pref("academy.hide."+it.id)=="true"}
+    val plan=JSONArray()
+    auto.forEach{q->plan.put(JSONArray(listOf(q.id,q.title,q.skill,q.metric,q.target)))}
+    set(planKey,plan.toString())
+    if(day==day()){
+        val evidence=org.json.JSONObject().put("minutes",if(date.dayOfWeek.value.toString() in days)mins else 0)
+            .put("weeklyMinutes",pref("academy.weekly").toIntOrNull()?:150).put("days",JSONArray(days))
+            .put("examDate",pref("academy.exam")).put("focus",pref("academy.focus")).put("tasks",plan).toString()
+        record(Evidence("plan/"+day+"/"+UUID.nameUUIDFromBytes(evidence.toByteArray()),"Planning","Daily plan",day,
+            answer=evidence,method="activity record",kind="study plan"))
+    }
+    return withEdits(auto)
 }
 internal fun StudyRepository.questCount(q:Quest,day:String):Int=when(q.metric){
     "Self-reported"->db.long("SELECT count(*) FROM academy_event WHERE quest=? AND day=? AND activity='Reported task'",q.id,day)

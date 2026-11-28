@@ -42,13 +42,16 @@ class MainActivity:ComponentActivity(){
         enableEdgeToEdge(statusBarStyle=androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
             navigationBarStyle=androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT))
         voice=Voice(this)
-        setContent { MaterialTheme(colorScheme=darkColorScheme(primary=blue,onPrimary=Color(0xff102c4d),
-            background=ink,surface=ink,surfaceContainer=panel,onBackground=Color(0xffedf4ef),
-            onSurface=Color(0xffedf4ef),onSurfaceVariant=faint,secondary=mint,outline=Color(0xff53677b))){
-            App(model,voice)
-        } }
+        setContent { LexoraApp(model,voice) }
     }
     override fun onDestroy(){voice.close();super.onDestroy()}
+}
+@Composable fun LexoraApp(model:StudyModel,voice:Voice){
+    MaterialTheme(colorScheme=darkColorScheme(primary=blue,onPrimary=Color(0xff102c4d),
+        background=ink,surface=ink,surfaceContainer=panel,onBackground=Color(0xffedf4ef),
+        onSurface=Color(0xffedf4ef),onSurfaceVariant=faint,secondary=mint,outline=Color(0xff53677b))){
+        App(model,voice)
+    }
 }
 
 @Composable fun Heading(text:String){Text(text,fontSize=32.sp,lineHeight=38.sp,fontWeight=FontWeight.SemiBold,letterSpacing=(-1).sp)}
