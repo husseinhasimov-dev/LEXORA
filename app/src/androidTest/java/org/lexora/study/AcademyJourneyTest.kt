@@ -1,37 +1,13 @@
 package org.lexora.study
 
 import androidx.compose.ui.test.*
-import androidx.activity.compose.setContent
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.Assert.*
-import org.junit.Rule
 import org.junit.Test
 import java.io.File
 
-class AcademyJourneyTest {
-    @get:Rule val ui=createAndroidComposeRule<androidx.activity.ComponentActivity>()
-    private val owner="qa-"+java.util.UUID.randomUUID()
-    private lateinit var voice:Voice
-    @org.junit.Before fun isolatedProfile(){
-        val activity=ui.activity
-        ui.runOnUiThread{
-            voice=Voice(activity)
-            val factory=object:androidx.lifecycle.ViewModelProvider.Factory{
-                @Suppress("UNCHECKED_CAST")
-                override fun <T:androidx.lifecycle.ViewModel> create(modelClass:Class<T>):T=
-                    StudyModel(activity.application){owner} as T
-            }
-            val vm=androidx.lifecycle.ViewModelProvider(activity,factory)[StudyModel::class.java]
-            activity.setContent {LexoraApp(vm,voice)}
-        }
-    }
-    @org.junit.After fun closeProfile(){
-        val activity=ui.activity
-        ui.runOnUiThread{activity.viewModelStore.clear();voice.close()}
-        activity.deleteDatabase("account-"+java.util.UUID.nameUUIDFromBytes(owner.toByteArray())+".db")
-    }
+class AcademyJourneyTest:IsolatedStudyUi() {
     private fun find(label:String)=hasText(label) and hasClickAction() and isEnabled()
     private fun waitText(label:String){ui.waitUntil(25000){ui.onAllNodesWithText(label).fetchSemanticsNodes().isNotEmpty()}}
     private fun tap(label:String){
