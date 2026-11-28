@@ -1,0 +1,3132 @@
+{
+  "version": 1,
+  "topics": [
+    {
+      "id": "pronouns",
+      "isNew": false,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "German pronouns agree with the grammatical gender (der/die/das) and number of the noun they replace, not only biological gender.",
+      "positiveExamples": [
+        "Der Tisch ist groß. Er steht im Zimmer. — The table is big. It stands in the room.",
+        "Frau Weber unterrichtet heute. Sie kommt pünktlich. — Ms. Weber teaches today. She arrives on time."
+      ],
+      "negativeExamples": [
+        "✗ Das Buch ist neu. Er liegt dort. → ✓ Das Buch ist neu. Es liegt dort."
+      ],
+      "commonMistakes": "Learners often use 'es' for all objects as in English 'it', forgetting that masculine objects take 'er' and feminine objects take 'sie'.",
+      "context": "Used in every spoken and written sentence; capitalized 'Sie' is mandatory for formal address in emails and university communication.",
+      "exceptions": "Compound or collective singular nouns like 'die Gruppe' take singular 'sie', while 'das Mädchen' is grammatically neuter and takes 'es'.",
+      "comparison": "Compare with Possessive Determiners (mein/sein/ihr), which also track the owner's person and gender.",
+      "relatedVocabTopics": [
+        "People",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Der Bus kommt spät. ___ fährt heute langsamer.",
+          "key": "Er",
+          "choices": [
+            "Es",
+            "Sie",
+            "Wir"
+          ],
+          "why": "Bus is masculine (der Bus), so the nominative subject pronoun is 'Er'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Die Universität ist alt. ___ liegt im Zentrum.",
+          "key": "Sie",
+          "choices": [],
+          "why": "Universität is feminine (die Universität), so use 'Sie'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the pronoun: Das Zimmer ist hell. Er ist groß.",
+          "key": "Das Zimmer ist hell. Es ist groß",
+          "choices": [],
+          "why": "Zimmer is neuter (das Zimmer), so the matching pronoun is 'Es'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Die Kinder warten am Tor. ___ sprechen leise.' Choose the pronoun.",
+          "key": "Sie",
+          "choices": [
+            "Er",
+            "Es",
+            "Ihr"
+          ],
+          "why": "Plural 'die Kinder' requires the third-person plural pronoun 'Sie'."
+        }
+      ]
+    },
+    {
+      "id": "sein",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "High-frequency verbs 'sein' (to be) and 'haben' (to have) evolved from irregular roots, so their present forms do not follow the regular -e/-st/-t pattern.",
+      "positiveExamples": [
+        "Ich bin Student in Berlin. — I am a student in Berlin.",
+        "Wir haben morgen eine Prüfung. — We have an exam tomorrow."
+      ],
+      "negativeExamples": [
+        "✗ Du habst keine Zeit. → ✓ Du hast keine Zeit.",
+        "✗ Ihr sind müde. → ✓ Ihr seid müde."
+      ],
+      "commonMistakes": "Adding a 'b' in 'du hast' or 'er hat', or confusing 'ihr seid' (verb) with 'seit' (preposition).",
+      "context": "Core verbs for introductions, states, age, weather, and later as auxiliaries for the Perfekt tense.",
+      "exceptions": "In southern colloquial German and idioms, 'sein' expresses states like 'Mir ist kalt' (I am cold).",
+      "comparison": "Compare with regular Present Tense verbs, which keep a stable stem.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "Conjugate sein: Wir ___ aus Aserbaidschan.",
+          "key": "sind",
+          "choices": [
+            "seid",
+            "bin",
+            "ist"
+          ],
+          "why": "First-person plural of sein is 'sind'."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "Conjugate haben: Er ___ heute keine Vorlesung.",
+          "key": "hat",
+          "choices": [
+            "habt",
+            "hast",
+            "haben"
+          ],
+          "why": "Third-person singular of haben drops the 'b': 'hat'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Du bist Student und du habst ein Buch.",
+          "key": "Du bist Student und du hast ein Buch",
+          "choices": [],
+          "why": "With 'du', haben conjugates to 'hast', without 'b'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite with 'ihr': Wir sind bereit.",
+          "key": "Ihr seid bereit",
+          "choices": [],
+          "why": "Second-person plural of sein is 'seid'."
+        }
+      ]
+    },
+    {
+      "id": "present",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "German verb endings encode who performs the action, allowing flexible word order without losing track of the subject.",
+      "positiveExamples": [
+        "Ich lerne jeden Abend Deutsch. — I study German every evening.",
+        "Ihr arbeitet in der Bibliothek. — You all work in the library."
+      ],
+      "negativeExamples": [
+        "✗ Wir lernt zusammen. → ✓ Wir lernen zusammen."
+      ],
+      "commonMistakes": "Using -t for 'wir' or forgetting the extra -e- when a stem ends in -t or -d (er arbeitet, du findest).",
+      "context": "German has only one present tense covering both English simple present ('I read') and continuous ('I am reading').",
+      "exceptions": "Stems ending in -t, -d, -chn, -ffn insert an -e- before -st and -t (du arbeitest, er öffnet). Stems in -s/-ß/-z take -t for du (du heißt).",
+      "comparison": "Compare with Stem-Changing Present Verbs (sprechen → du sprichst) and Modal Verbs (no -t on ich/er).",
+      "relatedVocabTopics": [
+        "Daily life",
+        "Work"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "arbeiten: Er ___ im Labor.",
+          "key": "arbeitet",
+          "choices": [
+            "arbeitt",
+            "arbeitest",
+            "arbeiten"
+          ],
+          "why": "Stems ending in -t add -et in third-person singular."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "heißen: Wie ___ du?",
+          "key": "heißt",
+          "choices": [
+            "heißst",
+            "heiße",
+            "heißen"
+          ],
+          "why": "Stems ending in -ß take only -t for 'du'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "finden: Du ___ den Raum leicht.",
+          "key": "findest",
+          "choices": [],
+          "why": "Stems ending in -d insert -e- before -st: 'findest'."
+        },
+        {
+          "type": "Sentence construction",
+          "prompt": "Build a sentence: wir / wohnen / in / Bonn",
+          "key": "Wir wohnen in Bonn",
+          "choices": [],
+          "why": "First-person plural takes -en: 'Wir wohnen in Bonn'."
+        }
+      ]
+    },
+    {
+      "id": "order",
+      "isNew": false,
+      "category": "Sentence Structure",
+      "whyItWorks": "In declarative main clauses, the finite (conjugated) verb acts as an anchor in Position 2 (V2). Position 1 can hold one whole phrase—subject, time, place, or object.",
+      "positiveExamples": [
+        "Am Montag beginnt das Semester. — On Monday the semester begins.",
+        "In der Mensa essen viele Studierende. — Many students eat in the cafeteria."
+      ],
+      "negativeExamples": [
+        "✗ Heute ich gehe zur Bibliothek. → ✓ Heute gehe ich zur Bibliothek."
+      ],
+      "commonMistakes": "Placing both a time adverb AND the subject before the verb (English V3 transfer).",
+      "context": "Essential in every German statement and especially important for cohesive academic writing where fronted topics link sentences.",
+      "exceptions": "Coordinating conjunctions (und, aber, oder, denn, sondern) stand in Position 0 and do not push the verb out of Position 2.",
+      "comparison": "Compare with Questions (V1 for yes/no) and Subordinate Clauses (verb-final).",
+      "relatedVocabTopics": [
+        "Everyday",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: beginnt / um neun Uhr / der Kurs. Start with Um neun Uhr.",
+          "key": "Um neun Uhr beginnt der Kurs",
+          "choices": [],
+          "why": "Time phrase fills Position 1, finite verb 'beginnt' takes Position 2, subject follows."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct word order: Morgen wir schreiben einen Test.",
+          "key": "Morgen schreiben wir einen Test",
+          "choices": [],
+          "why": "When 'Morgen' is in Position 1, the verb 'schreiben' must move to Position 2."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which sentence has correct V2 word order?",
+          "key": "Im Winter wird es früh dunkel.",
+          "choices": [
+            "Im Winter es wird früh dunkel.",
+            "Es im Winter wird früh dunkel.",
+            "Wird im Winter es früh dunkel."
+          ],
+          "why": "'Im Winter' is Position 1, so 'wird' must come directly in Position 2."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Move 'heute' to Position 1: Ich lerne heute Vokabeln.",
+          "key": "Heute lerne ich Vokabeln",
+          "choices": [],
+          "why": "Fronting 'Heute' triggers subject-verb inversion: 'Heute lerne ich Vokabeln'."
+        }
+      ]
+    },
+    {
+      "id": "articles",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "Every German noun carries one of three grammatical genders (der, die, das). Memorizing the article with the noun unlocks all case and adjective endings.",
+      "positiveExamples": [
+        "Das ist ein Bericht. Der Bericht ist kurz. — That is a report. The report is short.",
+        "Hier liegt eine Karte. — Here lies a map."
+      ],
+      "negativeExamples": [
+        "✗ Das ist ein Lampe. → ✓ Das ist eine Lampe."
+      ],
+      "commonMistakes": "Guessing gender from English meaning or omitting 'eine' for feminine nouns.",
+      "context": "Used whenever introducing a new noun (ein/eine) or referring to a known noun (der/die/das).",
+      "exceptions": "Reliable suffix clues: -ung, -heit, -keit, -schaft, -tät, -ion are always feminine (die); -chen, -lein, -ment are neuter (das); -er (agents) and days/months are usually masculine (der).",
+      "comparison": "Compare with Nominative vs Accusative cases, where masculine 'der/ein' changes to 'den/einen'.",
+      "relatedVocabTopics": [
+        "Objects",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Article selection",
+          "prompt": "Choose the definite article for 'Prüfung' (-ung): ___ Prüfung",
+          "key": "die",
+          "choices": [
+            "der",
+            "das",
+            "den"
+          ],
+          "why": "Nouns ending in -ung are always feminine (die Prüfung)."
+        },
+        {
+          "type": "Article selection",
+          "prompt": "Choose the indefinite article: Das ist ___ Wörterbuch (das).",
+          "key": "ein",
+          "choices": [
+            "eine",
+            "einen",
+            "einer"
+          ],
+          "why": "Neuter nominative takes 'ein'."
+        },
+        {
+          "type": "Article selection",
+          "prompt": "Choose the definite article for 'Möglichkeit' (-keit): ___ Möglichkeit",
+          "key": "die",
+          "choices": [
+            "der",
+            "das",
+            "dem"
+          ],
+          "why": "Nouns ending in -keit are always feminine."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Dort steht ___ Universität (die). Use an indefinite article.",
+          "key": "eine",
+          "choices": [],
+          "why": "Feminine nominative indefinite article is 'eine'."
+        }
+      ]
+    },
+    {
+      "id": "nominative",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "The nominative marks the subject (the actor) and predicate nouns after 'sein', 'werden', and 'bleiben'.",
+      "positiveExamples": [
+        "Der Professor erklärt das Thema. — The professor explains the topic.",
+        "Er ist ein guter Lehrer. — He is a good teacher."
+      ],
+      "negativeExamples": [
+        "✗ Er ist einen Lehrer. → ✓ Er ist ein Lehrer."
+      ],
+      "commonMistakes": "Using accusative 'den/einen' after 'sein' or when the subject stands after the verb.",
+      "context": "Required in every finite clause to distinguish who acts from who is acted upon.",
+      "exceptions": "After 'sein', 'werden', 'bleiben', and 'heißen', both sides of the verb stay in the nominative.",
+      "comparison": "Compare with Accusative Direct Objects (Ich sehe einen Lehrer vs Er ist ein Lehrer).",
+      "relatedVocabTopics": [
+        "People",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Choose nominative: Mein Bruder ist ___ Arzt (ein/einen).",
+          "key": "ein",
+          "choices": [
+            "einen",
+            "einem",
+            "eines"
+          ],
+          "why": "After 'sein', use nominative 'ein Arzt'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Am Morgen fährt ___ Zug pünktlich ab (der/den/dem).",
+          "key": "der",
+          "choices": [
+            "den",
+            "dem",
+            "des"
+          ],
+          "why": "'der Zug' is the subject performing the action, even after 'Am Morgen'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the case: Heute kommt den neuen Bus.",
+          "key": "Heute kommt der neue Bus",
+          "choices": [],
+          "why": "Subject 'der neue Bus' must be in nominative, not accusative."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Nach dem Kurs bleibt ___ Raum offen.' Choose the article for Raum (der).",
+          "key": "der",
+          "choices": [
+            "den",
+            "dem",
+            "die"
+          ],
+          "why": "'bleiben' takes a nominative subject: 'der Raum'."
+        }
+      ]
+    },
+    {
+      "id": "accusative",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "The accusative marks the direct recipient of an action (and objects of prepositions für, ohne, gegen, durch, um). Only masculine singular visibly changes from nominative.",
+      "positiveExamples": [
+        "Ich brauche einen Stift für die Prüfung. — I need a pen for the exam.",
+        "Wir lesen den Text ohne Wörterbuch. — We read the text without a dictionary."
+      ],
+      "negativeExamples": [
+        "✗ Ich habe ein Bruder. → ✓ Ich habe einen Bruder."
+      ],
+      "commonMistakes": "Forgetting to change 'ein/mein/der' to 'einen/meinen/den' for masculine direct objects, or mistakenly changing 'das' to 'den'.",
+      "context": "Used with the vast majority of German transitive verbs (haben, sehen, kaufen, suchen, brauchen, lesen, es gibt).",
+      "exceptions": "The impersonal expression 'es gibt' (there is/are) ALWAYS takes accusative: 'Es gibt einen Park.'",
+      "comparison": "Compare with Dative complements (helfen, danken, gehören) and Nominative after 'sein'.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Shopping"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Es gibt hier ___ großen Park (ein/einen/einem).",
+          "key": "einen",
+          "choices": [
+            "ein",
+            "einem",
+            "einer"
+          ],
+          "why": "'es gibt' always requires the accusative case: masculine 'einen'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Das Geschenk ist für ___ Vater (der/den/dem).",
+          "key": "den",
+          "choices": [
+            "der",
+            "dem",
+            "des"
+          ],
+          "why": "The preposition 'für' always governs the accusative case."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the case: Ich suche der Schlüssel.",
+          "key": "Ich suche den Schlüssel",
+          "choices": [],
+          "why": "Direct object of 'suchen' is masculine accusative: 'den Schlüssel'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Sie liest ___ Artikel (der) zweimal.",
+          "key": "den",
+          "choices": [],
+          "why": "Masculine direct object of 'lesen' takes 'den'."
+        }
+      ]
+    },
+    {
+      "id": "negation",
+      "isNew": false,
+      "category": "Sentence Structure",
+      "whyItWorks": "'kein' negates nouns that would have ein/eine or zero article; 'nicht' negates verbs, adjectives, adverbs, and nouns with definite articles or possessives.",
+      "positiveExamples": [
+        "Ich habe keinen Termin. — I have no appointment.",
+        "Ich kenne den Termin nicht. — I do not know the appointment."
+      ],
+      "negativeExamples": [
+        "✗ Ich habe nicht Zeit. → ✓ Ich habe keine Zeit.",
+        "✗ Das ist kein richtig. → ✓ Das ist nicht richtig."
+      ],
+      "commonMistakes": "Using 'nicht' before bare nouns ('nicht Zeit') or putting 'nicht' before the verb as in English.",
+      "context": "Vital for accurate answers in reading comprehension and expressing counterarguments.",
+      "exceptions": "To negate a specific element, place 'nicht' directly in front of it: 'Ich komme nicht heute, sondern morgen.'",
+      "comparison": "Compare with Indefinite Articles ('ein' → 'kein', 'eine' → 'keine', plural zero article → 'keine').",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Wir haben heute ___ Zeit (die Zeit).",
+          "key": "keine",
+          "choices": [
+            "nicht",
+            "kein",
+            "keinen"
+          ],
+          "why": "Bare feminine noun 'Zeit' is negated with 'keine'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Der Text ist ___ schwer.",
+          "key": "nicht",
+          "choices": [],
+          "why": "Adjectives ('schwer') are negated with 'nicht'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Er hat nicht einen Bruder.",
+          "key": "Er hat keinen Bruder",
+          "choices": [],
+          "why": "Negate 'einen Bruder' with 'keinen Bruder', not 'nicht einen'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Negate the sentence: Ich habe ein Auto.",
+          "key": "Ich habe kein Auto",
+          "choices": [],
+          "why": "Indefinite neuter noun 'ein Auto' becomes 'kein Auto'."
+        }
+      ]
+    },
+    {
+      "id": "modals",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Modal verbs express attitude (ability, duty, permission, desire) and form a 'sentence bracket' (Satzklammer): conjugated modal in Position 2, infinitive at the very end.",
+      "positiveExamples": [
+        "Wir müssen den Bericht heute abgeben. — We must submit the report today.",
+        "Er will im Herbst in München studieren. — He wants to study in Munich in autumn."
+      ],
+      "negativeExamples": [
+        "✗ Er kannt gut Deutsch sprechen. → ✓ Er kann gut Deutsch sprechen.",
+        "✗ Ich muss zu lernen. → ✓ Ich muss lernen."
+      ],
+      "commonMistakes": "Adding -t to third-person singular ('er kannt/musst') or inserting 'zu' before the infinitive.",
+      "context": "Essential in everyday speech and TestDaF speaking/writing tasks to state obligations, advice, and possibilities.",
+      "exceptions": "In the singular (ich/du/er), most modals change their stem vowel (können → kann, müssen → muss, dürfen → darf, wollen → will), while 'sollen' keeps its vowel (soll).",
+      "comparison": "Compare with Infinitives with 'zu' (versuchen ... zu) and Subjective Modals (B2).",
+      "relatedVocabTopics": [
+        "University",
+        "Daily life"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "dürfen: Man ___ hier nicht rauchen.",
+          "key": "darf",
+          "choices": [
+            "dürft",
+            "darft",
+            "dürfen"
+          ],
+          "why": "Third-person singular of dürfen has no -t and changes ü → a: 'darf'."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: heute / wir / abgeben / müssen / den Text. Start with Wir.",
+          "key": "Wir müssen heute den Text abgeben",
+          "choices": [],
+          "why": "Modal 'müssen' takes Position 2; infinitive 'abgeben' closes the bracket."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Sie will nach Deutschland zu reisen.",
+          "key": "Sie will nach Deutschland reisen",
+          "choices": [],
+          "why": "Modal verbs never take 'zu' before the infinitive."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "wollen: Ich ___ an der Universität studieren.",
+          "key": "will",
+          "choices": [],
+          "why": "First-person singular of wollen is 'will'."
+        }
+      ]
+    },
+    {
+      "id": "separable",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Stressed prefixes (ab-, an-, auf-, aus-, ein-, mit-, vor-, zu-) carry key meaning and detach to the end of a simple main clause, creating a sentence bracket.",
+      "positiveExamples": [
+        "Der Unterricht fängt um acht Uhr an. — The class starts at eight o'clock.",
+        "Ich bereite das Referat sorgfältig vor. — I prepare the presentation carefully."
+      ],
+      "negativeExamples": [
+        "✗ Der Zug abfährt um zehn. → ✓ Der Zug fährt um zehn ab."
+      ],
+      "commonMistakes": "Keeping the prefix attached in a main clause, or separating inseparable prefixes (be-, ver-, er-, ent-, ge-, miss-, zer-).",
+      "context": "Extremely common in spoken German and academic verbs (vorstellen, teilnehmen, feststellen, auswerten).",
+      "exceptions": "In subordinate clauses ('weil der Zug abfährt') and after modals ('der Zug muss abfahren'), the prefix stays attached!",
+      "comparison": "Compare with Infinitives with 'zu' (anzufangen) and Perfekt participles (angefangen).",
+      "relatedVocabTopics": [
+        "Daily life",
+        "Transport"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "teilnehmen: Viele Studierende nehmen am Seminar ___.",
+          "key": "teil",
+          "choices": [],
+          "why": "Separable prefix 'teil-' goes to the end of the main clause."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich einkaufe am Samstag im Supermarkt.",
+          "key": "Ich kaufe am Samstag im Supermarkt ein",
+          "choices": [],
+          "why": "Detach 'ein-' to the end: 'Ich kaufe ... ein'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which verb is INSEPARABLE (prefix does NOT detach)?",
+          "key": "verstehen",
+          "choices": [
+            "aufstehen",
+            "mitbringen",
+            "anfangen"
+          ],
+          "why": "Prefixes be-, er-, ver-, ent-, emp-, ge-, miss-, zer- never separate."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Remove 'muss' and use present tense: Er muss früh aufstehen.",
+          "key": "Er steht früh auf",
+          "choices": [],
+          "why": "Without the modal, 'aufstehen' splits: 'Er steht früh auf'."
+        }
+      ]
+    },
+    {
+      "id": "possessive",
+      "isNew": false,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Possessive determiners combine two pieces of information: the STEM shows the owner (mein/dein/sein/ihr/unser/euer/ihr/Ihr) and the ENDING matches the noun's gender, number, and case.",
+      "positiveExamples": [
+        "Sein Bruder besucht seine Schwester. — His brother visits his sister.",
+        "Wir vergessen unseren Ausweis nicht. — We do not forget our ID."
+      ],
+      "negativeExamples": [
+        "✗ Sie besucht sein Vater. → ✓ Sie besucht ihren Vater."
+      ],
+      "commonMistakes": "Matching the stem to the possessed noun instead of the owner, or forgetting -en in masculine accusative ('meinen').",
+      "context": "Used constantly in family, university, and personal writing.",
+      "exceptions": "When 'euer' takes an ending, it drops the inner -e-: 'eure Tasche', 'euren Lehrer' (not 'euere').",
+      "comparison": "Compare with 'ein' and 'kein', which take the exact same case endings as possessives.",
+      "relatedVocabTopics": [
+        "People",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Owner = Anna (she), noun = der Bruder (accusative): Anna ruft ___ Bruder an.",
+          "key": "ihren",
+          "choices": [],
+          "why": "Owner 'Anna' gives stem 'ihr-'; masculine accusative adds '-en' → 'ihren'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Owner = ihr (you all), noun = die Wohnung (nominative): ___ Wohnung ist hell.",
+          "key": "Eure",
+          "choices": [
+            "Euere",
+            "Euer",
+            "Euren"
+          ],
+          "why": "'euer' drops its inner 'e' when adding '-e': 'Eure'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Er sucht sein Tasche (die).",
+          "key": "Er sucht seine Tasche",
+          "choices": [],
+          "why": "Feminine accusative requires '-e': 'seine Tasche'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Ich helfe ___ Freund (mein, dative masculine).",
+          "key": "meinem",
+          "choices": [],
+          "why": "Dative masculine takes '-em': 'meinem Freund'."
+        }
+      ]
+    },
+    {
+      "id": "questions",
+      "isNew": false,
+      "category": "Sentence Structure",
+      "whyItWorks": "German forms yes/no questions by placing the finite verb in Position 1, and open questions by placing a W-word in Position 1 followed immediately by the finite verb.",
+      "positiveExamples": [
+        "Studierst du in Hamburg? — Do you study in Hamburg?",
+        "Seit wann wohnst du hier? — Since when have you lived here?"
+      ],
+      "negativeExamples": [
+        "✗ Wo du wohnst? → ✓ Wo wohnst du?"
+      ],
+      "commonMistakes": "Keeping English subject-before-verb order after a question word ('Warum du kommst?').",
+      "context": "Used in interviews, everyday dialogue, and oral exams.",
+      "exceptions": "Multi-word question phrases (Wie lange, Wie viel, Welches Buch) count as a single Position 1 unit before the verb.",
+      "comparison": "Compare with Embedded/Indirect Questions (B1), where the verb moves to the end ('Ich weiß nicht, wo du wohnst').",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Travel"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: du / hast / heute / Zeit?",
+          "key": "Hast du heute Zeit",
+          "choices": [],
+          "why": "Yes/no question puts the finite verb 'Hast' in Position 1."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: beginnt / wann / die Vorlesung?",
+          "key": "Wann beginnt die Vorlesung",
+          "choices": [],
+          "why": "W-word in Position 1, finite verb 'beginnt' in Position 2."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Warum er kommt heute spät?",
+          "key": "Warum kommt er heute spät",
+          "choices": [],
+          "why": "Finite verb 'kommt' must follow 'Warum' directly."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Turn into a yes/no question: Ihr lernt Deutsch.",
+          "key": "Lernt ihr Deutsch",
+          "choices": [],
+          "why": "Move the finite verb 'Lernt' to Position 1."
+        }
+      ]
+    },
+    {
+      "id": "imperative",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Imperative forms depend on who you address: 'du' (informal singular), 'ihr' (informal plural), or 'Sie' (formal singular/plural).",
+      "positiveExamples": [
+        "Lies den Text noch einmal! — Read the text once more!",
+        "Sprechen Sie bitte etwas langsamer! — Please speak a bit more slowly!"
+      ],
+      "negativeExamples": [
+        "✗ Nehmst du das Buch! → ✓ Nimm das Buch!"
+      ],
+      "commonMistakes": "Keeping the -st ending in the 'du' imperative or forgetting the e → i vowel change (lies!, nimm!, sprich!).",
+      "context": "Used in instructions, recipes, classroom tasks, and polite formal requests (with 'bitte').",
+      "exceptions": "Verbs with a → ä change do NOT keep the umlaut in the imperative: 'Fahr vorsichtig!' (not 'Fähr!'). 'sein' is irregular: 'Sei!', 'Seid!', 'Seien Sie!'",
+      "comparison": "Compare with Polite Requests using Konjunktiv II ('Könnten Sie ...?'), which sound softer in formal settings.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "du-imperative of 'lesen': ___ den Artikel genau!",
+          "key": "Lies",
+          "choices": [
+            "Liest",
+            "Lese",
+            "Lesen"
+          ],
+          "why": "e → ie stem-changing verbs keep the vowel change without -st: 'Lies!'."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "du-imperative of 'fahren': ___ bitte vorsichtig!",
+          "key": "Fahr",
+          "choices": [
+            "Fähr",
+            "Fährst",
+            "Fahrt"
+          ],
+          "why": "a → ä verbs drop the umlaut in the du-imperative: 'Fahr!'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Polite formal imperative of 'sein': ___ Sie bitte pünktlich!",
+          "key": "Seien",
+          "choices": [
+            "Sind",
+            "Seid",
+            "Sei"
+          ],
+          "why": "Formal imperative of 'sein' is irregular: 'Seien Sie!'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite as an ihr-command: Ihr hört genau zu.",
+          "key": "Hört genau zu",
+          "choices": [],
+          "why": "Drop 'ihr' and keep the verb form + separable prefix at the end."
+        }
+      ]
+    },
+    {
+      "id": "dative",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "The dative marks the indirect recipient/beneficiary and follows fixed dative verbs (helfen, danken, gehören, gefallen, folgen, antworten) and prepositions (aus, bei, mit, nach, seit, von, zu).",
+      "positiveExamples": [
+        "Der Kurs gefällt mir sehr gut. — I like the course very much.",
+        "Nach der Vorlesung fahre ich mit dem Bus. — After the lecture I take the bus."
+      ],
+      "negativeExamples": [
+        "✗ Ich helfe den Mann. → ✓ Ich helfe dem Mann.",
+        "✗ Mit die Freunde. → ✓ Mit den Freunden."
+      ],
+      "commonMistakes": "Using accusative after 'helfen' or 'mit', and forgetting the extra -n on dative plural nouns ('mit den Kindern').",
+      "context": "Core grammar for describing transport, time, opinions ('gefällt mir'), and personal interactions.",
+      "exceptions": "Dative plural adds -n to the noun unless the plural already ends in -n or -s (mit den Autos, mit den Frauen, mit den Büchern).",
+      "comparison": "Compare with Accusative Direct Objects and Two-Way Prepositions.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Transport"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Ich danke ___ Lehrerin (die) für die Hilfe.",
+          "key": "der",
+          "choices": [
+            "die",
+            "dem",
+            "den"
+          ],
+          "why": "'danken' requires dative; feminine dative definite article is 'der'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Wir lernen seit ___ Monat (ein, der) Deutsch.",
+          "key": "einem",
+          "choices": [
+            "einen",
+            "ein",
+            "einer"
+          ],
+          "why": "'seit' always governs dative; masculine dative indefinite is 'einem'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Sie fährt mit die Kinder nach Hause.",
+          "key": "Sie fährt mit den Kindern nach Hause",
+          "choices": [],
+          "why": "Dative plural takes article 'den' AND adds '-n' to 'Kinder' → 'den Kindern'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Das Wörterbuch gehört ___ (ich, dative pronoun).",
+          "key": "mir",
+          "choices": [],
+          "why": "'gehören' takes dative; the dative pronoun of 'ich' is 'mir'."
+        }
+      ]
+    },
+    {
+      "id": "cases",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "Verbs of transfer (geben, zeigen, erklären, schicken, empfehlen, leihen) take two objects: usually a person (Dative) and a thing (Accusative).",
+      "positiveExamples": [
+        "Der Dozent erklärt den Studierenden die Grafik. — The lecturer explains the chart to the students.",
+        "Ich leihe meinem Freund das Buch. — I lend my friend the book."
+      ],
+      "negativeExamples": [
+        "✗ Ich gebe den Mann den Brief. → ✓ Ich gebe dem Mann den Brief."
+      ],
+      "commonMistakes": "Putting both objects in accusative or swapping dative and accusative articles.",
+      "context": "Frequent in both daily communication and formal descriptions of research/explanations.",
+      "exceptions": "When both objects are full nouns, Dative normally precedes Accusative ('dem Kind das Buch').",
+      "comparison": "Compare with Pronouns in the Middle Field, where an accusative pronoun moves ahead of dative ('Ich gebe es ihm').",
+      "relatedVocabTopics": [
+        "People",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Sie schickt ___ Professor (der) ___ E-Mail (eine).",
+          "key": "dem Professor eine",
+          "choices": [
+            "den Professor eine",
+            "dem Professor einen",
+            "der Professor eine"
+          ],
+          "why": "Recipient 'Professor' is masculine dative (dem); 'E-Mail' is feminine accusative (eine)."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Kannst du ___ (ich) deinen Stift leihen?",
+          "key": "mir",
+          "choices": [],
+          "why": "Recipient of 'leihen' takes dative: 'mir'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Er empfiehlt seinen Freund den Kurs.",
+          "key": "Er empfiehlt seinem Freund den Kurs",
+          "choices": [],
+          "why": "Recipient 'seinem Freund' takes dative; direct object 'den Kurs' takes accusative."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: zeigt / die Studentin / dem Lehrer / das Ergebnis. Start with Die Studentin.",
+          "key": "Die Studentin zeigt dem Lehrer das Ergebnis",
+          "choices": [],
+          "why": "With two full nouns, Dative ('dem Lehrer') precedes Accusative ('das Ergebnis')."
+        }
+      ]
+    },
+    {
+      "id": "location",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "Nine two-way prepositions (an, auf, hinter, in, neben, über, unter, vor, zwischen) take DATIVE for static location (Wo?) and ACCUSATIVE for directional movement into a new position (Wohin?).",
+      "positiveExamples": [
+        "Ich stelle die Flasche auf den Tisch. Jetzt steht sie auf dem Tisch. — I put the bottle on the table. Now it stands on the table."
+      ],
+      "negativeExamples": [
+        "✗ Ich gehe in dem Kino. → ✓ Ich gehe in das Kino."
+      ],
+      "commonMistakes": "Assuming any motion verb takes accusative—walking around INSIDE a park is still static location ('Ich laufe im Park').",
+      "context": "Used for spatial descriptions, campus navigation, and chart/diagram descriptions in TestDaF.",
+      "exceptions": "Paired verbs make the distinction crystal clear: stellen/stehen, legen/liegen, setzen/sitzen, hängen (tr.)/hängen (intr.). Contractions: in+dem=im, in+das=ins, an+dem=am.",
+      "comparison": "Compare with Fixed-Case Prepositions (mit/zu always dative; durch/für always accusative).",
+      "relatedVocabTopics": [
+        "Home",
+        "City"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Wohin? Ich lege den Schlüssel neben ___ Lampe (die).",
+          "key": "die",
+          "choices": [
+            "der",
+            "dem",
+            "den"
+          ],
+          "why": "Directional placement (Wohin?) takes accusative: feminine 'die Lampe'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Wo? Der Schlüssel liegt neben ___ Lampe (die).",
+          "key": "der",
+          "choices": [
+            "die",
+            "dem",
+            "den"
+          ],
+          "why": "Static location (Wo?) takes dative: feminine 'der Lampe'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Wir sitzen in den Hörsaal.",
+          "key": "Wir sitzen im Hörsaal",
+          "choices": [],
+          "why": "'sitzen' indicates static location (Wo?), requiring dative: 'im' (in dem) Hörsaal."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Sie hängt die Jacke ___ Schrank (der, Wohin?).",
+          "key": "in den",
+          "choices": [
+            "im",
+            "in dem",
+            "in der"
+          ],
+          "why": "Direction into a masculine noun takes accusative: 'in den Schrank'."
+        }
+      ]
+    },
+    {
+      "id": "perfekt",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "German conversational past uses a finite auxiliary (haben or sein) in Position 2 and a past participle at the end of the clause. 'sein' is used for intransitive verbs of movement/change of state plus sein, bleiben, passieren.",
+      "positiveExamples": [
+        "Gestern habe ich drei Artikel gelesen. — Yesterday I read three articles.",
+        "Sie ist um acht Uhr in Köln angekommen. — She arrived in Cologne at eight."
+      ],
+      "negativeExamples": [
+        "✗ Ich habe nach Berlin gefahren. → ✓ Ich bin nach Berlin gefahren.",
+        "✗ Er hat gestudiert. → ✓ Er hat studiert."
+      ],
+      "commonMistakes": "Adding 'ge-' to inseparable verbs (verstanden, bezahlt) or '-ieren' verbs (studiert), or using 'haben' with 'gehen/kommen/fahren/bleiben'.",
+      "context": "Default past tense for speaking, messages, and informal writing; also appears in academic writing for recent results.",
+      "exceptions": "Separable verbs insert '-ge-' BETWEEN prefix and stem: 'eingekauft', 'aufgestanden', 'teilgenommen'.",
+      "comparison": "Compare with Präteritum (Simple Past), preferred in written narratives and for sein/haben/modals.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Travel"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Choose the right auxiliary: Wir ___ gestern lange geblieben.",
+          "key": "sind",
+          "choices": [
+            "haben",
+            "werden",
+            "waren"
+          ],
+          "why": "'bleiben' always forms the Perfekt with 'sein'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Past participle of 'mitbringen': Er hat sein Notebook ___.",
+          "key": "mitgebracht",
+          "choices": [],
+          "why": "Separable 'mit-' + irregular 'gebracht' → 'mitgebracht'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich habe den Text nicht geverstanden.",
+          "key": "Ich habe den Text nicht verstanden",
+          "choices": [],
+          "why": "Inseparable prefix 'ver-' never takes 'ge-': 'verstanden'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Put into Perfekt: Ich kaufe Brot ein.",
+          "key": "Ich habe Brot eingekauft",
+          "choices": [],
+          "why": "Auxiliary 'habe' in Position 2 + separable participle 'eingekauft' at the end."
+        }
+      ]
+    },
+    {
+      "id": "preterite",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "While Perfekt dominates everyday speech, sein, haben, werden, and all modal verbs are almost always used in the Präteritum (simple past) even in spoken German.",
+      "positiveExamples": [
+        "Gestern hatte ich keine Zeit, weil ich krank war. — Yesterday I had no time because I was sick.",
+        "Wir mussten früh abreisen. — We had to depart early."
+      ],
+      "negativeExamples": [
+        "✗ Ich war müde und konntest nicht schlafen. → ✓ Ich war müde und konnte nicht schlafen."
+      ],
+      "commonMistakes": "Putting an umlaut on modal Präteritum forms ('könnte' is Konjunktiv II, NOT simple past 'konnte'!).",
+      "context": "Used everywhere for sein/haben/modals, and for all verbs in news articles, biographies, and reports.",
+      "exceptions": "In the Präteritum, 1st and 3rd person singular have identical endings (ich war / er war; ich hatte / er hatte; ich musste / er musste).",
+      "comparison": "Compare with Konjunktiv II (könnte/hätte/wäre) where the umlaut changes past fact into hypothetical meaning!",
+      "relatedVocabTopics": [
+        "History",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "Simple past of dürfen: Früher ___ man hier parken.",
+          "key": "durfte",
+          "choices": [
+            "dürfte",
+            "darfte",
+            "durften"
+          ],
+          "why": "Simple past drops the umlaut: 'durfte' ('dürfte' would be hypothetical)."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "Simple past of müssen: Wir ___ den Bericht korrigieren.",
+          "key": "mussten",
+          "choices": [
+            "müssten",
+            "mussen",
+            "musstet"
+          ],
+          "why": "Präteritum of müssen has no umlaut: 'mussten'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the tense (factual past): Gestern könnte ich nicht kommen.",
+          "key": "Gestern konnte ich nicht kommen",
+          "choices": [],
+          "why": "For factual past use 'konnte' without umlaut."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Simple past of wollen: Sie (she) ___ Medizin studieren.",
+          "key": "wollte",
+          "choices": [],
+          "why": "Third-person singular Präteritum of wollen is 'wollte'."
+        }
+      ]
+    },
+    {
+      "id": "reflexive",
+      "isNew": false,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Reflexive verbs direct the action back to the subject. Only 'ich' (mich/mir) and 'du' (dich/dir) distinguish accusative vs dative reflexive pronouns; all other persons use uns, euch, or sich.",
+      "positiveExamples": [
+        "Ich interessiere mich für Umwelttechnik. — I am interested in environmental engineering.",
+        "Ich merke mir die neue Vokabel. — I memorize the new word."
+      ],
+      "negativeExamples": [
+        "✗ Ich freue sich auf den Urlaub. → ✓ Ich freue mich auf den Urlaub."
+      ],
+      "commonMistakes": "Using 'sich' with 'ich' or 'du', or forgetting to switch to dative 'mir/dir' when a second direct object is present ('Ich wasche mir die Hände').",
+      "context": "Very common in daily routines and academic verbs (sich beschäftigen mit, sich beziehen auf, sich eignen für).",
+      "exceptions": "When a reflexive verb already has an accusative noun object, the reflexive pronoun shifts to dative: 'Ich kaufe mir ein Buch' / 'Du merkst dir die Regel'.",
+      "comparison": "Compare with Verbs with Fixed Prepositions (sich freuen auf, sich erinnern an).",
+      "relatedVocabTopics": [
+        "Daily life",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Ich putze ___ morgens die Zähne.",
+          "key": "mir",
+          "choices": [
+            "mich",
+            "sich",
+            "mein"
+          ],
+          "why": "'die Zähne' is already the accusative object, so the reflexive pronoun is dative 'mir'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Du bereitest ___ gut auf die Prüfung vor.",
+          "key": "dich",
+          "choices": [],
+          "why": "'sich vorbereiten auf' takes an accusative reflexive pronoun: 'dich'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Wir interessieren sich für Geschichte.",
+          "key": "Wir interessieren uns für Geschichte",
+          "choices": [],
+          "why": "With 'wir', the reflexive pronoun is 'uns', not 'sich'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Die Studie bezieht ___ auf aktuelle Daten.' Choose the pronoun.",
+          "key": "sich",
+          "choices": [
+            "uns",
+            "mich",
+            "ihr"
+          ],
+          "why": "Third-person singular subject 'Die Studie' takes 'sich'."
+        }
+      ]
+    },
+    {
+      "id": "comparison",
+      "isNew": false,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Comparative adds -er (often with umlaut on short one-syllable adjectives: alt → älter) and pairs with 'als'; equality uses 'so ... wie'; superlative uses 'am ...-sten' or 'der/die/das ...-ste'.",
+      "positiveExamples": [
+        "Die zweite Grafik ist deutlicher als die erste. — The second chart is clearer than the first.",
+        "Dieser Kurs ist am interessantesten. — This course is the most interesting."
+      ],
+      "negativeExamples": [
+        "✗ Berlin ist größer wie Bonn. → ✓ Berlin ist größer als Bonn."
+      ],
+      "commonMistakes": "Using 'wie' instead of 'als' after a comparative, or forming 'mehr groß' instead of 'größer'.",
+      "context": "Essential for TestDaF graphic descriptions (higher than, lower than, the highest value).",
+      "exceptions": "Irregular stems: gut → besser → am besten; viel → mehr → am meisten; gern → lieber → am liebsten; hoch → höher → am höchsten; nah → näher → am nächsten.",
+      "comparison": "Compare with Je ... desto proportional comparisons (B2).",
+      "relatedVocabTopics": [
+        "Data",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Superlative of 'viel': Im Sommer reisen die Menschen am ___.",
+          "key": "meisten",
+          "choices": [],
+          "why": "Irregular superlative of 'viel' is 'am meisten'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Der Anteil ist heute doppelt so hoch ___ im Jahr 2010.",
+          "key": "wie",
+          "choices": [
+            "als",
+            "denn",
+            "ob"
+          ],
+          "why": "Equality ('so ... wie') always uses 'wie'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Mein Kaffee ist wärmer wie dein Tee.",
+          "key": "Mein Kaffee ist wärmer als dein Tee",
+          "choices": [],
+          "why": "Unequal comparison requires 'als', not 'wie'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Use the comparative of 'groß': Der Verbrauch (2025) > Der Verbrauch (2020).",
+          "key": "Der Verbrauch ist größer als 2020",
+          "choices": [],
+          "why": "'groß' takes an umlaut in comparative: 'größer als'."
+        }
+      ]
+    },
+    {
+      "id": "subordinate",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "Subordinating conjunctions (weil, dass, obwohl, wenn, bevor, nachdem, während) push the conjugated verb to the very end of the subordinate clause and are always set off by a comma.",
+      "positiveExamples": [
+        "Wir verschieben das Treffen, weil zwei Mitglieder fehlen. — We postpone the meeting because two members are absent.",
+        "Dass die Zahlen steigen, zeigt die Tabelle deutlich. — The table clearly shows that the numbers are rising."
+      ],
+      "negativeExamples": [
+        "✗ Ich bleibe zu Hause, weil ich bin müde. → ✓ Ich bleibe zu Hause, weil ich müde bin."
+      ],
+      "commonMistakes": "Using main-clause V2 order after 'weil' in written German, or forgetting verb-comma-verb inversion when the subordinate clause comes first.",
+      "context": "Foundational for all B1–B2 academic writing and complex sentence building.",
+      "exceptions": "When a subordinate clause stands in Position 1 before the main clause, the main clause starts immediately with its finite verb: 'Weil es regnet, bleiben wir drin.'",
+      "comparison": "Compare with 'denn' (Position 0, keeps V2 order: 'Ich bleibe, denn ich bin müde') and 'deshalb' (Position 1 adverb).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: wir / bleiben / weil / es / regnet / zu Hause. Start with Weil.",
+          "key": "Weil es regnet, bleiben wir zu Hause",
+          "choices": [],
+          "why": "Subordinate clause in Position 1 ends with 'regnet', followed by comma + finite verb 'bleiben'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Sie sagt, dass sie hat keine Zeit.",
+          "key": "Sie sagt, dass sie keine Zeit hat",
+          "choices": [],
+          "why": "'dass' sends the finite verb 'hat' to the end of the clause."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Ich lerne weiter, ___ die Prüfung bald stattfindet.",
+          "key": "weil",
+          "choices": [
+            "denn",
+            "deshalb",
+            "trotzdem"
+          ],
+          "why": "Verb 'stattfindet' is at the end, requiring a subordinating conjunction like 'weil'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Combine with 'dass': Er weiß es. Der Kurs beginnt morgen.",
+          "key": "Er weiß, dass der Kurs morgen beginnt",
+          "choices": [],
+          "why": "Embed the second clause after a comma and move 'beginnt' to the end."
+        }
+      ]
+    },
+    {
+      "id": "endings",
+      "isNew": false,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Adjective endings show case and gender when the article does not already show it clearly. After definite articles (der/die/das), the article carries the strong signal, so the adjective mostly takes -en (and -e in the 5 nominative/accusative 'boot' slots).",
+      "positiveExamples": [
+        "Der neue Student fragt den erfahrenen Dozenten. — The new student asks the experienced lecturer.",
+        "Ein kleiner Fehler hat große Folgen. — A small error has big consequences."
+      ],
+      "negativeExamples": [
+        "✗ Ich lese ein interessantes Buch, das ein gut Thema hat. → ✓ ... ein gutes Thema hat."
+      ],
+      "commonMistakes": "Using -e instead of -en in plural after 'die' ('die alten Bücher', NOT 'die alte Bücher') or forgetting -es after 'ein' for neuter nouns.",
+      "context": "Crucial for polished B1/B2 writing and accurate academic noun phrases.",
+      "exceptions": "Remember the 3 declension patterns: Weak (after der/dieser: only -e or -en), Mixed (after ein/kein/mein: adds -er/-e/-es in nom/acc singular), Strong (no article: adjective carries der-article endings, e.g. 'kalter Kaffee', 'frisches Brot').",
+      "comparison": "Compare with Participles as Adjectives (B1) and Extended Attributes (B2), which use the exact same endings!",
+      "relatedVocabTopics": [
+        "Academic",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Das ist ein ___ Beispiel (gut, das Beispiel).",
+          "key": "gutes",
+          "choices": [],
+          "why": "After 'ein', neuter nominative needs strong ending '-es': 'ein gutes Beispiel'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Die ___ Ergebnisse (neu, plural) sind überraschend.",
+          "key": "neuen",
+          "choices": [],
+          "why": "After definite plural 'die', all adjectives take '-en': 'Die neuen Ergebnisse'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Wir trinken gern ___ Kaffee (frisch, no article, masculine accusative).",
+          "key": "frischen",
+          "choices": [
+            "frischer",
+            "frische",
+            "frisches"
+          ],
+          "why": "Without an article, masculine accusative takes '-en' (like 'den'): 'frischen Kaffee'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Sie wohnt in einer klein Wohnung.",
+          "key": "Sie wohnt in einer kleinen Wohnung",
+          "choices": [],
+          "why": "Dative singular after 'einer' always takes '-en': 'einer kleinen Wohnung'."
+        }
+      ]
+    },
+    {
+      "id": "middle",
+      "isNew": false,
+      "category": "Sentence Structure",
+      "whyItWorks": "Inside the German middle field (Mittelfeld), pronouns come before full nouns; when both objects are pronouns, Accusative precedes Dative ('es ihm'); when both are full nouns, Dative precedes Accusative ('dem Freund das Buch').",
+      "positiveExamples": [
+        "Ich erkläre dem Studenten die Aufgabe. → Ich erkläre sie ihm. — I explain the task to the student. → I explain it to him."
+      ],
+      "negativeExamples": [
+        "✗ Ich gebe ihm es. → ✓ Ich gebe es ihm."
+      ],
+      "commonMistakes": "Keeping dative-before-accusative order when replacing nouns with pronouns.",
+      "context": "Makes spoken and written German sound natural and idiomatic.",
+      "exceptions": "If only one object is a pronoun, the pronoun ALWAYS comes first: 'Ich gebe es dem Kind' AND 'Ich gebe ihm das Buch'.",
+      "comparison": "Compare with Recipient and Object (Dative + Accusative nouns).",
+      "relatedVocabTopics": [
+        "Everyday",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: schickt / er / sie / mir. Start with Er.",
+          "key": "Er schickt sie mir",
+          "choices": [],
+          "why": "Two pronouns follow Accusative ('sie') before Dative ('mir')."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Replace both nouns with pronouns: Ich leihe meiner Schwester das Buch.",
+          "key": "Ich leihe es ihr",
+          "choices": [],
+          "why": "'das Buch' → 'es' (acc), 'meiner Schwester' → 'ihr' (dat); accusative pronoun comes first."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Kannst du mir es morgen geben?",
+          "key": "Kannst du es mir morgen geben",
+          "choices": [],
+          "why": "Accusative pronoun 'es' precedes dative pronoun 'mir'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which word order is natural when only 'es' is a pronoun?",
+          "key": "Sie zeigt es dem Dozenten.",
+          "choices": [
+            "Sie zeigt dem Dozenten es.",
+            "Es zeigt sie dem Dozenten.",
+            "Dem Dozenten zeigt sie es nicht."
+          ],
+          "why": "A pronoun ('es') precedes a full noun ('dem Dozenten')."
+        }
+      ]
+    },
+    {
+      "id": "relative",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "A relative clause works like an adjective sentence modifying a noun. Its pronoun gets GENDER & NUMBER from the noun it refers to, and CASE from its grammatical job inside the relative clause.",
+      "positiveExamples": [
+        "Die Studie, deren Ergebnisse wir diskutieren, stammt aus 2024. — The study whose results we are discussing is from 2024.",
+        "Das ist das Thema, über das wir sprechen. — That is the topic about which we are speaking."
+      ],
+      "negativeExamples": [
+        "✗ Das ist der Mann, der ich gestern gesehen habe. → ✓ Das ist der Mann, den ich gestern gesehen habe."
+      ],
+      "commonMistakes": "Copying the nominative case of the main noun into the relative clause instead of checking what the verb in the relative clause needs.",
+      "context": "High-value B1–B2 structure for precise academic definitions and complex TestDaF essays.",
+      "exceptions": "Relative pronouns look like der/die/das EXCEPT dative plural ('denen') and genitive ('dessen/deren'). Relative clauses are ALWAYS set off by commas and send the verb to the end.",
+      "comparison": "Compare with Subordinate Clauses (same verb-final order) and Genitive Case.",
+      "relatedVocabTopics": [
+        "Academic",
+        "People"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Das sind die Studierenden, ___ ich geholfen habe.",
+          "key": "denen",
+          "choices": [
+            "die",
+            "den",
+            "deren"
+          ],
+          "why": "Plural dative relative pronoun is 'denen' (not 'den')."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Der Artikel, ___ ich gerade lese, ist hilfreich.",
+          "key": "den",
+          "choices": [
+            "der",
+            "dem",
+            "dessen"
+          ],
+          "why": "'lesen' needs an accusative object; masculine accusative is 'den'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Die Methode, mit die wir arbeiten, ist effizient.",
+          "key": "Die Methode, mit der wir arbeiten, ist effizient",
+          "choices": [],
+          "why": "'mit' requires dative; feminine dative relative pronoun is 'der'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Combine with a relative clause: Das ist das Buch. Ich brauche es.",
+          "key": "Das ist das Buch, das ich brauche",
+          "choices": [],
+          "why": "Neuter accusative relative pronoun 'das' + verb 'brauche' at the end."
+        }
+      ]
+    },
+    {
+      "id": "conditional",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Konjunktiv II expresses unreal situations, wishes, polite requests, and advice. Use single-word forms for sein (wäre), haben (hätte), and modals (könnte, müsste, sollte, dürfte), and 'würde + Infinitiv' for most other verbs.",
+      "positiveExamples": [
+        "Wenn ich mehr Zeit hätte, würde ich noch eine Sprache lernen. — If I had more time, I would learn another language.",
+        "Könnten Sie diesen Punkt bitte näher erläutern? — Could you please elaborate on this point?"
+      ],
+      "negativeExamples": [
+        "✗ Wenn ich mehr Zeit würde haben, ... → ✓ Wenn ich mehr Zeit hätte, ..."
+      ],
+      "commonMistakes": "Using 'würde haben/sein' instead of concise 'hätte/wäre', or confusing 'konnte' (past) with 'könnte' (hypothetical).",
+      "context": "Crucial for TestDaF Speaking (polite requests, suggestions, weighing hypothetical policies) and Writing.",
+      "exceptions": "In formal/academic style, 'wenn' can be omitted by fronting the verb: 'Hätte ich mehr Zeit, würde ich ...'.",
+      "comparison": "Compare with Past Counterfactuals (B2: hätte/wäre + Partizip II) and Konjunktiv I (reported speech).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Daily life"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "Hypothetical advice (sollen): Man ___ mehr in Bildung investieren.",
+          "key": "sollte",
+          "choices": [
+            "soll",
+            "sollen",
+            "würde sollen"
+          ],
+          "why": "Use the direct Konjunktiv II modal 'sollte'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Wenn es wärmer sein würde, gingen wir raus.",
+          "key": "Wenn es wärmer wäre, würden wir rausgehen",
+          "choices": [],
+          "why": "Use 'wäre' instead of 'sein würde'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Make polite with 'könnten': Schicken Sie mir die Daten!",
+          "key": "Könnten Sie mir die Daten schicken?",
+          "choices": [],
+          "why": "Polite request uses 'Könnten Sie ... + Infinitiv?'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Wenn wir schneller arbeiten würden, ___ wir früher fertig. (sein)",
+          "key": "wären",
+          "choices": [],
+          "why": "First-person plural Konjunktiv II of sein is 'wären'."
+        }
+      ]
+    },
+    {
+      "id": "passive",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Process passive (Vorgangspassiv: werden + Partizip II) foregrounds the action or result rather than the person doing it. The active accusative object becomes the passive nominative subject.",
+      "positiveExamples": [
+        "In der Studie werden 500 Personen befragt. — In the study 500 people are surveyed.",
+        "Das Problem wurde schnell gelöst. — The problem was solved quickly."
+      ],
+      "negativeExamples": [
+        "✗ Das Buch ist von vielen gelesen werden. → ✓ Das Buch wird von vielen gelesen."
+      ],
+      "commonMistakes": "Confusing Process Passive ('Die Tür wird geöffnet' = is being opened) with State Passive ('Die Tür ist geöffnet' = is open).",
+      "context": "Signature structure of German academic texts, lab reports, and TestDaF reading/writing.",
+      "exceptions": "To mention the agent, use 'von + Dativ' for people/institutions ('von der Universität') and 'durch + Akkusativ' for causes/means ('durch ein Gesetz'). Dative objects NEVER become nominative subjects ('Mir wird geholfen').",
+      "comparison": "Compare with Passive with Modals & Tenses (B2) and active 'man' alternatives.",
+      "relatedVocabTopics": [
+        "Science",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite in present passive: Man prüft die Daten.",
+          "key": "Die Daten werden geprüft",
+          "choices": [],
+          "why": "Plural object 'die Daten' becomes subject + 'werden' + 'geprüft'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Die Studie wurde ___ einem Forschungsteam durchgeführt.",
+          "key": "von",
+          "choices": [
+            "durch",
+            "mit",
+            "bei"
+          ],
+          "why": "A human/institutional agent in passive takes 'von + Dativ'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich werde geholfen.",
+          "key": "Mir wird geholfen",
+          "choices": [],
+          "why": "'helfen' takes a dative object, which stays dative in the passive: 'Mir wird geholfen'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Simple past passive: Der Bericht ___ gestern veröffentlicht.",
+          "key": "wurde",
+          "choices": [],
+          "why": "Singular Präteritum passive uses 'wurde'."
+        }
+      ]
+    },
+    {
+      "id": "infinitive",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "Verbs and adjectives of intention, judgment, or effort (versuchen, planen, vergessen, beginnen, es ist wichtig) take an infinitive clause with 'zu' at the end, separated by a comma when expanded.",
+      "positiveExamples": [
+        "Es ist sinnvoll, regelmäßig zu wiederholen. — It is sensible to review regularly.",
+        "Sie hat beschlossen, früh anzufangen. — She decided to start early."
+      ],
+      "negativeExamples": [
+        "✗ Ich habe vor, zu mitkommen. → ✓ Ich habe vor, mitzukommen."
+      ],
+      "commonMistakes": "Placing 'zu' before a separable prefix instead of inside it ('zu aufstehen' → 'aufzustehen'), or using 'zu' after modal verbs.",
+      "context": "Very frequent in formal essays ('Es ist notwendig, Maßnahmen zu ergreifen').",
+      "exceptions": "No 'zu' is used after modals, 'lassen', 'bleiben', 'gehen', 'sehen', 'hören', or 'helfen' (short phrases).",
+      "comparison": "Compare with Purpose Clauses ('um ... zu' vs 'damit') and Modal Verbs.",
+      "relatedVocabTopics": [
+        "University",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Combine with zu (vorbereiten): Es ist wichtig, den Vortrag gut ___.",
+          "key": "vorzubereiten",
+          "choices": [],
+          "why": "Separable verb inserts '-zu-' between prefix 'vor' and stem 'bereiten'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Er versucht, das Problem zu lösen können.",
+          "key": "Er versucht, das Problem lösen zu können",
+          "choices": [],
+          "why": "With two verbs in an infinitive clause, 'zu' goes before the final verb ('lösen zu können')."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order after comma: zu / rechtzeitig / abgeben / die Arbeit.",
+          "key": "die Arbeit rechtzeitig abzugeben",
+          "choices": [],
+          "why": "Object + adverb precede the separable 'zu'-infinitive at the end."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which verb does NOT take 'zu'?",
+          "key": "Er lässt das Fahrrad reparieren.",
+          "choices": [
+            "Er versucht, das Fahrrad zu reparieren.",
+            "Er plant, das Fahrrad zu reparieren.",
+            "Er vergisst, das Fahrrad zu reparieren."
+          ],
+          "why": "'lassen' takes a bare infinitive without 'zu'."
+        }
+      ]
+    },
+    {
+      "id": "temporal",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "German distinguishes single past events ('als') from repeated past/present/future events or conditions ('wenn'), ongoing duration from a start point ('seit/seitdem'), and sequence ('bevor', 'nachdem', 'während').",
+      "positiveExamples": [
+        "Als ich in Berlin ankam, regnete es. — When I arrived in Berlin, it was raining.",
+        "Immer wenn ich Zeit habe, lese ich Zeitung. — Whenever I have time, I read the newspaper."
+      ],
+      "negativeExamples": [
+        "✗ Wenn ich fünf Jahre alt war, lernte ich schwimmen. → ✓ Als ich fünf Jahre alt war, lernte ich schwimmen."
+      ],
+      "commonMistakes": "Using English-like 'wenn' for a one-time past event (like birth, graduation, or a single trip).",
+      "context": "Important in narratives, biographies, and describing time-series charts in TestDaF.",
+      "exceptions": "'nachdem' requires a tense shift (e.g., Perfekt/Plusquamperfekt in the 'nachdem' clause before a Present/Präteritum main clause).",
+      "comparison": "Compare with Subordinate Clauses (all temporal conjunctions send the finite verb to the end).",
+      "relatedVocabTopics": [
+        "History",
+        "Daily life"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "___ das Projekt 2021 startete, gab es nur drei Teams.",
+          "key": "Als",
+          "choices": [
+            "Wenn",
+            "Wann",
+            "Ob"
+          ],
+          "why": "Single completed event in the past requires 'Als'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Jedes Jahr, ___ die Prüfungen beginnen, ist die Bibliothek voll.",
+          "key": "wenn",
+          "choices": [
+            "als",
+            "wann",
+            "seitdem"
+          ],
+          "why": "Repeated event requires 'wenn'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "___ ich in Deutschland wohne, spreche ich täglich Deutsch. (since)",
+          "key": "Seitdem",
+          "choices": [],
+          "why": "'Seitdem' introduces a subordinate clause marking a continuing start point."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Wenn ich letztes Jahr nach Wien fuhr, besuchte ich das Museum.",
+          "key": "Als ich letztes Jahr nach Wien fuhr, besuchte ich das Museum",
+          "choices": [],
+          "why": "Single past trip takes 'Als', not 'Wenn'."
+        }
+      ]
+    },
+    {
+      "id": "verbprep",
+      "isNew": false,
+      "category": "Cases & Articles",
+      "whyItWorks": "Many German verbs bind tightly to a specific preposition and case (warten auf + A, sich freuen über + A, teilnehmen an + D, bestehen aus + D). You must learn the whole trio: Verb + Preposition + Case.",
+      "positiveExamples": [
+        "Der Erfolg hängt von der Vorbereitung ab. — Success depends on preparation.",
+        "Worüber diskutiert das Seminar? — What is the seminar discussing?"
+      ],
+      "negativeExamples": [
+        "✗ Ich warte für den Bus. → ✓ Ich warte auf den Bus."
+      ],
+      "commonMistakes": "Translating English prepositions literally ('wait for' → 'warten auf', 'think of' → 'denken an', 'participate in' → 'teilnehmen an').",
+      "context": "Indispensable for TestDaF reading precision and natural B1/B2 academic expression.",
+      "exceptions": "For THINGS use wo(r)- + preposition ('Woran denkst du?'), for PEOPLE use preposition + wen/wem ('An wen denkst du?').",
+      "comparison": "Compare with Da- and Wo-Compounds (A2) and Two-Way Prepositions.",
+      "relatedVocabTopics": [
+        "Academic",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Das Ergebnis hängt ___ mehreren Faktoren ab.",
+          "key": "von",
+          "choices": [
+            "auf",
+            "über",
+            "für"
+          ],
+          "why": "'abhängen von + Dativ' = depend on."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Wir beschäftigen uns mit ___ Thema (das).",
+          "key": "dem",
+          "choices": [
+            "das",
+            "den",
+            "des"
+          ],
+          "why": "'sich beschäftigen mit' governs dative: 'mit dem Thema'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Question about a thing (sich interessieren für): ___ interessierst du dich?",
+          "key": "Wofür",
+          "choices": [],
+          "why": "Thing-question with 'für' combines into 'Wofür'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Sie freut sich auf das Geschenk, das sie gestern bekam.",
+          "key": "Sie freut sich über das Geschenk, das sie gestern bekam",
+          "choices": [],
+          "why": "'sich freuen auf' is for future anticipation; 'sich freuen über' is for something present/past."
+        }
+      ]
+    },
+    {
+      "id": "indirect",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "Indirect (embedded) questions report a question inside a main clause. W-questions keep their question word; yes/no questions use 'ob'. In both cases, the finite verb moves to the end.",
+      "positiveExamples": [
+        "Es ist unklar, ob die Maßnahme ausreicht. — It is unclear whether the measure suffices.",
+        "Die Studie untersucht, wie sich der Verbrauch entwickelt. — The study examines how consumption develops."
+      ],
+      "negativeExamples": [
+        "✗ Ich weiß nicht, ob kommt er morgen. → ✓ Ich weiß nicht, ob er morgen kommt."
+      ],
+      "commonMistakes": "Using 'wenn' instead of 'ob' for 'whether/if', or leaving the verb in Position 2.",
+      "context": "Very frequent in academic introductions ('Die Arbeit fragt, inwiefern ...') and polite spoken inquiries ('Können Sie mir sagen, wo ...?').",
+      "exceptions": "Remember: 'ob' = whether/if (uncertainty); 'wenn' = if/when (condition/time).",
+      "comparison": "Compare with Direct Questions (A1) and Subordinate Clauses (A2).",
+      "relatedVocabTopics": [
+        "University",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Man prüft, ___ die Hypothese zutrifft.",
+          "key": "ob",
+          "choices": [
+            "wenn",
+            "dass",
+            "als"
+          ],
+          "why": "Embedded yes/no question ('whether') requires 'ob'."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order after 'wie hoch': die Kosten / sind / tatsächlich.",
+          "key": "die Kosten tatsächlich sind",
+          "choices": [],
+          "why": "Embedded question sends finite verb 'sind' to the end."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich frage mich, wenn der Kurs stattfindet (meaning whether).",
+          "key": "Ich frage mich, ob der Kurs stattfindet",
+          "choices": [],
+          "why": "Use 'ob' (whether), not 'wenn', for an indirect yes/no question."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Embed after 'Ich möchte wissen, ...': Wann öffnet das Labor?",
+          "key": "Ich möchte wissen, wann das Labor öffnet",
+          "choices": [],
+          "why": "Keep 'wann', add comma, and move 'öffnet' to the end."
+        }
+      ]
+    },
+    {
+      "id": "purpose",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "Purpose clauses explain 'in order to / so that'. Use 'um ... zu + Infinitiv' when both clauses share the SAME subject; use 'damit' (verb-final) when the subjects are DIFFERENT (or optionally when the same).",
+      "positiveExamples": [
+        "Er erstellt eine Liste, um nichts zu vergessen. — He makes a list in order not to forget anything.",
+        "Die Stadt baut Radwege, damit mehr Menschen Rad fahren. — The city builds bike lanes so that more people cycle."
+      ],
+      "negativeExamples": [
+        "✗ Ich spreche laut, um du mich hörst. → ✓ Ich spreche laut, damit du mich hörst."
+      ],
+      "commonMistakes": "Using 'um ... zu' when the second clause introduces a different subject, or using 'für ... zu' (English transfer).",
+      "context": "Key structure for TestDaF Writing when proposing solutions and explaining policy goals.",
+      "exceptions": "Avoid redundant modals inside 'damit' clauses when 'wollen' is already implied by purpose—though 'können' is common ('damit alle teilnehmen können').",
+      "comparison": "Compare with Infinitives with 'zu' and Causal 'weil'.",
+      "relatedVocabTopics": [
+        "Academic",
+        "Society"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Sie lernt täglich, ___ die Prüfung zu bestehen.",
+          "key": "um",
+          "choices": [
+            "damit",
+            "für",
+            "weil"
+          ],
+          "why": "Same subject ('Sie') + 'zu bestehen' requires 'um ... zu'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Der Dozent wiederholt die Regel, ___ alle sie verstehen.",
+          "key": "damit",
+          "choices": [
+            "um",
+            "zu",
+            "weil"
+          ],
+          "why": "Different subjects ('Der Dozent' vs 'alle') require 'damit'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich fahre nach Deutschland, für Deutsch zu studieren.",
+          "key": "Ich fahre nach Deutschland, um Deutsch zu studieren",
+          "choices": [],
+          "why": "German uses 'um ... zu', never 'für ... zu', for purpose."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Combine with 'um ... zu': Er liest Fachartikel. Er will seinen Wortschatz erweitern.",
+          "key": "Er liest Fachartikel, um seinen Wortschatz zu erweitern",
+          "choices": [],
+          "why": "Drop repeated subject and 'will', insert 'um ... zu erweitern'."
+        }
+      ]
+    },
+    {
+      "id": "advpassive",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Complex passive combines tense or modality with the passive participle. Perfect passive uses 'sein + Partizip II + worden' (never 'geworden'); modal passive uses 'Modal + Partizip II + werden'.",
+      "positiveExamples": [
+        "Die Daten sind bereits ausgewertet worden. — The data have already been evaluated.",
+        "Die Grenzwerte müssen strikt eingehalten werden. — The limits must be strictly observed."
+      ],
+      "negativeExamples": [
+        "✗ Der Antrag ist genehmigt geworden. → ✓ Der Antrag ist genehmigt worden."
+      ],
+      "commonMistakes": "Writing 'geworden' instead of 'worden' in Perfekt passive, or swapping 'werden' and the participle.",
+      "context": "Core grammar of scientific reports, university lectures, and TestDaF academic reading.",
+      "exceptions": "Passive alternatives are also common in B2: 'sich lassen + Infinitiv' ('Das lässt sich erklären'), '-bar/-lich' adjectives ('messbar'), and 'sein + zu + Infinitiv' ('Die Aufgabe ist zu lösen').",
+      "comparison": "Compare with Process Passive (B1) and Subjective Modals (B2).",
+      "relatedVocabTopics": [
+        "Science",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Perfekt passive: Das Gesetz ist im Mai verabschiedet ___.",
+          "key": "worden",
+          "choices": [],
+          "why": "Perfect process passive always uses 'worden' (without 'ge-')."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: werden / muss / überprüft / die Methode. Start with Die Methode.",
+          "key": "Die Methode muss überprüft werden",
+          "choices": [],
+          "why": "Modal 'muss' in Pos 2, participle 'überprüft' + 'werden' at the end."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Der Fehler ist schnell behoben geworden.",
+          "key": "Der Fehler ist schnell behoben worden",
+          "choices": [],
+          "why": "Use 'worden', not 'geworden', for passive Perfekt."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite using 'sich lassen': Man kann das Problem lösen.",
+          "key": "Das Problem lässt sich lösen",
+          "choices": [],
+          "why": "'sich lassen + Infinitiv' expresses passive possibility ('can be solved')."
+        }
+      ]
+    },
+    {
+      "id": "pastconditional",
+      "isNew": false,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Past counterfactuals (Konjunktiv II der Vergangenheit) express what WOULD HAVE happened differently. Combine 'hätte' or 'wäre' with the past participle (matching Perfekt auxiliary choice).",
+      "positiveExamples": [
+        "Hätte das Team früher getestet, wäre der Fehler aufgefallen. — Had the team tested earlier, the error would have been noticed."
+      ],
+      "negativeExamples": [
+        "✗ Wenn ich gewusst würde haben, ... → ✓ Wenn ich es gewusst hätte, ..."
+      ],
+      "commonMistakes": "Using 'würde' with a past participle or picking 'hätte' for a 'sein'-verb like 'kommen/gehen/bleiben'.",
+      "context": "Used in academic critiques, historical evaluation, and TestDaF discussion of causes and missed opportunities.",
+      "exceptions": "With modal verbs in past counterfactuals, use 'hätte + Infinitiv + Modal-Infinitiv' (double infinitive): 'Wir hätten früher anfangen müssen.'",
+      "comparison": "Compare with Present Konjunktiv II (B1) and Perfekt auxiliaries (A2).",
+      "relatedVocabTopics": [
+        "History",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Fill in the blank",
+          "prompt": "Wenn der Zug pünktlich abgefahren ___, wären wir rechtzeitig angekommen.",
+          "key": "wäre",
+          "choices": [],
+          "why": "'abfahren' takes 'sein' in Perfekt, so past counterfactual uses 'wäre'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Wenn ich Zeit gehabt hätte, ich hätte dich besucht.",
+          "key": "Wenn ich Zeit gehabt hätte, hätte ich dich besucht",
+          "choices": [],
+          "why": "When the 'wenn'-clause comes first, the main clause starts immediately with 'hätte'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Put into past counterfactual: Wir wissen es nicht, deshalb helfen wir nicht.",
+          "key": "Wenn wir es gewusst hätten, hätten wir geholfen",
+          "choices": [],
+          "why": "Combine 'hätten + gewusst' and 'hätten + geholfen'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Er ___ den Text noch einmal lesen sollen (past counterfactual modal).",
+          "key": "hätte",
+          "choices": [
+            "wäre",
+            "würde",
+            "hatte"
+          ],
+          "why": "Double-infinitive modal counterfactuals always use 'hätte'."
+        }
+      ]
+    },
+    {
+      "id": "nominal",
+      "isNew": false,
+      "category": "Academic Style",
+      "whyItWorks": "Academic German compresses entire clauses into dense noun phrases (Nominalstil). Verbs become capitalized neuter nouns ('das Auswerten') or '-ung' nouns ('die Auswertung'), often taking a genitive attribute.",
+      "positiveExamples": [
+        "Durch die Einführung neuer Regeln sinkt der Verbrauch. — Through the introduction of new rules, consumption drops.",
+        "Beim Lesen wissenschaftlicher Texte helfen Notizen. — Notes help when reading academic texts."
+      ],
+      "negativeExamples": [
+        "✗ Nach dem lesen diskutieren wir. → ✓ Nach dem Lesen diskutieren wir."
+      ],
+      "commonMistakes": "Forgetting to capitalize nominalized infinitives or losing the correct preposition ('durch/wegen/aufgrund/trotz/während').",
+      "context": "Hallmark of TestDaF Reading and high-scoring TestDaF Writing.",
+      "exceptions": "Verbal style ('Weil die Kosten steigen, ...') and Nominal style ('Wegen der steigenden Kosten ...') carry the same meaning—mastering both boosts comprehension and writing flexibility.",
+      "comparison": "Compare with Genitive Case (B1) and Formal Academic Constructions (B2).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Science"
+      ],
+      "extraExercises": [
+        {
+          "type": "Grammar transformation",
+          "prompt": "Nominalize with 'beim': Wenn man Daten vergleicht, erkennt man Muster.",
+          "key": "Beim Vergleichen von Daten erkennt man Muster",
+          "choices": [],
+          "why": "'beim' (bei dem) + capitalized infinitive 'Vergleichen'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Nominalize 'entwickeln' with -ung: die ___ neuer Technologien",
+          "key": "Entwicklung",
+          "choices": [],
+          "why": "'-ung' nominalization of entwickeln is feminine 'die Entwicklung'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct capitalization: Das schnelle finden von Quellen spart Zeit.",
+          "key": "Das schnelle Finden von Quellen spart Zeit",
+          "choices": [],
+          "why": "Nominalized infinitives ('das Finden') are always capitalized."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Durch das ___ der Proben wurden Fehler vermieden.' (prüfen)",
+          "key": "Prüfen",
+          "choices": [
+            "prüfen",
+            "geprüft",
+            "Prüfung"
+          ],
+          "why": "Neuter article 'das' requires the capitalized infinitive 'Prüfen'."
+        }
+      ]
+    },
+    {
+      "id": "formal",
+      "isNew": false,
+      "category": "Academic Style",
+      "whyItWorks": "Funktionsverbgefüge (light-verb constructions like 'eine Frage stellen', 'Kritik üben', 'in Betracht ziehen', 'zur Verfügung stehen') pair a fixed noun with a bleached verb to achieve formal precision.",
+      "positiveExamples": [
+        "Die Autorin zieht zwei Ursachen in Betracht. — The author takes two causes into consideration.",
+        "Für das Projekt stehen ausreichend Mittel zur Verfügung. — Sufficient funds are available for the project."
+      ],
+      "negativeExamples": [
+        "✗ Ich mache eine Entscheidung. → ✓ Ich treffe eine Entscheidung."
+      ],
+      "commonMistakes": "Using generic 'machen' instead of the idiomatic verb ('treffen', 'stellen', 'üben', 'leisten', 'ziehen').",
+      "context": "Essential for B2/TestDaF writing and recognizing nuanced stances in academic texts.",
+      "exceptions": "Some constructions carry passive meaning without 'werden': 'zur Diskussion stehen' (= diskutiert werden), 'Anerkennung finden' (= anerkannt werden).",
+      "comparison": "Compare with Nominalization (B2) and Process Passive (B1).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Business"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Die Forschungsgruppe ___ einen wichtigen Beitrag zum Klimaschutz.",
+          "key": "leistet",
+          "choices": [
+            "macht",
+            "stellt",
+            "zieht"
+          ],
+          "why": "Fixed academic collocation: 'einen Beitrag leisten'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Viele Experten ___ Kritik an diesem Vorschlag.",
+          "key": "üben",
+          "choices": [
+            "machen",
+            "nehmen",
+            "stellen"
+          ],
+          "why": "Fixed collocation: 'Kritik üben an + Dativ'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Die Bibliothek stellt den Studierenden Datenbanken zur ___.",
+          "key": "Verfügung",
+          "choices": [],
+          "why": "Fixed phrase: 'etwas zur Verfügung stellen' (make available)."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the verb: Wir müssen diese Lösung in Betracht machen.",
+          "key": "Wir müssen diese Lösung in Betracht ziehen",
+          "choices": [],
+          "why": "Fixed collocation: 'etwas in Betracht ziehen' (take into consideration)."
+        }
+      ]
+    },
+    {
+      "id": "connectors",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "German logical connectors come in three syntactic families: Subordinating conjunctions (obwohl, weil → verb-final), Linking adverbs (trotzdem, daher, folglich, dennoch → Position 1 + finite verb), and Prepositions (trotz, wegen, aufgrund → noun phrase).",
+      "positiveExamples": [
+        "Obwohl das Budget klein war, gelang das Experiment. / Das Budget war klein; trotzdem gelang das Experiment. / Trotz des kleinen Budgets gelang das Experiment."
+      ],
+      "negativeExamples": [
+        "✗ Es regnet, trotzdem wir gehen spazieren. → ✓ Es regnet, trotzdem gehen wir spazieren."
+      ],
+      "commonMistakes": "Treating adverbs like 'trotzdem', 'deshalb', or 'jedoch' as Position 0 conjunctions instead of inverting subject and verb.",
+      "context": "Crucial for coherent TestDaF argumentation (cause, consequence, concession).",
+      "exceptions": "'dennoch' is a formal synonym of 'trotzdem'; 'folglich' and 'infolgedessen' are formal synonyms of 'daher/deshalb'.",
+      "comparison": "Compare with Subordinate Clauses (A2) and Qualifying an Argument (B2).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Society"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: wir / daher / anpassen / müssen / den Plan. Start with Daher.",
+          "key": "Daher müssen wir den Plan anpassen",
+          "choices": [],
+          "why": "'Daher' fills Position 1, so 'müssen' comes immediately in Position 2."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "___ der hohen Kosten wurde das Labor modernisiert.",
+          "key": "Trotz",
+          "choices": [
+            "Obwohl",
+            "Trotzdem",
+            "Daher"
+          ],
+          "why": "Followed by a noun phrase ('der hohen Kosten'), so a preposition ('Trotz') is required."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Die Daten fehlen, dennoch wir ziehen einen Schluss.",
+          "key": "Die Daten fehlen, dennoch ziehen wir einen Schluss",
+          "choices": [],
+          "why": "'dennoch' in Position 1 requires verb 'ziehen' in Position 2."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite using 'trotzdem': Obwohl es kalt ist, fahren sie Rad.",
+          "key": "Es ist kalt. Trotzdem fahren sie Rad",
+          "choices": [],
+          "why": "Split into two main clauses with 'Trotzdem' in Position 1 + verb 'fahren'."
+        }
+      ]
+    },
+    {
+      "id": "proportional",
+      "isNew": false,
+      "category": "Clauses & Connectors",
+      "whyItWorks": "'Je ... desto/umso' links two proportional changes: the 'je'-clause is subordinate (comparative right after 'je', finite verb at the end), and the 'desto'-clause is main (comparative right after 'desto', finite verb immediately next!).",
+      "positiveExamples": [
+        "Je früher man mit der Vorbereitung beginnt, desto sicherer fühlt man sich. — The earlier one begins preparing, the more confident one feels."
+      ],
+      "negativeExamples": [
+        "✗ Je mehr ich lerne, desto ich verstehe besser. → ✓ Je mehr ich lerne, desto besser verstehe ich."
+      ],
+      "commonMistakes": "Separating the comparative adjective from 'desto' or putting the subject before the verb in the 'desto'-clause.",
+      "context": "Elegant, high-scoring B2 structure for TestDaF graphic analysis and essays.",
+      "exceptions": "'umso' is interchangeable with 'desto' ('Je größer die Stichprobe, umso zuverlässiger das Ergebnis').",
+      "comparison": "Compare with Comparative & Superlative (A2) and Subordinate Clauses (A2).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Data"
+      ],
+      "extraExercises": [
+        {
+          "type": "Word order",
+          "prompt": "Order: desto / das Ergebnis / genauer / wird. Start with desto.",
+          "key": "desto genauer wird das Ergebnis",
+          "choices": [],
+          "why": "'desto' + comparative ('genauer') + finite verb ('wird') + subject."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Je länger die Pause dauert, desto wir werden müder.",
+          "key": "Je länger die Pause dauert, desto müder werden wir",
+          "choices": [],
+          "why": "Put comparative 'müder' right after 'desto', followed immediately by 'werden wir'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Je höher die Temperatur steigt, ___ trockener wird der Boden. (use umso)",
+          "key": "umso",
+          "choices": [],
+          "why": "'umso' pairs with 'je' just like 'desto'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Je ___ die Methode dokumentiert ist, desto leichter lässt sie sich prüfen.' (genau)",
+          "key": "genauer",
+          "choices": [
+            "genau",
+            "genaueste",
+            "genauere"
+          ],
+          "why": "'je' always requires the comparative form: 'genauer'."
+        }
+      ]
+    },
+    {
+      "id": "argument",
+      "isNew": false,
+      "category": "Academic Style",
+      "whyItWorks": "Academic German rarely argues in black and white. Paired connectors—'einerseits ... andererseits' (weighing), 'zwar ... aber/jedoch' (conceding before countering), 'sowohl ... als auch' (both), 'weder ... noch' (neither)—structure balanced arguments.",
+      "positiveExamples": [
+        "Das Modell spart zwar Kosten, erfordert jedoch mehr Rechenzeit. — The model admittedly saves costs, yet requires more computing time.",
+        "Sowohl Lehrende als auch Studierende profitieren davon. — Both teachers and students benefit from this."
+      ],
+      "negativeExamples": [
+        "✗ Einerseits es ist günstig, andererseits es dauert lang. → ✓ Einerseits ist es günstig, andererseits dauert es lang."
+      ],
+      "commonMistakes": "Forgetting V2 inversion after 'einerseits'/'andererseits', or pairing 'zwar' with 'und' instead of a contrast ('aber/jedoch/allerdings').",
+      "context": "Essential for TestDaF Writing (Pro-und-Kontra essays) and Oral Argumentation.",
+      "exceptions": "'weder ... noch' already carries negation—do NOT add 'nicht' or 'kein' inside the same clause.",
+      "comparison": "Compare with Concessive Connectors ('obwohl', 'trotzdem').",
+      "relatedVocabTopics": [
+        "Academic",
+        "Politics"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Das Verfahren ist ___ schnell ___ kostengünstig (both ... and).",
+          "key": "sowohl ... als auch",
+          "choices": [
+            "weder ... noch",
+            "entweder ... oder",
+            "zwar ... aber"
+          ],
+          "why": "'sowohl ... als auch' expresses 'both ... and'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Die Studie bietet ___ klare Daten ___ belastbare Belege (neither ... nor).",
+          "key": "weder ... noch",
+          "choices": [
+            "sowohl ... als auch",
+            "zwar ... aber",
+            "nicht nur ... sondern auch"
+          ],
+          "why": "'weder ... noch' expresses 'neither ... nor' without extra 'nicht'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct word order: Einerseits die App hilft, andererseits sie braucht Zeit.",
+          "key": "Einerseits hilft die App, andererseits braucht sie Zeit",
+          "choices": [],
+          "why": "'Einerseits' and 'andererseits' occupy Position 1, so the finite verb comes second."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Der Vorschlag klingt zwar überzeugend, ___ er lässt offene Fragen. (use jedoch)",
+          "key": "jedoch",
+          "choices": [],
+          "why": "'zwar' pairs with a contrastive word like 'aber' or 'jedoch'."
+        }
+      ]
+    },
+    {
+      "id": "plural",
+      "isNew": true,
+      "category": "Cases & Articles",
+      "whyItWorks": "German nouns form plurals in five main patterns (-e, -er, -n/-en, -s, or no ending, sometimes with umlaut). All plurals share the definite article 'die' in nominative and accusative.",
+      "positiveExamples": [
+        "der Tisch → die Tische; das Kind → die Kinder; die Lampe → die Lampen; das Auto → die Autos; der Lehrer → die Lehrer."
+      ],
+      "negativeExamples": [
+        "✗ Die Tischen sind neu. → ✓ Die Tische sind neu.",
+        "✗ Zwei Buches → ✓ Zwei Bücher"
+      ],
+      "commonMistakes": "Adding English '-s' to native German nouns ('die Buchs' instead of 'die Bücher') or confusing masculine/feminine plural patterns.",
+      "context": "Needed immediately at A1 to count objects, describe classrooms, and use plural verbs accurately.",
+      "exceptions": "Reliable patterns: feminine nouns ending in -e/-ung/-heit/-keit/-ion almost always take -n/-en; nouns in -er/-el/-en (masculine/neuter) usually take no ending (sometimes umlaut); international loanwords often take -s.",
+      "comparison": "Compare with Definite Articles (all genders merge to 'die' in plural) and Dative Plural (-n).",
+      "relatedVocabTopics": [
+        "Objects",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "What is the plural of 'die Prüfung'?",
+          "key": "die Prüfungen",
+          "choices": [
+            "die Prüfunge",
+            "die Prüfungs",
+            "die Prüfüngen"
+          ],
+          "why": "Nouns ending in -ung always form the plural with '-en'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Plural of 'das Buch': Ich lese viele ___.",
+          "key": "Bücher",
+          "choices": [],
+          "why": "'das Buch' takes umlaut + '-er': 'die Bücher'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Plural of 'die Straße': Die ___ sind heute ruhig.",
+          "key": "Straßen",
+          "choices": [],
+          "why": "Feminine nouns ending in -e add '-n': 'die Straßen'."
+        },
+        {
+          "type": "Article selection",
+          "prompt": "All German plural nouns take which nominative definite article?",
+          "key": "die",
+          "choices": [
+            "der",
+            "das",
+            "den"
+          ],
+          "why": "Every plural noun takes 'die' in nominative and accusative."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct the plural: Auf dem Tisch liegen drei Stifts.",
+          "key": "Auf dem Tisch liegen drei Stifte",
+          "choices": [],
+          "why": "'der Stift' takes the '-e' plural: 'Stifte'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Change to plural: Das Fenster ist offen.",
+          "key": "Die Fenster sind offen",
+          "choices": [],
+          "why": "'Fenster' has no extra plural ending; article becomes 'Die' and verb becomes 'sind'."
+        }
+      ],
+      "level": "A1",
+      "title": "Noun plurals",
+      "prerequisite": "articles",
+      "explanation": "German uses five plural patterns (-e, -er, -n/-en, -s, or zero ending, often with umlaut). All plurals use the article die in nominative and accusative."
+    },
+    {
+      "id": "time_prepositions",
+      "isNew": true,
+      "category": "Cases & Articles",
+      "whyItWorks": "German pairs each time unit with a specific preposition: 'um' for exact clock times, 'am' (an dem) for days and parts of the day, and 'im' (in dem) for months and seasons.",
+      "positiveExamples": [
+        "Der Kurs beginnt um 9 Uhr am Montag im Oktober. — The course starts at 9 o'clock on Monday in October."
+      ],
+      "negativeExamples": [
+        "✗ Im Montag habe ich frei. → ✓ Am Montag habe ich frei.",
+        "✗ Am Nacht → ✓ In der Nacht"
+      ],
+      "commonMistakes": "Using 'in' with days of the week or 'am' with 'Nacht' (Nacht is an exception: 'in der Nacht').",
+      "context": "Used every day for schedules, appointments, timetables, and study planning.",
+      "exceptions": "Years stand WITHOUT 'im' ('2026' or 'im Jahr 2026'). 'Nacht' always takes 'in der Nacht', not 'am Nacht'.",
+      "comparison": "Compare with Dative Prepositions ('seit', 'vor', 'nach') and Two-Way Prepositions.",
+      "relatedVocabTopics": [
+        "Time",
+        "Daily life"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Der Zug fährt ___ 14:30 Uhr ab.",
+          "key": "um",
+          "choices": [
+            "am",
+            "im",
+            "auf"
+          ],
+          "why": "Clock times always take 'um'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "___ Freitag schreiben wir einen Test.",
+          "key": "Am",
+          "choices": [
+            "Im",
+            "Um",
+            "An"
+          ],
+          "why": "Days of the week take 'am' (an dem)."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "___ Sommer reisen viele Studierende.",
+          "key": "Im",
+          "choices": [
+            "Am",
+            "Um",
+            "In"
+          ],
+          "why": "Seasons and months take 'im' (in dem)."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Exception: ___ der Nacht ist die Straße leer.",
+          "key": "In",
+          "choices": [],
+          "why": "'Nacht' takes 'in der Nacht', unlike Morgen/Abend ('am Morgen')."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich bin im 2002 geboren.",
+          "key": "Ich bin 2002 geboren",
+          "choices": [],
+          "why": "Bare years take no preposition in German (or use 'im Jahr 2002')."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: beginnt / das Semester / im April. Start with Im April.",
+          "key": "Im April beginnt das Semester",
+          "choices": [],
+          "why": "Time phrase in Position 1 + finite verb 'beginnt' in Position 2."
+        }
+      ],
+      "level": "A1",
+      "title": "Time prepositions (am, im, um)",
+      "prerequisite": "order",
+      "explanation": "Use um for clock times, am for days and parts of the day (except in der Nacht), and im for months and seasons."
+    },
+    {
+      "id": "stem_verbs",
+      "isNew": true,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "A core group of strong German verbs changes its stem vowel in the present tense ONLY in 2nd and 3rd person singular (du, er/sie/es): e → i (sprechen), e → ie (lesen), a → ä (fahren), au → äu (laufen).",
+      "positiveExamples": [
+        "Ich lese ein Buch, aber er liest die Zeitung. — I read a book, but he reads the newspaper.",
+        "Wir fahren mit dem Zug, du fährst mit dem Bus. — We go by train, you go by bus."
+      ],
+      "negativeExamples": [
+        "✗ Ihr fährst heute ab. → ✓ Ihr fahrt heute ab.",
+        "✗ Du sprechst gut Deutsch. → ✓ Du sprichst gut Deutsch."
+      ],
+      "commonMistakes": "Applying the vowel change to 'ich' or 'ihr'—the plural forms NEVER change their stem vowel!",
+      "context": "These include the highest-frequency verbs in German (sprechen, lesen, sehen, geben, nehmen, helfen, fahren, schlafen, tragen).",
+      "exceptions": "'nehmen' also changes spelling: du nimmst, er nimmt. 'essen' takes du isst, er isst.",
+      "comparison": "Compare with Regular Present Tense (A1) and Imperative forms (e → i/ie stays, a → ä drops).",
+      "relatedVocabTopics": [
+        "Daily life",
+        "Transport"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "sprechen: Du ___ sehr deutlich.",
+          "key": "sprichst",
+          "choices": [
+            "sprechst",
+            "spricht",
+            "sprechen"
+          ],
+          "why": "e → i stem change in 'du': 'sprichst'."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "nehmen: Er ___ den früheren Bus.",
+          "key": "nimmt",
+          "choices": [
+            "nehmt",
+            "nimmst",
+            "nehme"
+          ],
+          "why": "'nehmen' changes to 'nimmt' in third-person singular."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "fahren: Ihr ___ morgen nach Bonn.",
+          "key": "fahrt",
+          "choices": [
+            "fährt",
+            "fährst",
+            "fahren"
+          ],
+          "why": "Plural 'ihr' NEVER takes a stem vowel change: 'fahrt'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "sehen: Sie (she) ___ das Schild nicht.",
+          "key": "sieht",
+          "choices": [],
+          "why": "e → ie stem change: 'sieht'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Er lauft jeden Morgen im Park.",
+          "key": "Er läuft jeden Morgen im Park",
+          "choices": [],
+          "why": "'laufen' changes au → äu in third-person singular: 'läuft'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite with 'du': Ich helfe meinem Bruder.",
+          "key": "Du hilfst deinem Bruder",
+          "choices": [],
+          "why": "'helfen' changes e → i ('hilfst') and possessive adjusts to 'deinem'."
+        }
+      ],
+      "level": "A1",
+      "title": "Stem-changing present verbs",
+      "prerequisite": "present",
+      "explanation": "Strong verbs with e → i/ie, a → ä, or au → äu change their stem vowel only for du and er/sie/es—never for ich, wir, ihr, or sie/Sie."
+    },
+    {
+      "id": "modal_perfekt",
+      "isNew": true,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Although German uses Perfekt for most spoken past actions, modal verbs strongly prefer Präteritum ('Ich musste lernen') because their Perfekt form requires a bulky double infinitive ('Ich habe lernen müssen').",
+      "positiveExamples": [
+        "Ich konnte gestern nicht kommen. — I couldn't come yesterday.",
+        "Er hat das Buch leider nicht finden können. — Unfortunately he was unable to find the book."
+      ],
+      "negativeExamples": [
+        "✗ Ich habe müssen arbeiten. → ✓ Ich musste arbeiten."
+      ],
+      "commonMistakes": "Forming a participle 'gemusst' alongside another verb ('Ich habe arbeiten gemusst' is wrong; use 'Ich musste arbeiten').",
+      "context": "Essential for sounding natural in everyday conversation and avoiding awkward past modal constructions.",
+      "exceptions": "A modal participle (gemusst, gekonnt, gewollt) is only used when there is NO second verb ('Das habe ich nicht gewollt').",
+      "comparison": "Compare with Common Simple Past Forms (A2) and Past Counterfactual Modals (B2).",
+      "relatedVocabTopics": [
+        "Daily life",
+        "University"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Which past sentence is natural in German?",
+          "key": "Wir mussten früh aufstehen.",
+          "choices": [
+            "Wir haben früh aufgestanden müssen.",
+            "Wir haben früh aufstehen gemusst.",
+            "Wir müssten früh aufstehen."
+          ],
+          "why": "Präteritum 'mussten + Infinitiv' is the natural past form for modals."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "Simple past of können: Sie (they) ___ den Text gut verstehen.",
+          "key": "konnten",
+          "choices": [
+            "könnten",
+            "gekonnt",
+            "kann"
+          ],
+          "why": "Factual past of können has no umlaut: 'konnten'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich habe gestern nicht kommen gekonnt.",
+          "key": "Ich konnte gestern nicht kommen",
+          "choices": [],
+          "why": "Replace awkward modal Perfekt with Präteritum 'konnte'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Without a second verb, Perfekt participle of wollen: Das habe ich nicht ___.",
+          "key": "gewollt",
+          "choices": [],
+          "why": "With no second verb, 'wollen' can take participle 'gewollt'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Put into natural past tense: Ich darf heute länger bleiben.",
+          "key": "Ich durfte gestern länger bleiben",
+          "choices": [],
+          "why": "Use Präteritum 'durfte' + infinitive at the end."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: musste / am Sonntag / arbeiten / sie. Start with Am Sonntag.",
+          "key": "Am Sonntag musste sie arbeiten",
+          "choices": [],
+          "why": "Time phrase in Pos 1, modal 'musste' in Pos 2, infinitive 'arbeiten' at the end."
+        }
+      ],
+      "level": "A2",
+      "title": "Past tense of modal verbs",
+      "prerequisite": "preterite",
+      "explanation": "With another verb, use the Präteritum of modal verbs (konnte, musste, durfte, wollte, sollte) rather than Perfekt; drop any umlaut for factual past."
+    },
+    {
+      "id": "da_wo_compounds",
+      "isNew": true,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "To refer back to a THING or an entire idea after a preposition, German combines da(r)- + preposition ('dafür', 'damit', 'darüber') instead of preposition + 'es'. Questions about things use wo(r)- + preposition ('wofür', 'worüber').",
+      "positiveExamples": [
+        "Wir sprechen über das Klima. → Wir sprechen darüber. — We talk about the climate. → We talk about it.",
+        "Womit fährst du zur Uni? — What do you take to university?"
+      ],
+      "negativeExamples": [
+        "✗ Ich warte auf es. → ✓ Ich warte darauf.",
+        "✗ Ich warte darauf (referring to Anna). → ✓ Ich warte auf sie."
+      ],
+      "commonMistakes": "Using da-compounds for PEOPLE (never say 'damit' for a friend—say 'mit ihm/ihr') or forgetting the linking '-r-' before vowels (darauf, woran).",
+      "context": "Extremely common in cohesive B1/B2 writing to link back to previous sentences ('Daraus folgt, dass ...').",
+      "exceptions": "Insert '-r-' whenever the preposition starts with a vowel: an → daran/woran, auf → darauf/worauf, in → darin/worin, über → darüber/worüber, um → darum/worum.",
+      "comparison": "Compare with Verbs with Fixed Prepositions (B1).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Everyday"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Er denkt oft an die Prüfung. Er denkt oft ___.",
+          "key": "daran",
+          "choices": [
+            "daan",
+            "an sie",
+            "auf sie"
+          ],
+          "why": "Preposition 'an' starts with a vowel, so insert '-r-': 'daran'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Sie wartet auf ihren Bruder. Sie wartet ___.",
+          "key": "auf ihn",
+          "choices": [
+            "darauf",
+            "worauf",
+            "auf ihm"
+          ],
+          "why": "For a PERSON, never use a da-compound; use 'auf + accusative pronoun' ('auf ihn')."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Ask about a thing (sprechen über): ___ sprecht ihr gerade?",
+          "key": "Worüber",
+          "choices": [],
+          "why": "wo- + -r- + über = 'Worüber'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich bin mit es sehr zufrieden.",
+          "key": "Ich bin damit sehr zufrieden",
+          "choices": [],
+          "why": "Replace 'mit es' with 'damit'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Replace the noun with a da-compound: Wir profitieren von dem Programm.",
+          "key": "Wir profitieren davon",
+          "choices": [],
+          "why": "'von dem Programm' (a thing) becomes 'davon'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Die Zahlen sinken. ___ lässt sich ein klarer Trend erkennen.' (aus + da)",
+          "key": "Daraus",
+          "choices": [],
+          "why": "da- + -r- + aus = 'Daraus' (from this)."
+        }
+      ],
+      "level": "A2",
+      "title": "Da- and wo-compounds",
+      "prerequisite": "dative",
+      "explanation": "Combine da(r)- or wo(r)- with a preposition to refer to or ask about things and ideas (dafür, darüber, woran). For people, keep preposition + pronoun."
+    },
+    {
+      "id": "indefinite_pronouns",
+      "isNew": true,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Indefinite pronouns refer to unspecified people or things: 'man' (one/people in general — nominative only), 'jemand' (someone), 'niemand' (no one), 'etwas' (something), 'nichts' (nothing), 'alle' (everyone/all).",
+      "positiveExamples": [
+        "In der Bibliothek spricht man leise. — In the library one speaks quietly.",
+        "Niemand kennt die genaue Antwort. — Nobody knows the exact answer."
+      ],
+      "negativeExamples": [
+        "✗ Man muss sein Zeit gut planen, weil man nicht alles schaffen können. → ✓ Man muss seine Zeit gut planen, weil man nicht alles schaffen kann."
+      ],
+      "commonMistakes": "Confusing 'man' (pronoun, lowercase, single n) with 'Mann' (noun, capital M, double n), or using 'man' in accusative/dative instead of 'einen/einem'.",
+      "context": "Very useful in TestDaF Writing and Speaking for general statements alongside passive voice.",
+      "exceptions": "'man' is ONLY nominative; its accusative is 'einen' and its dative is 'einem' ('Das hilft einem sehr'). Adjectives after 'etwas/nichts' are capitalized neuter: 'etwas Neues', 'nichts Gutes'.",
+      "comparison": "Compare with Process Passive (B1), which often alternates with active 'man'-sentences.",
+      "relatedVocabTopics": [
+        "Everyday",
+        "Academic"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "___ sollte Quellen immer sorgfältig prüfen.",
+          "key": "Man",
+          "choices": [
+            "Mann",
+            "Einen",
+            "Alle"
+          ],
+          "why": "Indefinite subject pronoun is 'Man' (singular verb 'sollte')."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Dative of 'man': Gute Notizen helfen ___ beim Lernen.",
+          "key": "einem",
+          "choices": [
+            "man",
+            "einen",
+            "ein"
+          ],
+          "why": "Dative counterpart of 'man' is 'einem'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Capitalize the adjective after 'etwas': Heute habe ich etwas ___ gelernt. (neu)",
+          "key": "Neues",
+          "choices": [],
+          "why": "Adjectives after 'etwas/nichts' become capitalized neuter nouns: 'etwas Neues'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Niemand wissen die Lösung.",
+          "key": "Niemand weiß die Lösung",
+          "choices": [],
+          "why": "'niemand' and 'jemand' always take a 3rd-person singular verb ('weiß')."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite passive with 'man': Hier wird Deutsch gesprochen.",
+          "key": "Hier spricht man Deutsch",
+          "choices": [],
+          "why": "Active 'man' + 3rd-person singular verb replaces impersonal passive."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Hast du ___ vergessen? Nein, ___.",
+          "key": "etwas ... nichts",
+          "choices": [
+            "nichts ... etwas",
+            "jemand ... man",
+            "alle ... niemand"
+          ],
+          "why": "'etwas' (something) pairs with 'nichts' (nothing)."
+        }
+      ],
+      "level": "A2",
+      "title": "Indefinite pronouns (man, jemand, etwas)",
+      "prerequisite": "pronouns",
+      "explanation": "Use man (accusative einen, dative einem), jemand, niemand, etwas, and nichts for general statements. All take 3rd-person singular verbs."
+    },
+    {
+      "id": "genitive",
+      "isNew": true,
+      "category": "Cases & Articles",
+      "whyItWorks": "The genitive expresses possession, belonging, and formal relationships ('die Ergebnisse der Studie'), and follows academic prepositions (wegen, trotz, während, aufgrund, innerhalb, außerhalb, statt).",
+      "positiveExamples": [
+        "Aufgrund der hohen Nachfrage öffnet ein zweiter Kurs. — Due to high demand, a second course is opening.",
+        "Die Qualität des Textes überzeugt. — The quality of the text is convincing."
+      ],
+      "negativeExamples": [
+        "✗ Wegen dem schlechten Wetter (formal writing) → ✓ Wegen des schlechten Wetters."
+      ],
+      "commonMistakes": "Forgetting the -(e)s ending on masculine and neuter nouns ('des Textes', 'des Jahres') or using dative instead of genitive in formal essays.",
+      "context": "Hallmark of B1/B2 academic German and essential for TestDaF reading and writing.",
+      "exceptions": "Masculine and neuter nouns add -s (or -es for one-syllable words or words ending in -s/-ß/-z/-x: 'des Gesetzes', 'des Hauses'). Feminine and plural nouns take 'der' with NO noun ending.",
+      "comparison": "Compare with Nominalization (B2) and Concessive/Causal Prepositions.",
+      "relatedVocabTopics": [
+        "Academic",
+        "Science"
+      ],
+      "extraExercises": [
+        {
+          "type": "Article selection",
+          "prompt": "Genitive masculine: die Ergebnisse ___ Experiments (das).",
+          "key": "des",
+          "choices": [
+            "dem",
+            "den",
+            "der"
+          ],
+          "why": "Neuter and masculine genitive definite article is 'des'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Add the genitive noun ending: das Ende des ___ (das Jahr).",
+          "key": "Jahres",
+          "choices": [],
+          "why": "One-syllable neuter noun 'Jahr' takes '-es': 'des Jahres'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Während ___ Semesters (das) finden vier Tests statt.",
+          "key": "des",
+          "choices": [
+            "dem",
+            "das",
+            "der"
+          ],
+          "why": "'während' governs genitive: 'Während des Semesters'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Trotz ___ Schwierigkeiten (plural) schloss sie das Studium ab.",
+          "key": "der",
+          "choices": [
+            "den",
+            "die",
+            "des"
+          ],
+          "why": "Genitive plural definite article is 'der'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct for formal German: Aufgrund den Daten änderten wir den Plan.",
+          "key": "Aufgrund der Daten änderten wir den Plan",
+          "choices": [],
+          "why": "'aufgrund' governs genitive plural: 'Aufgrund der Daten'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Replace 'von' with genitive: die Meinung von dem Experten.",
+          "key": "die Meinung des Experten",
+          "choices": [],
+          "why": "Masculine weak noun 'Experte' takes 'des Experten' in genitive."
+        }
+      ],
+      "level": "B1",
+      "title": "Genitive case and prepositions",
+      "prerequisite": "dative",
+      "explanation": "Genitive marks formal attribution (des/eines + -(e)s for masc/neut; der/einer for fem/pl) and follows academic prepositions like wegen, trotz, während, and aufgrund."
+    },
+    {
+      "id": "n_declension",
+      "isNew": true,
+      "category": "Cases & Articles",
+      "whyItWorks": "A group of masculine nouns—mostly living beings ending in -e (der Student, der Kollege, der Experte, der Mensch, der Nachbar, der Präsident)—adds -(e)n in EVERY case except nominative singular.",
+      "positiveExamples": [
+        "Der Student fragt den Studenten. — The student asks the student.",
+        "Ich spreche mit einem Experten. — I am speaking with an expert."
+      ],
+      "negativeExamples": [
+        "✗ Ich kenne den Student. → ✓ Ich kenne den Studenten."
+      ],
+      "commonMistakes": "Leaving off the -(e)n in accusative, dative, or genitive singular ('mit dem Kollege' → 'mit dem Kollegen').",
+      "context": "Very frequent in university and news German (Student, Dozent, Praktikant, Experte, Journalist, Kunde, Mensch).",
+      "exceptions": "A few nouns like 'der Name' and 'der Gedanke' add -ns in genitive ('des Namens', 'des Gedankens'). 'das Herz' is the only neuter weak noun ('des Herzens').",
+      "comparison": "Compare with Genitive Case (B1) and Regular Masculine Nouns.",
+      "relatedVocabTopics": [
+        "University",
+        "People"
+      ],
+      "extraExercises": [
+        {
+          "type": "Case drill",
+          "prompt": "Accusative: Wir befragen einen ___ (der Experte).",
+          "key": "Experten",
+          "choices": [
+            "Experte",
+            "Expertes",
+            "Expert"
+          ],
+          "why": "Weak masculine noun ending in -e adds '-n' in accusative: 'Experten'."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Dative: Der Artikel hilft dem ___ (der Student).",
+          "key": "Studenten",
+          "choices": [
+            "Student",
+            "Students",
+            "Studente"
+          ],
+          "why": "Weak noun 'der Student' adds '-en' in dative singular."
+        },
+        {
+          "type": "Case drill",
+          "prompt": "Genitive: Die Aussage des ___ (der Journalist) ist klar.",
+          "key": "Journalisten",
+          "choices": [
+            "Journalist",
+            "Journalists",
+            "Journalistes"
+          ],
+          "why": "Weak nouns ending in -ist add '-en' in genitive (no '-s')."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Genitive of 'der Name': die Bedeutung des ___.",
+          "key": "Namens",
+          "choices": [],
+          "why": "'der Name' is a special weak noun taking '-ns' in genitive: 'des Namens'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Ich habe gestern mit meinem Nachbar gesprochen.",
+          "key": "Ich habe gestern mit meinem Nachbarn gesprochen",
+          "choices": [],
+          "why": "'der Nachbar' is an N-declension noun and takes '-n' in dative: 'Nachbarn'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which noun follows N-declension?",
+          "key": "der Kollege",
+          "choices": [
+            "der Lehrer",
+            "der Tisch",
+            "das Buch"
+          ],
+          "why": "Masculine living-being nouns ending in -e ('der Kollege') follow N-declension."
+        }
+      ],
+      "level": "B1",
+      "title": "Weak nouns (N-declension)",
+      "prerequisite": "genitive",
+      "explanation": "Masculine weak nouns (e.g. der Student, der Kollege, der Experte, der Mensch) add -(e)n in accusative, dative, and genitive singular as well as plural."
+    },
+    {
+      "id": "participle_adjectives",
+      "isNew": true,
+      "category": "Pronouns & Modifiers",
+      "whyItWorks": "Both Partizip I (Infinitiv + -d: 'steigend' = rising, active/ongoing) and Partizip II ('gelöst' = solved, completed/passive) work like regular adjectives and take normal adjective endings.",
+      "positiveExamples": [
+        "Die steigenden Kosten belasten Studierende. — The rising costs burden students.",
+        "Die gesammelten Daten werden geprüft. — The collected data are checked."
+      ],
+      "negativeExamples": [
+        "✗ Das geschriebende Buch → ✓ Das geschriebene Buch."
+      ],
+      "commonMistakes": "Mixing up active ongoing Partizip I ('der lesende Student' = the student who is reading) with passive/completed Partizip II ('der gelesene Text' = the text that was read).",
+      "context": "Very common in newspaper headlines, scientific abstracts, and TestDaF Reading.",
+      "exceptions": "Always check whether the noun PERFORMS the action (Partizip I) or RECEIVES the action (Partizip II), then add the normal adjective ending (-e/-en/-er/-es).",
+      "comparison": "Compare with Adjective Endings (A2) and Extended Participial Attributes (B2).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Data"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Active ongoing (wachsen): eine schnell ___ Stadt.",
+          "key": "wachsende",
+          "choices": [
+            "gewachsene",
+            "wachsend",
+            "wachsen"
+          ],
+          "why": "Active ongoing action takes Partizip I ('wachsend') + feminine ending '-e'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Completed passive (veröffentlichen): die gestern ___ Studie.",
+          "key": "veröffentlichte",
+          "choices": [
+            "veröffentlichende",
+            "veröffentlicht",
+            "veröffentlichen"
+          ],
+          "why": "Completed passive action takes Partizip II ('veröffentlicht') + '-e'."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Partizip I of 'steigen': wegen der ___ Preise (genitive plural).",
+          "key": "steigenden",
+          "choices": [],
+          "why": "'steigend' + genitive plural ending '-en' → 'steigenden'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct: Die geprüfende Unterlagen liegen bereit.",
+          "key": "Die geprüften Unterlagen liegen bereit",
+          "choices": [],
+          "why": "Documents are checked (passive completed) → Partizip II 'geprüften'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Compress with Partizip I: ein Text, der überzeugt.",
+          "key": "ein überzeugender Text",
+          "choices": [],
+          "why": "Partizip I 'überzeugend' + masculine nominative '-er' after 'ein'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Die ___ Ergebnisse bestätigen die These.' (messen, completed)",
+          "key": "gemessenen",
+          "choices": [
+            "messenden",
+            "gemessen",
+            "messende"
+          ],
+          "why": "Completed passive results take Partizip II 'gemessen' + plural '-en'."
+        }
+      ],
+      "level": "B1",
+      "title": "Participles as adjectives",
+      "prerequisite": "endings",
+      "explanation": "Use Partizip I (-d) for active ongoing qualities (steigende Kosten) and Partizip II for completed or passive qualities (geprüfte Daten), declined like normal adjectives."
+    },
+    {
+      "id": "konjunktiv1",
+      "isNew": true,
+      "category": "Verbs & Tenses",
+      "whyItWorks": "Konjunktiv I marks indirect (reported) speech neutrally—distancing the writer from a claim without asserting it as proven fact. Form it from the infinitive stem + -e, -est, -e, -en, -et, -en (3rd person singular: er sei, habe, könne, gehe).",
+      "positiveExamples": [
+        "Die Forscherin betont, die Methode sei zuverlässig. — The researcher emphasizes that the method is reliable.",
+        "Laut Bericht habe sich der Trend verstärkt. — According to the report, the trend has strengthened."
+      ],
+      "negativeExamples": [
+        "✗ Er sagt, er ist krank (in formal news reporting). → ✓ Er sagt, er sei krank."
+      ],
+      "commonMistakes": "Using Konjunktiv I when it looks identical to the Indicative (e.g. 'sie haben'); in that case, switch to Konjunktiv II ('sie hätten') so indirectness stays visible!",
+      "context": "Standard in German journalism, academic summaries, and TestDaF Reading/Writing when citing authors.",
+      "exceptions": "'sein' has no -e in 1st/3rd singular: 'ich sei', 'er sei', 'wir seien'. For past reported speech, put only the auxiliary in Konjunktiv I: 'er habe gesagt', 'sie sei gekommen'.",
+      "comparison": "Compare with Konjunktiv II (hypothetical) and Subjective Modals ('sollen/wollen').",
+      "relatedVocabTopics": [
+        "Academic",
+        "Politics"
+      ],
+      "extraExercises": [
+        {
+          "type": "Verb conjugation",
+          "prompt": "Konjunktiv I of 'sein' (3rd sg): Der Bericht betont, die Lage ___ stabil.",
+          "key": "sei",
+          "choices": [
+            "ist",
+            "wäre",
+            "seie"
+          ],
+          "why": "3rd-person singular Konjunktiv I of 'sein' is 'sei'."
+        },
+        {
+          "type": "Verb conjugation",
+          "prompt": "Konjunktiv I of 'können' (3rd sg): Sie erklärt, man ___ das Problem lösen.",
+          "key": "könne",
+          "choices": [
+            "kann",
+            "könnte",
+            "konnte"
+          ],
+          "why": "Infinitive stem 'könn-' + '-e' → 'könne'."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "When Konjunktiv I matches Indicative ('sie arbeiten'), what do formal writers use?",
+          "key": "sie arbeiteten (Konjunktiv II)",
+          "choices": [
+            "sie arbeitet",
+            "sie arbeite",
+            "sie arbeiten weiter"
+          ],
+          "why": "Switch to Konjunktiv II (or würde + Infinitiv) whenever Konjunktiv I equals Indicative."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Reported past (haben): Der Autor schreibt, das Modell ___ sich bewährt.",
+          "key": "habe",
+          "choices": [],
+          "why": "3rd-person singular Konjunktiv I of 'haben' is 'habe'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct to formal reported speech: Die Studie sagt, der Verbrauch sinkt.",
+          "key": "Die Studie sagt, der Verbrauch sinke",
+          "choices": [],
+          "why": "Infinitive stem 'sink-' + '-e' → 'sinke'."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Put into Konjunktiv I: 'Das Projekt ist erfolgreich.' → Die Leiterin erklärt, ...",
+          "key": "Die Leiterin erklärt, das Projekt sei erfolgreich",
+          "choices": [],
+          "why": "Drop quotes and shift 'ist' to 'sei'."
+        }
+      ],
+      "level": "B2",
+      "title": "Reported speech (Konjunktiv I)",
+      "prerequisite": "conditional",
+      "explanation": "Konjunktiv I (sei, habe, könne, arbeite) marks neutral indirect speech in news and academic writing. Switch to Konjunktiv II when a form matches the indicative."
+    },
+    {
+      "id": "extended_attributes",
+      "isNew": true,
+      "category": "Academic Style",
+      "whyItWorks": "Academic German often packs an entire relative clause BEFORE the noun, placing the participle right in front of the noun and its modifiers between the article and the participle.",
+      "positiveExamples": [
+        "Die im Jahr 2024 in Berlin durchgeführte Studie zeigt klare Effekte. — The study conducted in Berlin in 2024 shows clear effects."
+      ],
+      "negativeExamples": [
+        "✗ Die durchgeführte in Berlin Studie → ✓ Die in Berlin durchgeführte Studie."
+      ],
+      "commonMistakes": "Placing the prepositional phrase AFTER the participle instead of directly after the article.",
+      "context": "Appears constantly in TestDaF Reading texts; learning to unpack it left-to-right (Article → Noun → Participle → Modifiers) dramatically improves reading speed and accuracy.",
+      "exceptions": "Reading strategy: jump from the article ('Die') to the head noun ('Studie'), then read the participle ('durchgeführte') and its details ('im Jahr 2024 in Berlin').",
+      "comparison": "Compare with Relative Clauses (B1) and Participles as Adjectives (B1).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Science"
+      ],
+      "extraExercises": [
+        {
+          "type": "Grammar transformation",
+          "prompt": "Expand into a relative clause: der gestern veröffentlichte Bericht.",
+          "key": "der Bericht, der gestern veröffentlicht wurde",
+          "choices": [],
+          "why": "Extended Partizip II attribute expands to a passive relative clause."
+        },
+        {
+          "type": "Word order",
+          "prompt": "Order: die / klar / formulierte / These.",
+          "key": "die klar formulierte These",
+          "choices": [],
+          "why": "Article → adverb ('klar') → participle ('formulierte') → noun ('These')."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "Which noun is the core subject of 'Die von vielen Experten kritisierten Maßnahmen greifen langsam'?",
+          "key": "Maßnahmen",
+          "choices": [
+            "Experten",
+            "kritisierten",
+            "vielen"
+          ],
+          "why": "The head noun directly after the participle is 'Maßnahmen'."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Correct word order: Ein geschriebener auf Deutsch Aufsatz.",
+          "key": "Ein auf Deutsch geschriebener Aufsatz",
+          "choices": [],
+          "why": "Modifiers ('auf Deutsch') stand BEFORE the participle ('geschriebener')."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Complete with Partizip I: die seit Jahren ___ Nachfrage (steigen).",
+          "key": "steigende",
+          "choices": [],
+          "why": "Article + modifier ('seit Jahren') + Partizip I ('steigende') + noun."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Unpack: 'das im Labor gemessene Ergebnis' means the result that ___.",
+          "key": "was measured in the lab",
+          "choices": [
+            "is measuring the lab",
+            "will measure in the lab",
+            "measures in the lab"
+          ],
+          "why": "Partizip II 'gemessene' expresses a completed passive action."
+        }
+      ],
+      "level": "B2",
+      "title": "Extended participial attributes",
+      "prerequisite": "participle_adjectives",
+      "explanation": "Academic German condenses relative clauses before a noun: Article + modifiers + Participle + Noun (die im Labor geprüfte Probe)."
+    },
+    {
+      "id": "subjective_modals",
+      "isNew": true,
+      "category": "Academic Style",
+      "whyItWorks": "Modal verbs can express a speaker's JUDGMENT of probability or source of information rather than obligation/ability: 'muss' (almost certain), 'dürfte' (probable), 'kann/könnte' (possible), 'soll' (it is claimed), 'will' (he/she claims about self).",
+      "positiveExamples": [
+        "Das dürfte der Hauptgrund sein. — That is probably the main reason.",
+        "Das Medikament soll kaum Nebenwirkungen haben. — The drug is said to have hardly any side effects."
+      ],
+      "negativeExamples": [
+        "✗ Er soll reich sein (= he is obligated to be rich). → ✓ Meaning: People say he is rich."
+      ],
+      "commonMistakes": "Reading 'soll' only as 'should' instead of recognizing 'is said to / is rumored to' in academic and journalistic texts.",
+      "context": "Critical for TestDaF Reading & Listening nuance (identifying whether an author endorses or distances themselves from a claim).",
+      "exceptions": "Past probability uses 'Modal + Perfekt-Infinitiv': 'Er muss den Zug verpasst haben' (He must have missed the train).",
+      "comparison": "Compare with Standard Modal Verbs (A1) and Konjunktiv I (B2).",
+      "relatedVocabTopics": [
+        "Academic",
+        "Politics"
+      ],
+      "extraExercises": [
+        {
+          "type": "Multiple choice",
+          "prompt": "Which modal expresses 'probable / likely' in formal German?",
+          "key": "dürfte",
+          "choices": [
+            "will",
+            "muss nicht",
+            "sollte nicht"
+          ],
+          "why": "'dürfte' expresses cautious high probability ('is likely to')."
+        },
+        {
+          "type": "Multiple choice",
+          "prompt": "'Die Reform soll die Kosten senken.' In a news report, 'soll' often signals:",
+          "key": "A reported claim or intention",
+          "choices": [
+            "Physical ability",
+            "Personal boast",
+            "Guaranteed past fact"
+          ],
+          "why": "Subjective 'sollen' reports a third-party claim without guaranteeing its truth."
+        },
+        {
+          "type": "Fill in the blank",
+          "prompt": "Express near certainty about the past: Sie ___ den Brief übersehen haben. (müssen)",
+          "key": "muss",
+          "choices": [],
+          "why": "'muss + Partizip II + haben' expresses strong deduction about the past."
+        },
+        {
+          "type": "Sentence correction",
+          "prompt": "Fix the meaning ('He claims to have seen it himself'): Er soll es selbst gesehen haben.",
+          "key": "Er will es selbst gesehen haben",
+          "choices": [],
+          "why": "Subjective 'wollen' expresses a speaker's own unverified claim about themselves."
+        },
+        {
+          "type": "Grammar transformation",
+          "prompt": "Rewrite with subjective 'dürfte': Wahrscheinlich steigt die Zahl weiter.",
+          "key": "Die Zahl dürfte weiter steigen",
+          "choices": [],
+          "why": "'dürfte + Infinitiv' concisely replaces 'wahrscheinlich'."
+        },
+        {
+          "type": "Grammar in reading context",
+          "prompt": "Context: 'Dieser Faktor ___ eine Rolle gespielt haben.' (strongest certainty)",
+          "key": "muss",
+          "choices": [
+            "will",
+            "soll",
+            "darf"
+          ],
+          "why": "'muss ... gespielt haben' conveys the strongest logical deduction."
+        }
+      ],
+      "level": "B2",
+      "title": "Subjective modal verbs",
+      "prerequisite": "modals",
+      "explanation": "Modals express certainty or reported claims: muss (almost certain), dürfte (likely), könnte (possible), soll (is said to), will (claims to)."
+    }
+  ]
+}

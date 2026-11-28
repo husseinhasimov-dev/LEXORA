@@ -117,8 +117,8 @@ import java.util.Locale
         }
         if(user==null){
             Hint("Signing in opens a separate account profile. Your offline profile stays on this device. Use a local backup to merge its history.")
-            OutlinedTextField(email,{email=it},label={Text("Email")},singleLine=true)
-            OutlinedTextField(password,{password=it},label={Text("Password")},singleLine=true,visualTransformation=PasswordVisualTransformation())
+            OutlinedTextField(email,{email=it},Modifier.fillMaxWidth(),label={Text("Email")},singleLine=true)
+            OutlinedTextField(password,{password=it},Modifier.fillMaxWidth(),label={Text("Password")},singleLine=true,visualTransformation=PasswordVisualTransformation())
             Secondary("Sign in",!busy && email.isNotBlank() && password.isNotBlank()){result(auth.signInWithEmailAndPassword(email.trim(),password))}
             Secondary("Create account",!busy && email.isNotBlank() && password.length>=6){result(auth.createUserWithEmailAndPassword(email.trim(),password))}
             if(google!=null)Secondary("Continue with Google",!busy){launcher.launch(google.signInIntent)}

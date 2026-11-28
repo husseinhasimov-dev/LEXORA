@@ -1,7 +1,7 @@
 package org.lexora.study
 
 import androidx.compose.ui.test.*
-import androidx.compose.ui.test.junit4.createAndroidComposeRule
+
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import android.app.Notification
@@ -11,8 +11,7 @@ import org.junit.*
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-class V4NavigationTest{
-    @get:Rule val ui=createAndroidComposeRule<MainActivity>()
+class V4NavigationTest:IsolatedStudyUi(){
     private fun home(){
         ui.waitUntil(20000){ui.onAllNodesWithText("Your study day").fetchSemanticsNodes().isNotEmpty() || ui.onAllNodesWithText("Start at A1").fetchSemanticsNodes().isNotEmpty()}
         if(ui.onAllNodesWithText("Start at A1").fetchSemanticsNodes().isNotEmpty())ui.onNodeWithText("Start at A1").performClick()

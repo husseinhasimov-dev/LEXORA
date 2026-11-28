@@ -1,0 +1,224 @@
+[
+  {
+    "id": "map",
+    "title": "Zwei Namen für dieselbe Straße",
+    "level": "B1",
+    "topic": "Geography and history",
+    "grammar": "temporal",
+    "quote": "Als ihr Großvater noch ein Kind war, führte die Straße zum Bahnhof.",
+    "forms": {
+      "Straße": "Straße",
+      "führte": "führen"
+    },
+    "text": "Auf einem alten Stadtplan sucht Daria das Haus ihrer Großeltern. Die Adresse steht auf der Rückseite eines Fotos. Aber auf ihrem Handy gibt es die Bahnhofstraße in diesem Viertel gar nicht. Daria glaubt zuerst, dass sie die falsche Stadt eingegeben hat.\n\nIm Stadtarchiv legt eine Mitarbeiterin zwei Karten nebeneinander. Sie zeigt auf einen Fluss und eine Brücke. Beide sind auf den Karten gut zu erkennen. Von der Brücke aus zählt Daria die Straßen. Die dritte Straße rechts hat auf der alten Karte einen anderen Namen, doch die Häuser stehen noch an derselben Stelle. Als ihr Großvater noch ein Kind war, führte die Straße zum Bahnhof. Später hat die Stadt die Gleise verlegt.\n\nAm Nachmittag fotografiert Daria die Haustür. Die Nummer ist kaum zu lesen, aber über der Tür sieht sie einen kleinen Vogel aus Stein. Er ist auch auf dem alten Foto zu sehen. Jetzt hat Daria zwei Hinweise für das Haus: die Lage auf der Karte und den Vogel an der Tür.",
+    "questions": [
+      {
+        "type": "Detail",
+        "prompt": "Which two landmarks help Daria align the maps?",
+        "key": "A river and a bridge",
+        "choices": [
+          "A tower and a church",
+          "A school and a market"
+        ],
+        "why": "The archivist points to the river and bridge on both maps."
+      },
+      {
+        "type": "Detail",
+        "prompt": "What detail identifies the doorway?",
+        "key": "A stone bird",
+        "choices": [
+          "A new number",
+          "A railway sign"
+        ],
+        "why": "The same carved bird appears in the old photograph."
+      }
+    ]
+  },
+  {
+    "id": "appointment",
+    "title": "Der erste Termin im Sportverein",
+    "level": "A2",
+    "topic": "Health and wellbeing",
+    "grammar": "reflexive",
+    "quote": "Mina freut sich auf das nächste Training.",
+    "forms": {
+      "Termin": "Termin"
+    },
+    "text": "Mina arbeitet oft bis sechs Uhr und sitzt viel am Schreibtisch. Am Mittwoch besucht sie zum ersten Mal den Sportverein in ihrer Straße. Sie möchte sich nach der Arbeit mehr bewegen. Auf der Internetseite steht, dass der Kurs um sieben Uhr beginnt. Mina kommt zehn Minuten früher. In ihrer Tasche hat sie Schuhe, eine Flasche Wasser und ein kleines Handtuch.\n\nVor der Halle hängt ein Zettel. Heute trifft sich die Gruppe im Hof, weil der Boden in der Halle noch nass ist. Mina geht um das Gebäude herum. Die anderen stehen schon im Kreis. Die Trainerin zeigt zwei Übungen. Bei der zweiten Übung kann jeder zwischen einer leichten und einer schweren Variante wählen.\n\nNach dem Kurs fragt Mina nach der Anmeldung. Sie muss sich heute noch nicht entscheiden. Am nächsten Mittwoch darf sie ein zweites Mal mitmachen. Dann kann sie sehen, ob der Termin auch nach einem langen Arbeitstag gut passt. Mina freut sich auf das nächste Training.",
+    "questions": [
+      {
+        "type": "Detail",
+        "prompt": "Why does the class meet outside?",
+        "key": "The hall floor is wet",
+        "choices": [
+          "The class is too big",
+          "The trainer has lost a key"
+        ],
+        "why": "A notice explains the change of venue."
+      },
+      {
+        "type": "True / false",
+        "prompt": "Mina must join immediately after her first visit.",
+        "key": "False",
+        "choices": [
+          "True"
+        ],
+        "why": "She may attend a second session before deciding."
+      }
+    ]
+  },
+  {
+    "id": "repair",
+    "title": "Wie viel kostet eine offene Werkstatt?",
+    "level": "B2",
+    "topic": "Economics and business",
+    "grammar": "argument",
+    "quote": "Die neue Regel ist zwar einfach, aber sie beantwortet noch nicht jede Frage.",
+    "forms": {
+      "Werkstatt": "Werkstatt",
+      "Betrag": "Betrag"
+    },
+    "text": "In einem ehemaligen Ladenlokal treffen sich jeden Freitag Menschen, die kaputte Gegenstände reparieren wollen. Ein Regal ist voller Schrauben, auf dem Tisch liegen zwei Lötkolben und neben der Tür wartet meistens jemand mit einem Fahrrad. Die Werkstatt gehört einem Verein. Jahrelang hat eine Spendenbox neben dem Ausgang gereicht. Seit der Vermieter die Nebenkosten erhöht hat, fehlt am Ende jedes Monats Geld. Bei der nächsten Versammlung stellt der Vorstand eine Frage, die einfacher klingt, als sie ist: Was soll ein Besuch kosten?\n\nTobias schlägt einen festen Eintrittspreis vor. Eine klare Zahl mache die Einnahmen planbar, sagt er. Seine Nachbarin Reha widerspricht. Wer nur eine Schraube braucht, bezahlt dann genauso viel wie jemand, der drei Stunden lang eine Nähmaschine zerlegt. Außerdem kenne sie mehrere Besucher, die am Monatsende jeden Euro zweimal umdrehen müssten. Gerade für diese Menschen sei es wichtig, einen Toaster reparieren zu können, anstatt einen neuen zu kaufen.\n\nBevor die Gruppe abstimmt, schreibt ihre Kassenwartin drei Spalten an die Wand. In die erste kommen Ausgaben, die auch dann entstehen, wenn an einem Freitag niemand hereinkommt. Dazu gehören Miete und Versicherung. Die zweite Spalte enthält Dinge, deren Verbrauch ungefähr mit der Arbeit steigt, etwa Lötzinn oder Schleifpapier. In der dritten stehen besondere Ersatzteile für einzelne Geräte. Die Liste zeigt einen wichtigen Unterschied: Die teure Pumpe für eine bestimmte Maschine erklärt nicht, warum der Verein seine Miete kaum bezahlen kann.\n\nNun bringt eine Schülerin eine Beobachtung ein. Sie komme oft mit ihrer Mutter, sagt sie. Während die Mutter etwas repariere, helfe sie anderen Kindern am Basteltisch. Auf der bisherigen Liste erscheine diese Arbeit überhaupt nicht. Wenn künftig nur Geld als Beitrag zähle, könne sie selbst nichts zum Erhalt der Werkstatt beitragen. Der Vorstand ergänzt eine vierte Spalte für Aufgaben, die regelmäßig anfallen. Jemand muss den Raum öffnen, Werkzeuge prüfen und die Bestellung für Verbrauchsmaterial vorbereiten. Manche dieser Arbeiten lassen sich gut teilen, andere erfordern Erfahrung.\n\nAm Ende vereinbart der Verein einen Versuch für acht Freitage. Für einen einzelnen Besuch wird ein Beitrag empfohlen. Wer weniger geben kann, darf das tun, ohne seine Gründe zu erklären. Persönliche Ersatzteile sollen die Besucher weiterhin selbst bezahlen. Für Menschen, die häufiger kommen, gibt es einen freiwilligen Monatsbeitrag. Dafür verspricht der Verein weder eine kürzere Wartezeit noch den Erfolg einer Reparatur. Die neue Regel ist zwar einfach, aber sie beantwortet noch nicht jede Frage.\n\nGleich am zweiten Freitag bringt ein Mann vier defekte Kaffeemühlen mit. Er möchte alle auf dem Flohmarkt verkaufen. Eine Helferin spricht ihn darauf an, dass andere in der Schlange stehen und nur ihr eigenes Gerät reparieren möchten. Der Mann hat den empfohlenen Beitrag viermal in die Box gelegt. Er versteht deshalb nicht, warum er warten soll. In der folgenden Woche hängt am Eingang ein zusätzlicher Satz: Wenn andere warten, bearbeitet jede Person zunächst nur einen Gegenstand. Über die Reihenfolge entscheidet also nicht die Höhe des Beitrags.\n\nNach dem vierten Freitag scheint das Ergebnis eindeutig. In der Spendenbox liegt deutlich mehr Geld als früher. Die Kassenwartin warnt jedoch vor einem schnellen Schluss. Ein ehemaliger Besucher hat einmalig einen größeren Betrag gespendet, weil er wegzieht. Ohne diese Zahlung sind die Einnahmen nur wenig gestiegen. Außerdem war an einem Feiertag kaum jemand in der Werkstatt. Der Verein notiert deshalb für jeden Öffnungstag die Zahl der Besuche, die normalen Beiträge und außergewöhnliche Zahlungen getrennt. Namen schreibt er dafür nicht auf.\n\nAm achten Freitag fragt Reha einige Besucher nach ihren Erfahrungen. Ein Vater findet den empfohlenen Betrag hilfreich, weil er vorher nie wusste, was angemessen war. Eine Auszubildende sagt dagegen, sie habe sich beim ersten Mal nicht getraut, weniger zu geben. Erst als eine Helferin die Regel persönlich erklärte, sei sie geblieben. Beide Antworten zeigen etwas, das die Kassenliste allein nicht erklären kann. Eine formell freiwillige Zahlung kann sich für einzelne Menschen wie eine Pflicht anfühlen.\n\nBei der nächsten Versammlung liegt deshalb kein einfacher Antrag auf eine Preiserhöhung vor. Der Vorstand schlägt vor, die Monatsbeiträge beizubehalten, größere Einzelspenden bei der Planung vorsichtig zu behandeln und die Erklärung am Eingang zu verbessern. Zusätzlich will er mit dem Vermieter über einen längeren Vertrag sprechen. Wenn die Miete für zwei Jahre feststeht, lässt sich das finanzielle Risiko besser einschätzen. Niemand behauptet, der Versuch habe den richtigen Preis für alle gefunden. Aber der Verein weiß jetzt genauer, welche Kosten er decken muss, welche Hilfe seine Mitglieder leisten und an welcher Stelle eine scheinbar faire Regel Menschen ausschließen kann.",
+    "questions": [
+      {
+        "type": "Main idea",
+        "prompt": "Why separate normal contributions from unusual payments?",
+        "key": "To judge which income can be expected again",
+        "choices": [
+          "To identify visitors who cannot pay",
+          "To raise the entry fee automatically"
+        ],
+        "why": "The departing visitor's large one-off gift distorts the ordinary opening-day revenues."
+      },
+      {
+        "type": "Detail",
+        "prompt": "Which cost exists even on an empty Friday?",
+        "key": "Rent",
+        "choices": [
+          "A visitor's replacement pump",
+          "Each visitor's sandpaper"
+        ],
+        "why": "Rent and insurance are in the first column."
+      },
+      {
+        "type": "Ordering",
+        "prompt": "Which happened first?",
+        "key": "The association listed different kinds of costs",
+        "choices": [
+          "The eight-Friday trial ended",
+          "The queue rule was posted"
+        ],
+        "why": "The cost discussion precedes the experiment and the queue dispute."
+      },
+      {
+        "type": "True / false",
+        "prompt": "A larger contribution buys earlier access to tools.",
+        "key": "False",
+        "choices": [
+          "True"
+        ],
+        "why": "When others are waiting, each person works on one object first."
+      }
+    ]
+  },
+  {
+    "id": "abstract",
+    "title": "Vom Ergebnis zur Zusammenfassung",
+    "level": "B2",
+    "topic": "Academic German",
+    "grammar": "formal",
+    "quote": "Eine gute Zusammenfassung nimmt Bezug auf die Ausgangsfrage.",
+    "forms": {
+      "Ergebnis": "Ergebnis",
+      "Frage": "Frage"
+    },
+    "text": "Im Schreibseminar sollen zwei Gruppen dieselbe Untersuchung zusammenfassen. Die erste beginnt mit einer langen Liste aller Arbeitsschritte. Erst im letzten Satz erfährt man, welche Frage überhaupt untersucht wurde. Die zweite Gruppe nennt sofort ein Ergebnis: Die Befragten bevorzugten einen früheren Beginn. Doch ohne Angaben zur Auswahl der Befragten bleibt unklar, für wen dieses Ergebnis gilt.\n\nDie Lehrerin bittet beide Gruppen, ihre Texte auszutauschen. Jede Person markiert eine Stelle, an der sie beim Lesen eine zusätzliche Auskunft braucht. Auf der ersten Seite häufen sich Fragen nach dem Zweck der Untersuchung. Auf der zweiten Seite steht neben dem Wort „Befragte“ mehrmals die Frage „Wer genau?“. Die Gruppen entscheiden, jeweils einen Satz der anderen Fassung zu übernehmen und dafür einen eigenen Satz zu streichen.\n\nEine gute Zusammenfassung nimmt Bezug auf die Ausgangsfrage. Sie nennt außerdem das Verfahren so knapp, dass Platz für das wichtigste Ergebnis bleibt. Im letzten Satz machen die Gruppen deutlich, dass nur Mitglieder eines einzigen Kurses teilgenommen haben. Dadurch wird der Text etwas vorsichtiger, aber zugleich genauer.",
+    "questions": [
+      {
+        "type": "Main idea",
+        "prompt": "Which limitation belongs in the revised abstract?",
+        "key": "Only members of one course participated",
+        "choices": [
+          "The groups used different surveys",
+          "The questionnaires were lost"
+        ],
+        "why": "The final sentence limits the group to one course."
+      },
+      {
+        "type": "Detail",
+        "prompt": "What did the first group explain too late?",
+        "key": "The research question",
+        "choices": [
+          "The names of the writers",
+          "The price of the course"
+        ],
+        "why": "The reader reaches the last sentence before learning what was being investigated."
+      }
+    ]
+  },
+  {
+    "id": "canteen",
+    "title": "Wer wartet vor der Mensa?",
+    "level": "B2",
+    "topic": "TestDaF-oriented academic themes",
+    "grammar": "nominal",
+    "quote": "Das Zählen allein erklärt diesen Unterschied nicht.",
+    "forms": {
+      "Ausgabe": "Ausgabe",
+      "Uhrzeit": "Uhrzeit",
+      "Zählen": "zählen"
+    },
+    "text": "Vor der Mensa einer Hochschule steht mittags oft eine lange Schlange. Jeden Dienstag zeigt die Hochschulzeitung ein Foto derselben Tür. Unter dem Bild wird darüber gestritten, ob die Küche zu langsam arbeitet oder ob einfach zu viele Lehrveranstaltungen zur gleichen Zeit enden. Beides klingt plausibel. Auf dem Foto kann man die Ursachen aber nicht voneinander unterscheiden. Ein Seminar für angewandte Forschung bietet deshalb an, vier Wochen lang Daten zu sammeln. Die Leitung bittet um eine Empfehlung, die sich mit dem vorhandenen Personal erproben lässt. Einen Umbau kann sie im laufenden Semester nicht bezahlen.\n\nAm ersten Seminartag schreibt der Dozent zwei Fragen auf. Wie viele Menschen warten zur Mittagszeit? Und wie lange wartet eine einzelne Person? Einige Teilnehmer halten die Fragen zunächst für fast gleichbedeutend. Dann erzählt eine Studentin von ihrem Supermarkt. Dort wirke eine gemeinsame Schlange vor vier Kassen manchmal sehr lang, bewege sich aber schneller als eine kurze Schlange vor nur einer Kasse. Umgekehrt könne man in einer fast leeren Apotheke lange warten, wenn die Person vor einem ausführlich beraten werde. Die Zahl der Wartenden und die erlebte Dauer hängen also zusammen, beschreiben jedoch verschiedene Eigenschaften.\n\nFür ihre erste Beobachtung stellen sich drei Studierende an unterschiedliche Stellen. Eine Person zählt alle fünf Minuten die Menschen vor der Tür. Eine zweite beobachtet den Bereich zwischen Eingang und Essensausgabe. Die dritte verfolgt den Weg bis zur Kasse. Schon nach einer halben Stunde entdecken sie ein Problem. Manche Gäste gehen direkt zur Salatbar, andere prüfen zuerst beide warmen Gerichte. Wer sich nach dem Preis erkundigt und dann wieder geht, taucht in der Kassenzahl überhaupt nicht auf. Die drei Zahlen lassen sich deshalb nicht ohne Weiteres voneinander abziehen. Das Team braucht genaue Regeln für den Beginn und das Ende eines Besuchs.\n\nAm nächsten Tag verteilt eine Mitarbeiterin kleine nummerierte Karten an freiwillige Teilnehmer. Auf der Karte steht die Uhrzeit beim Eintritt in die Warteschlange. Hinter der Kasse gibt es eine Box für die Rückgabe. Das Verfahren kommt ohne Namen aus. Wer seine Karte nicht abgibt, hinterlässt allerdings eine unvollständige Beobachtung. Die Studierenden protokollieren deshalb sowohl ausgegebene als auch zurückgegebene Karten. Eine besonders kurze mittlere Wartezeit wäre schwer zu deuten, wenn ausgerechnet die Menschen mit den längsten Wartezeiten ihre Karte wegwerfen und die Mensa vorzeitig verlassen. In der Auswertung soll dieser mögliche Verlust sichtbar bleiben.\n\nBei der ersten Besprechung zeigt sich ein weiterer Unterschied. Dienstags kommen viele Gruppen gleichzeitig, weil nach einer großen Vorlesung mehrere hundert Personen denselben Ausgang benutzen. Freitags verteilt sich der Besuch gleichmäßiger über zwei Stunden. Vergleicht man einen Dienstag vor einer Änderung mit einem Freitag danach, könnte man der Änderung einen Erfolg zuschreiben, der eigentlich am Stundenplan liegt. Das Team vergleicht deshalb möglichst gleiche Wochentage und hält den Speiseplan fest. Ein besonders beliebtes Gericht kann einen ähnlichen Effekt haben wie das Ende einer Vorlesung. Auch die Wetterlage wird kurz notiert, denn an sonnigen Tagen kaufen manche ihr Mittagessen außerhalb des Campus.\n\nEine Woche später liegt eine erste Zeichnung auf dem Tisch. Gegen zwölf Uhr wächst die Schlange vor dem Gebäude schnell. Im Inneren ist die Strecke zwischen Ausgabe und Kasse dagegen oft frei. Einige Studierende möchten daraus sofort folgern, dass die Küche schneller kochen muss. Eine Köchin widerspricht. In den Töpfen sei genug Essen, sagt sie. Viel Zeit gehe verloren, wenn Gäste direkt vor der Ausgabe erst nach den Zutaten fragen oder nach einem Schild mit den Preisen suchen. Sie schlägt vor, die Informationen bereits draußen zu zeigen. So könne man die Entscheidungszeit verkürzen, ohne Personen vom Essen auszuschließen, die eine Rückfrage haben.\n\nDas Seminar plant einen kleinen Versuch. An zwei vergleichbaren Dienstagen steht eine gut lesbare Tafel vor dem Eingang. Sie zeigt die Gerichte, die Preise und einen Hinweis auf die Auskunft zu Zutaten. An zwei weiteren Dienstagen bleibt der bisherige Ablauf bestehen. Die Reihenfolge wird vor dem ersten Versuch festgelegt. Auf diese Weise kann das Team nicht nachträglich nur jene Tage als Versuchstage auswählen, an denen die Schlange ohnehin kurz war. Die Mitarbeiter sollen ihre übliche Arbeit fortsetzen. Falls jemand ausfällt oder ein Gericht verspätet geliefert wird, kommt eine Bemerkung ins Protokoll. Solche Tage werden nicht heimlich aus der Rechnung entfernt.\n\nZur Auswertung berechnen die Studierenden zunächst die mittlere Wartezeit. Sie addieren die beobachteten Minuten und teilen die Summe durch die Zahl der zurückgegebenen Karten. Daneben sortieren sie die einzelnen Zeiten und betrachten den mittleren Wert dieser Reihenfolge. Ein ungewöhnlich langer Aufenthalt beeinflusst beide Kennzahlen unterschiedlich. Für die Leitung ist außerdem wichtig, wie häufig Menschen länger als ihre verfügbare Pause warten. Eine Änderung, die den Durchschnitt leicht senkt, kann für diese Gruppe trotzdem kaum etwas verbessern. Deshalb vereinbart das Seminar schon vor dem Blick auf die Ergebnisse, auch die längeren Wartezeiten getrennt zu beschreiben.\n\nDie Zahlen nach den ersten beiden Versuchstagen überraschen. Vor der Essensausgabe geht es schneller, an der Kasse bildet sich dagegen häufiger ein Stau. Die Kassenmitarbeiterin hat keine zusätzliche Aufgabe übernommen. Sie bekommt nur mehr Personen in kurzer Folge zu sehen. Mehrere Gäste suchen ihre Karte erst am Lesegerät. Ein Student schlägt eine zweite Hinweistafel vor. Eine andere Teilnehmerin warnt davor, gleich noch eine Änderung einzuführen. Wenn man zwei Dinge gleichzeitig verändert, lässt sich später schwer sagen, welcher Schritt geholfen hat. Die Gruppe hält den Vorschlag für eine zweite Runde fest und beendet zuerst die vereinbarte Beobachtung.\n\nIn kurzen Gesprächen erzählen die Gäste unterschiedliche Geschichten. Eine Studentin findet die Tafel praktisch, weil sie schon vor der Tür eine Entscheidung treffen kann. Ein Austauschstudent versteht die Namen der Gerichte kaum und fragt weiterhin an der Ausgabe nach. Ein Mitarbeiter mit kurzer Pause sieht morgens auf dem Weg zum Büro nach dem Angebot. Für ihn würde ein früher sichtbarer Speiseplan vielleicht mehr ändern als die Tafel zur Mittagszeit. Diese Aussagen geben Hinweise auf Verbesserungen, liefern aber keine verlässliche Angabe darüber, wie groß jede dieser Gruppen ist. Besonders gesprächige Gäste treten bei einer freiwilligen Befragung leicht stärker hervor.\n\nIm Seminar entsteht nun eine Diskussion über den Ausdruck „Erfolg“. Die Leitung möchte vor allem vermeiden, dass Studierende zu spät in das nächste Seminar kommen. Das Küchenteam möchte Rückfragen beantworten können, ohne unter dauernden Zeitdruck zu geraten. Für Gäste mit besonderen Ernährungsbedürfnissen ist eine verlässliche Auskunft wichtiger als eine sehr kurze Wartezeit. Die Gruppe beschließt, diese Ziele getrennt darzustellen. Eine einzige Punktzahl würde zwar in die Überschrift der Hochschulzeitung passen, ließe aber wichtige Unterschiede verschwinden. Das Zählen allein erklärt diesen Unterschied nicht. Erst das Gespräch über den Zweck der Messung macht deutlich, welche Veränderung überhaupt erwünscht ist.\n\nAm Ende präsentiert das Team seine Empfehlung in drei Teilen. Die Tafel soll vorläufig bleiben, weil sie sich leicht versetzen und ohne großen Aufwand aktualisieren lässt. Für einen weiteren Versuch schlägt die Gruppe eine deutlich sichtbare Erinnerung an die Bezahlkarte vor. Die Hochschule soll außerdem prüfen, ob zum Ende der großen Vorlesung ein zweiter Zugang für Gäste der Salatbar geöffnet werden kann. Für diese dritte Idee liegen noch keine Versuchsdaten vor. Im Bericht stehen deshalb die beobachteten Ergebnisse und die neuen Vorschläge in getrennten Abschnitten. Eine preiswerte Maßnahme ist schließlich nicht automatisch eine wirksame Maßnahme.\n\nDie Redakteurin der Hochschulzeitung fragt zum Schluss, ob sie schreiben dürfe, das Problem sei gelöst. Der Dozent gibt die Frage an die Studierenden weiter. Sie formulieren eine andere Überschrift: „Weniger Warten an der Ausgabe, neue Fragen an der Kasse“. Darunter drucken sie zwei Skizzen, auf denen die Leser den Weg durch das Gebäude vergleichen können. Die Studierenden laden die Beschäftigten ein, den Bericht zu ergänzen, wenn sich der Stundenplan im kommenden Semester ändert. So bleibt aus einer einmaligen Untersuchung ein Verfahren, das andere nachvollziehen und bei veränderten Bedingungen erneut erproben können.",
+    "questions": [
+      {
+        "type": "Main idea",
+        "prompt": "What distinction does the study make at the outset?",
+        "key": "Queue length and individual waiting time",
+        "choices": [
+          "Price and nutritional value",
+          "Meal variety and meal size"
+        ],
+        "why": "Four fast queues can serve a long line quickly. Counting people does not measure an individual's wait."
+      },
+      {
+        "type": "Detail",
+        "prompt": "Why record the number of unreturned cards?",
+        "key": "Missing returns may be related to very long waits",
+        "choices": [
+          "Every lost card identifies a visitor",
+          "The university charges for each card"
+        ],
+        "why": "People who leave before paying may never reach the return box."
+      },
+      {
+        "type": "True / false",
+        "prompt": "Faster service at the counter also cleared the queue at the till.",
+        "key": "False",
+        "choices": [
+          "True"
+        ],
+        "why": "A bottleneck appeared at the till when arrivals there became more concentrated."
+      },
+      {
+        "type": "Vocabulary in context",
+        "prompt": "What does Ausgabe refer to here?",
+        "key": "The food serving counter",
+        "choices": [
+          "A newspaper edition",
+          "Financial spending"
+        ],
+        "why": "Guests choose meals there before proceeding to the till."
+      },
+      {
+        "type": "Ordering",
+        "prompt": "Which action belongs to a future trial?",
+        "key": "Testing the payment-card reminder",
+        "choices": [
+          "Counting returned cards",
+          "Displaying the menu outside"
+        ],
+        "why": "The group postponed the reminder so it could isolate the first change."
+      }
+    ]
+  }
+]

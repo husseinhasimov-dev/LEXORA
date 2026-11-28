@@ -21,7 +21,7 @@ data class ScreenState(val ready:Boolean=false,val busy:Boolean=false,val error:
     val schedules:List<ReminderSchedule> = emptyList(),val nextReminders:Map<String,Long> = emptyMap(),val weekly:WeeklyGoals=WeeklyGoals(),val goalCounts:GoalCounts=GoalCounts(0,0,0,0),val detailGrade:Int=0,val latestRating:Pair<String,Int>?=null,val assessedToday:Int=0,
     val dailyHistory:List<DailyRecord> = emptyList(),val selectedCalendarDay:String="",val selectedDayWords:List<Word> = emptyList())
 
-class StudyModel(val app:Application):AndroidViewModel(app) {
+class StudyModel @JvmOverloads constructor(val app:Application,private val currentOwner:()->String?=Cloud::uid):AndroidViewModel(app) {
     private var repository:StudyRepository?=null
     private var exploreOpen=false
     private var shelf:ExploreShelf?=null
@@ -41,14 +41,14 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
                 mutable.update { it.copy(busy=true) }
                 try {
                     val next=withContext(Dispatchers.IO){
-                        if(repository?.owner!=Cloud.uid()){repository?.close();repository=null;shelf=null;detailId=null;calendarDay=null;filter=Filters()}
-                        val repo=repository ?: StudyRepository(app).also { repository=it;Reminder.plan(app,it,forceRegister=true) }
+                        if(repository?.owner!=currentOwner()){repository?.close();repository=null;shelf=null;detailId=null;calendarDay=null;filter=Filters()}
+                        val repo=repository ?: StudyRepository(app,currentOwner()).also { repository=it;Reminder.plan(app,it,forceRegister=true) }
                         repo.upgradeCourse()
                         if(repo.db.long("SELECT count(*) FROM pref WHERE k LIKE 'dailyTarget.%'")==0L)repo.set("dailyTarget."+repo.day(),repo.pref("goal"))
                         val msg=repo.op()
                         val s=repo.session();val w=s?.let {repo.word(it.current)}
                         val detail=detailId?.let(repo::word)
-                        val keys=repo.defaults.keys+listOf("notificationsMaster","weeklyReviewGoal")+listOf("discoveryTopic","discoveryLevel")+Reminder.keys+Reminder.names.keys.flatMap {k->listOf("$k.hour","$k.minute","$k.days")}
+                        val keys=repo.defaults.keys+listOf("notificationsMaster","weeklyReviewGoal")+listOf("discoveryTopic","discoveryLevel")+AlertCategory.entries.map(alertCategoryPrefKey)+Reminder.keys+Reminder.names.keys.flatMap {k->listOf("$k.hour","$k.minute","$k.days")}
                         val stats=repo.stats()
                         val activeCalendarDay=calendarDay ?: repo.day()
                         val dailyHistory=repo.dailyHistory()
@@ -76,6 +76,13 @@ class StudyModel(val app:Application):AndroidViewModel(app) {
                 }catch(e:CancellationException){throw e}
                 catch(e:Exception){mutable.update {it.copy(busy=false,error=e.localizedMessage?:e.javaClass.simpleName)}}
             }
+        }
+    }
+    internal suspend fun <T> academyQuery(op:StudyRepository.()->T):T=lock.withLock {
+        withContext(Dispatchers.IO) {
+            val repo=requireNotNull(repository)
+            check(repo.owner==currentOwner()){"Profile changed. Reopen the academy."}
+            repo.op()
         }
     }
     fun clear(){mutable.update {it.copy(notice="",error="")}}

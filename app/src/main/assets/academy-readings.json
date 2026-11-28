@@ -1,0 +1,167 @@
+[
+  {
+    "id": "market",
+    "title": "Der letzte Einkauf",
+    "level": "A1",
+    "topic": "Everyday life",
+    "grammar": "accusative",
+    "quote": "Ich nehme den Korb.",
+    "forms": {
+      "nehme": "nehmen",
+      "Korb": "Korb"
+    },
+    "text": "Am Samstag bin ich bei meiner Oma. Wir essen heute zusammen. In der Küche stehen drei Teller. Meine Schwester kommt auch. Oma braucht noch Brot, Tomaten und Milch. Ich nehme den Korb. Auf einem kleinen Zettel steht die Liste. Der Laden ist nicht weit. Ich gehe zu Fuß.\n\nIm Laden sehe ich zuerst das Obst. Die Äpfel sind schön, aber wir haben zu Hause noch vier Äpfel. Ich gehe weiter. Eine Frau zeigt mir die Milch. Sie arbeitet hier. Ich kaufe eine Flasche Milch und vier Tomaten. Jetzt fehlt nur das Brot. Das Regal ist leer. Was mache ich jetzt?\n\nNeben dem Laden ist eine kleine Bäckerei. Dort gibt es noch Brot. Ich kaufe ein kleines Brot und gehe nach Hause. Meine Schwester ist schon da. Sie schneidet die Tomaten. Oma stellt die Milch auf den Tisch. Ich hole das Brot aus dem Korb. Jetzt können wir alle zusammen in Ruhe essen.",
+    "questions": [
+      {
+        "type": "Detail",
+        "prompt": "What does the narrator buy at the bakery?",
+        "key": "Bread",
+        "choices": [
+          "Milk",
+          "Apples"
+        ],
+        "why": "The bread shelf in the shop is empty. The bakery still has bread."
+      },
+      {
+        "type": "True / false",
+        "prompt": "The family already has apples at home.",
+        "key": "True",
+        "choices": [
+          "False"
+        ],
+        "why": "The narrator counts four apples at home."
+      },
+      {
+        "type": "Short answer",
+        "prompt": "Wie viele Tomaten kauft die Person? Answer in German words.",
+        "key": "vier",
+        "choices": [],
+        "why": "The shopping sentence specifies vier Tomaten."
+      }
+    ]
+  },
+  {
+    "id": "campus",
+    "title": "Ein Raum für die Lerngruppe",
+    "level": "A2",
+    "topic": "University and education",
+    "grammar": "perfekt",
+    "quote": "Er hat den Termin in den Kalender geschrieben.",
+    "forms": {
+      "geschrieben": "schreiben",
+      "Raum": "Raum"
+    },
+    "text": "Am Montag will eine kleine Gruppe für den Deutschtest lernen. Julia wartet um vier Uhr vor der Bibliothek. Sie hat die Bücher mitgebracht. Malik kommt mit seinem Computer. Er hat den Termin in den Kalender geschrieben. Nur Anna fehlt. Julia ruft sie an. Anna wartet im alten Gebäude. Auf ihrer Einladung steht noch die alte Adresse.\n\nZehn Minuten später sind alle da. In der Bibliothek gibt es einen freien Tisch, aber dort müssen die drei leise sein. Sie möchten die Aufgaben laut lesen und über ihre Antworten sprechen. Malik fragt am Eingang nach einem anderen Raum. Die Mitarbeiterin zeigt auf eine Tür neben der Treppe. Der Raum ist bis sechs Uhr frei.\n\nDie Gruppe schreibt die Nummer an die Tafel und macht ein Foto. Für nächste Woche buchen sie den Raum gleich am Eingang. Anna schickt allen eine neue Einladung mit der richtigen Adresse und dem Foto. Beim nächsten Treffen findet sie den Weg als Erste.",
+    "questions": [
+      {
+        "type": "Main idea",
+        "prompt": "What practical problem does the group solve?",
+        "key": "Finding a suitable meeting place",
+        "choices": [
+          "Buying a new computer",
+          "Changing the exam date"
+        ],
+        "why": "They need both a correct address and a space where conversation is allowed."
+      },
+      {
+        "type": "Ordering",
+        "prompt": "Which sequence matches the story?",
+        "key": "Phone call → room search → new invitation",
+        "choices": [
+          "Room search → invitation → phone call",
+          "Invitation → phone call → room search"
+        ],
+        "why": "Julia calls Anna before Malik asks for a room. Anna sends the invitation at the end."
+      },
+      {
+        "type": "True / false",
+        "prompt": "They plan to study silently at the first table.",
+        "key": "False",
+        "choices": [
+          "True"
+        ],
+        "why": "They want to read aloud and discuss their answers."
+      }
+    ]
+  },
+  {
+    "id": "heat",
+    "title": "Wo der Schatten fehlt",
+    "level": "B1",
+    "topic": "Environment and climate",
+    "grammar": "relative",
+    "quote": "Ein Platz, der auf der Karte grün aussieht, bietet im Sommer kaum Schutz.",
+    "forms": {
+      "Schatten": "Schatten",
+      "misst": "messen"
+    },
+    "text": "Auf einer Karte der Stadt sieht die Straße zwischen Schule und Bahnhof freundlich aus. Neben dem Weg stehen grüne Punkte für Bäume. Wer dort mittags auf den Bus wartet, merkt jedoch schnell, dass die Zeichnung wenig über den Schatten verrät. Die Bäume sind noch jung, und die Bank steht auf der anderen Straßenseite. Ein Platz, der auf der Karte grün aussieht, bietet im Sommer kaum Schutz.\n\nEine Schulklasse möchte wissen, wo ein neues Dach den größten Unterschied machen würde. Drei Gruppen besuchen dieselben Haltestellen morgens, mittags und am späten Nachmittag. Eine Person misst die Temperatur, eine zweite zeichnet den Schatten ein. Die dritte fragt Fahrgäste, wie lange sie normalerweise warten. Die Klasse schreibt auch auf, wenn gerade kein Bus nach Fahrplan kommt.\n\nAm Ende empfehlen die Jugendlichen nicht einfach den heißesten Ort. An einer etwas kühleren Haltestelle warten besonders viele ältere Menschen auf einen Anschluss. Für sie fehlen Sitzplätze im Schatten. Die Stadt prüft nun, ob dort genug Platz für ein Dach und eine zusätzliche Bank bleibt.",
+    "questions": [
+      {
+        "type": "Detail",
+        "prompt": "Why do the groups visit at different times?",
+        "key": "Shade changes during the day",
+        "choices": [
+          "They are counting new trees",
+          "Only the evening bus runs"
+        ],
+        "why": "They map shade in the morning, at noon and in the afternoon."
+      },
+      {
+        "type": "Main idea",
+        "prompt": "Which evidence influences the final choice?",
+        "key": "Exposure and the needs of waiting passengers",
+        "choices": [
+          "The colour of the printed map",
+          "The highest temperature alone"
+        ],
+        "why": "Waiting time, passengers and seating matter alongside temperature."
+      }
+    ]
+  },
+  {
+    "id": "speech",
+    "title": "Ein Modell am Ausleihschalter",
+    "level": "B2",
+    "topic": "Computer science and AI",
+    "grammar": "connectors",
+    "quote": "Obwohl der Versuch klein ist, deckt er einen wichtigen Unterschied auf.",
+    "forms": {
+      "Fehler": "Fehler",
+      "prüft": "prüfen"
+    },
+    "text": "Die Hochschulbibliothek möchte ihren Ausleihschalter entlasten. Ein Team schlägt vor, häufige Fragen automatisch zu beantworten. Als Grundlage dienen alte Anfragen, aus denen Namen und Ausweisnummern entfernt wurden. Für den ersten Versuch wählt das Team nur Fragen zu Öffnungszeiten, Leihfristen und Gebühren aus. Wenn eine Anfrage außerhalb dieser Bereiche liegt, soll das System an einen Menschen verweisen. Diese Grenze ist wichtig: Eine schnelle, aber falsche Auskunft kann dazu führen, dass jemand eine Frist versäumt.\n\nVor der Einführung teilen die Mitarbeiterinnen die alten Anfragen in zwei Gruppen. Eine Gruppe darf das Team zur Entwicklung verwenden. Die zweite bleibt bis zum Test verschlossen. Dabei fällt einer Studentin auf, dass manche Anfragen fast wortgleich in beiden Gruppen stehen. Zahlreiche Nutzer hatten den Text einer E-Mail kopiert. Ein gutes Ergebnis könnte deshalb nur bedeuten, dass das System vertraute Formulierungen erkennt. Die Studentin ordnet zusammengehörige Nachrichten derselben Gruppe zu. Erst dann beginnt der Vergleich.\n\nIm ersten Durchgang zählt das Team jede Antwort als richtig oder falsch. Das klingt einfach, hilft dem Schalterpersonal aber nur begrenzt. Eine überflüssige Weiterleitung kostet eine Minute. Eine erfundene Auskunft zu einer Gebühr kostet unter Umständen Geld. Im zweiten Durchgang hält das Team daher zusätzlich fest, welche Folgen ein Fehler haben könnte. Zwei Antworten mit derselben Punktzahl erhalten auf diese Weise unterschiedliche Bedeutung.\n\nAnschließend bittet die Bibliothek fünf Studierende, eigene Fragen zu formulieren. Eine Person nennt zwei Probleme in einem einzigen Satz. Eine andere schreibt nur das Wort „Verlängerung“. Das System liefert in beiden Fällen eine flüssige Antwort, fragt jedoch nicht nach, was genau gemeint war. Ein Mitarbeiter am Schalter hätte zuerst geklärt, ob es um ein Buch oder um den Bibliotheksausweis geht. Obwohl der Versuch klein ist, deckt er einen wichtigen Unterschied auf.\n\nFür die nächste Testwoche vereinbart die Bibliothek deshalb eine einfache Regel. Bei mehreren plausiblen Deutungen zeigt das System eine Rückfrage an. Erst wenn die Person eine Möglichkeit auswählt, wird eine konkrete Frist genannt. Das Team prüft nun getrennt, wie oft eine solche Rückfrage nötig ist und ob sie tatsächlich zur richtigen Auskunft führt. Eine hohe Zahl beantworteter Fragen allein reicht der Bibliothek für eine Entscheidung nicht mehr aus.",
+    "questions": [
+      {
+        "type": "Main idea",
+        "prompt": "Why does the team revise its evaluation?",
+        "key": "Different errors have different consequences",
+        "choices": [
+          "Longer answers are always better",
+          "The library has removed all fees"
+        ],
+        "why": "The text contrasts an unnecessary referral with invented financial information."
+      },
+      {
+        "type": "Vocabulary in context",
+        "prompt": "What is a Rückfrage in the last paragraph?",
+        "key": "A clarifying question",
+        "choices": [
+          "A refund",
+          "A follow-up penalty"
+        ],
+        "why": "The system asks users to identify their intended meaning before giving a deadline."
+      },
+      {
+        "type": "Matching",
+        "prompt": "Which pair matches the passage?",
+        "key": "Weiterleitung → staff time; false fee → possible financial loss",
+        "choices": [
+          "Weiterleitung → financial loss; false fee → duplicate message",
+          "Weiterleitung → new card; false fee → opening hours"
+        ],
+        "why": "The examples appear in the third paragraph."
+      }
+    ]
+  }
+]
